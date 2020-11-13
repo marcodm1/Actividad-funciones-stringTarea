@@ -94,6 +94,25 @@ saludo("ana", "Buenas tardes");
 
 
 
+//apuntes 
+bool : empty(mixed)
+
+$_GET['nombre']          ;
+
+//le pasa a _GET y si esta vacio, bool devuelve true
+<input type="texto" name ="nombre">
+<input type="checkbox" name="correo" value="time">
+
+
+
+is_boool();
+is_int();
+is_float();
+is_string();
+is_array();
+is_double();
+is_objecto();
+is_infinite();
 
 
 
