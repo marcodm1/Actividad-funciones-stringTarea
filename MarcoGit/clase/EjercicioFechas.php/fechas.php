@@ -8,28 +8,28 @@
 	</head>
 	<body>
         <form action="fechas.php" method="get">
-            Fecha <input type="number" name="fecha" id="txt" ><br><br>
+            Fecha (día, mes, año): <input type="text" name="fecha" id="txt" ><br><br>
             <input type="submit" value="enviar"><br><br>
         </form>
+
         <?php 
-            // Devuelve un booleano que indica si la fecha expresada es válida (el mes, día y año) deben darse en formato numérico).
-            //El rango del año puede ir del 1 al 32767
-            $ok_fecha = checkdate(2,29,2012) ? ' fecha correcta' : ' fecha incorrecta' ;
-            echo $ok_fecha ;
+           
+            $fecha_ahora = date("d,m,Y");
+            $fecha_usuario = $_GET['fecha'];
 
-//---------------------------------------------------------
+            plazo($fecha_ahora, $fecha_usuario);
 
-                // date( formato [, numero ] )
-            echo "Son las ", date('h : i : s') ;
-            echo " hoy es ", date("j‐n‐Y") . '<br>';
-            echo "Fue a las ", date('h : i : s', 456573426) ;
-            echo "del ", date('j – n  ‐ Y', 456573426) ;
+            function plazo($fecha_ahora, $fecha_usuario){
+                
+                if ($fecha_ahora > $fecha_usuario){
+                    echo $fecha_ahora . ": Esta fuera de fecha";
+                }else {
+                    echo $fecha_usuario . ": Esta en fecha";
+                }
+            }
 
-//---------------------------------------------------------
-
-
-
-        // Igual que date() devuelve la fecha y hora, en el formato indicado.
+      
+// Igual que date() devuelve la fecha y hora, en el formato indicado.
         //  Es sensible a los datos de localización establecidos con setlocale
         //  Los comodines de formato se pueden consultar en :
 
@@ -69,12 +69,6 @@
 // Si se omiten argumentos (sólo pueden omitirse por la derecha) tomará los de la fecha actual.
 // Cuando el parámetro día es cero devuelve el último día del mes anterior, pero si pasamos
 // cero como parámetro de mes nos dará un error
-
-    time();
-
-    echo time(); // instante actual
-    echo mktime(0,0,0,7,7,2014); // instante 7‐jul‐2014 a las 00 :00: 00
-
 
     
     
