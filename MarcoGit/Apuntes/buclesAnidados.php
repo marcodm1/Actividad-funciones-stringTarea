@@ -10,8 +10,10 @@
         <form action="buclesAnidados.php" method="get">
             <label for="txtLongitud"><strong>Escriba longitud de la contraseña:</strong></label>
             <input type="number" name="longitud" id="txtLongitud" ><br><br>
+
             <label for="txtCantidad"><strong>Escriba la cantidad de contraseñas:</strong></label>
-            <input type="number" name="cantidad" id="txtCantidad" ><br><br>     
+            <input type="number" name="cantidad" id="txtCantidad" ><br><br> 
+                
             <input type="submit" value="enviar"><br><br>
         </form> 
         <?php 

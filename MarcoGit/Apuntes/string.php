@@ -1,5 +1,98 @@
 
 
+
+
+
+
+
+<!--
+<form action="EjercicioString.php" method="post">
+
+Español<input type="checkbox" name="idiomas[]" value="español"><br>
+Ingles <input type="checkbox" name="idiomas[]" value="ingles"><br>
+Frances<input type="checkbox" name="idiomas[]" value="frances"><br>
+Aleman <input type="checkbox" name="idiomas[]" value="aleman"><br>
+
+<input type="submit" value="enviar"><br><br>
+</form> 
+
+     // Convierte la cadena $frase en un array cada espacio
+            $frase  = "porción1 porción2 porción3 porción4 porción5 porción6";
+            $porciones = explode(" ", $frase);
+            echo $porciones[0] . " posicion 0<br>"; 
+            echo $porciones[1] . " posicon 1<br>"; 
+            
+            // Convierte la cadena $frase2 en variables cada espacio
+            $frase2  = "porción1 porción2 porción3 porción4 porción5 porción6 porción7";
+            list($user, $pass, $uid, $gid, $gecos, $home, $shell) = explode(" ", $frase2);
+            echo $user . " usuario<br>"; 
+            echo $pass . " contraseña<br>"; 
+           
+        
+            if (strcmp($_SERVER['REQUEST_METHOD'], 'GET') !==0) {
+                // prueba de implode
+                $cadena = implode (',', $_POST['idiomas']);
+                
+                echo "<pre>";
+                print_r($_POST);
+                echo"</pre>";
+            
+            
+            } -->
+
+
+
+
+
+            <!-- switch (func_num_args()) { 
+            case 0: $mensaje = "Buenos dias";
+                    $persona = "pepe";
+                    break;
+            case 1: $persona = func_get_arg(0);
+                    $mensaje = "Buenos dias";
+                    break;
+            case 2: $persona = func_get_arg(0);
+                    $mensaje = func_get_arg(1);
+                    break;
+    }
+            echo "$mensaje $persona <br>";
+
+ // ponemos $mensaje por defecto, y siempre al final de la lista de parametros.
+ function saludo ($persona, $mensaje = "Buenos dias") { 
+    echo "$mensaje $persona <br>";
+}
+// como saludo(); tiene $mensaje esta por defecto, ponemos solo "pepe" para $persona
+saludo("pepe"); 
+saludo("ana", "Buenas tardes"); -->
+
+
+
+
+
+
+
+<!-- // para comparar 2 cadenas
+        strcmp($a, $b) === 0;
+
+        // en concat con null y false, se convierten en cadena vacia
+        $a = 12 + 10;           //nos devuelve byte
+        $a = 12 + 12312313131;  //nos devuelve float
+        $a = 12 + "1hola";      //nos devuelve 13
+        $a = 12 + (5>3);        //nos devuelve 13
+        $a = 12 + (5<3);        //nos devuelve 12
+        $a = 5 . 2.3 . (5>3);   //nos devuelve "52.31" cadena
+        $a;                     //nos devuelve 0 porque nada = false y false = 0 -->
+
+
+
+
+
+
+
+
+
+
+<!-- 
 // convertir cadena en array
            
            // $pizza  = "porción1 porción2 porción3 porción4 porción5 porción6";
@@ -136,4 +229,4 @@
            // vprintf — Muestra una cadena con formato
            // vsprintf — Devuelve una cadena con formato
            // wordwrap — Ajusta un string hasta un número dado de caracteres
-           
+            -->
