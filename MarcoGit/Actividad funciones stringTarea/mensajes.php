@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="es">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <meta name="author" content="Marco Dominguez">
+        <meta name="description" content="Ejercicio funciones string.">
         <link rel="stylesheet" href="mensajes.css">
         <title>xxx.html</title>
     </head>
