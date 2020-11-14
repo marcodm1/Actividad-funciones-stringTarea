@@ -13,21 +13,20 @@
         </form>
 
         <?php 
-           
-            $fecha_ahora = date("d,m,Y");
-            $fecha_usuario = $_GET['fecha'];
-
-            plazo($fecha_ahora, $fecha_usuario);
-
-            function plazo($fecha_ahora, $fecha_usuario){
-                
-                if ($fecha_ahora > $fecha_usuario){
-                    echo $fecha_ahora . ": Esta fuera de fecha";
-                }else {
-                    echo $fecha_usuario . ": Esta en fecha";
-                }
+            if (isset($_GET['fecha'])){
+                $fechaAhora = date("d,m,Y");
+                $fechaUsuario = $_GET['fecha'];
+                plazo ($fechaAhora, $fechaUsuario);
             }
 
+            function plazo ($fechaAhora, $fechaUsuario){
+                if ($fechaAhora >= $fechaUsuario){
+                    echo $fechaAhora . ": Esta fuera de fecha";
+                }else {
+                    echo $fechaUsuario . ": Esta en fecha";
+                }
+            }
+            
       
 // Igual que date() devuelve la fecha y hora, en el formato indicado.
         //  Es sensible a los datos de localización establecidos con setlocale

@@ -17,7 +17,6 @@
             <input type="submit" value="enviar"><br><br>
         </form> 
         <?php 
-        // me sale el error antes de empezar
             $tabla = array ('t', '2', '€', '7', 'v', '1', '*', '3', 's', '9');
             
             if (isset($_GET['longitud']) && isset($_GET['cantidad'])){
