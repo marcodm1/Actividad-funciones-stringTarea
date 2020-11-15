@@ -4,7 +4,7 @@
 		<title>Marco Domínguez</title>
 		<meta charset="UTF-8">
         <meta name="author" content="Marco Dominguez">
-        <meta name="description" content="...">
+        <meta name="description" content="ejercicio fechas">
 	</head>
 	<body>
         <form action="fechas.php" method="get">

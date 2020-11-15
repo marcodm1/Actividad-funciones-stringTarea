@@ -3,16 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="author" content="Marco Dominguez">
-        <meta name="description" content="Actividad funciones fechaTarea">
-        <link rel="stylesheet" href="mensajes.css">
+        <meta name="description" content="Ejercicio ahorcado">
         <title>xxx.html</title>
     </head>
     <body>
-        <?php 
-            
-
-
-
-        ?>
+        <form action="ahorcado2.php" method="post">
+            Introduzca una palabra para adivinar<input type="text" name="palabra" id="txt" ><br><br>
+            <input type="submit" value="enviar"><br><br>
+        </form>
     </body>
 </html>
