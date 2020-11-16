@@ -25,9 +25,8 @@
 		//Procesar el formulario.
 		echo "Procesando el formulario <br>";
 		echo $_POST['nombre'];
-		
 	}else{
-            // falta algo apra que cuando pongamos algo erroneo, se guarde en el formulario
+           
 	?>
 	
 		<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
