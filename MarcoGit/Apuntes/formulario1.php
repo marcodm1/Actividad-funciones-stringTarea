@@ -52,8 +52,9 @@
     </body>
 </html>
 
-este codigo tal cual, es el que se tiene que poner en un fichero nuevo, y arriba cambiar en nombreDelFichero
+//este codigo tal cual, es el que se tiene que poner en un fichero nuevo, y arriba cambiar en nombreDelFichero
 <?php
+// para comprobar si ha enviado algo... if(isset($_GET['numero'])){
     echo "Nombre: " . $_GET['nombre'];
     echo "<br>";
     echo "Contraseña: " . $_GET['contrasenia'];
