@@ -8,7 +8,7 @@
     </head>
     <body>
         <form action="ahorcado2.php" method="post">
-            Introduzca una palabra para adivinar<input type="text" name="palabra" id="txt" ><br><br>
+            Introduzca una palabra para adivinar<input type="text" name="frase" id="txt" ><br><br>
             <input type="submit" value="enviar"><br><br>
         </form>
     </body>
