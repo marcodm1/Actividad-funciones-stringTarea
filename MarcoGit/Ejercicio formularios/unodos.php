@@ -13,9 +13,10 @@
 
         // aqui conprueba que se haya enviado el formulario con "algo"
         if (isset($_POST['nombre']) && isset($_POST['contrasenia']) && isset($_POST['check']) && isset($_POST['sexo']) && isset($_POST['asignatura'])){
-            // validar datos
+            // valida tamaño del nombre y la contraseña
             if (strlen($_POST['nombre']) >= 5 && strlen($_POST['contrasenia']) >= 5){
                 
+                // si hay errores los agrega al array
             }else {
                 $errores = true;
                 $listaErrores[] = "error, usuario o contraseña demasiado cortos<br>";
@@ -27,16 +28,13 @@
                 $errores = true;
                 $listaErrores[] = "error, usuario no ha aceptado LOPD";
             }
-
-            
-          
             // validar datos
             if (in_array("DI",$_POST['asignatura'])){
-                echo "Asignatura DI ";
             }else {
                 $errores = true;
                 $listaErrores[] = "error, asignatura incorrecta.";
             }
+            
 
             if (!$errores){
                 echo "Nombre: " . $_POST['nombre'];
@@ -47,17 +45,20 @@
                 echo "<br>"; 
                 echo "Sexo: " . $_POST['sexo'];
                 echo "<br>";
+                echo "Asignatura DI <br>";
             }else{
-                echo "alguna de las validaciones es incorrecta";
+                foreach ($listaErrores as &$valor) {
+                    echo "$valor <br>";
+                }
                 mostrarFormulario();
             }
 
-        
-            print_r($listaErrores);
+            
             // si no se envia algo del formulario pasamos aqui
         }else{
             mostrarFormulario();
             }
+
 
             function mostrarFormulario(){
                 echo '
