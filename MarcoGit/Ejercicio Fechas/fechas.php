@@ -8,13 +8,13 @@
 	</head>
 	<body>
         <form action="fechas.php" method="get">
-            Fecha (día, mes, año): <input type="text" name="fecha" id="txt" ><br><br>
+            Fecha (día, mes, año): <input type="date" name="fecha" id="txt" ><br><br>
             <input type="submit" value="enviar"><br><br>
         </form>
 
         <?php 
             if (isset($_GET['fecha'])){
-                $fechaAhora = date("d,m,Y");
+               echo $fechaAhora = date("Y-m-d");
                 $fechaUsuario = $_GET['fecha'];
                 plazo ($fechaAhora, $fechaUsuario);
             }
