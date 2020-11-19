@@ -19,23 +19,23 @@
                 // si hay errores los agrega al array
             }else {
                 $errores = true;
-                $listaErrores[] = "error, usuario o contraseña demasiado cortos<br>";
+                $listaErrores["nombre"] = "error, usuario o contraseña demasiado cortos<br>";
             }
            
             // validar datos
             if (isset($_POST['check'])){
             }else {
                 $errores = true;
-                $listaErrores[] = "error, usuario no ha aceptado LOPD";
+                $listaErrores["check"] = "error, usuario no ha aceptado LOPD";
             }
             // validar datos
             if (in_array("DI",$_POST['asignatura'])){
             }else {
                 $errores = true;
-                $listaErrores[] = "error, asignatura incorrecta.";
+                $listaErrores["DI"] = "error, asignatura incorrecta.";
             }
             
-
+            // si no hay errores, se imprimen los resultados
             if (!$errores){
                 echo "Nombre: " . $_POST['nombre'];
                 echo "<br>";
@@ -59,10 +59,10 @@
             mostrarFormulario();
             }
 
-
+                // en la 67 al final faltaba algo para que muestre si ha habido un error que se guarde
             function mostrarFormulario(){
-                echo '
-                    <form action="' . $_SERVER['PHP_SELF'] . '" method="post">
+                ?>
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <label for="txtNombre"><strong>Escriba su nombre:</strong></label>
                         <input type="text" name="nombre" id="txtNombre" ><br><br>
 
@@ -78,7 +78,7 @@
                     <label for="mujer">Mujer</label>
                             <input type="radio" name="sexo" value="mujer">
 
-                    <label for="asignatura"><strong>Seleccione su primera asignatura:</strong></label>
+                    <label for="asignatura"><strong>Seleccione su asignatura:</strong></label>
                         <select name="asignatura[]" id="asignatura">
                             <option value="DWES">DWES</option>
                             <option value="DWEC">DWEC</option>
@@ -86,7 +86,7 @@
                         </select><br>
 
                     <input type="submit" value="enviar">
-                ';
+                <?php
             }
         ?>
         
