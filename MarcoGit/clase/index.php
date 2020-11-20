@@ -19,8 +19,8 @@
             }else{
                 echo "no existe la cookie nombre <br>";
             }
-// probar a hacer una carpeta privada y guardarla  y no se que creo que 
-// es asi, eje: setcookie("nombre", "Marco", time() +3600, '/', 'localhost')
+            // probar a hacer una carpeta privada y guardarla  y no se que creo que 
+            // es asi, eje: setcookie("nombre", "Marco", time() +3600, '/', 'localhost')
         ?>
     </body>
 </html>
