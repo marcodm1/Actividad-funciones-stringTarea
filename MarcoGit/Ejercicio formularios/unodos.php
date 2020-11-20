@@ -34,6 +34,7 @@
                 $errores = true;
                 $listaErrores["DI"] = "error, asignatura incorrecta.";
             }
+
             
             // si no hay errores, se imprimen los resultados
             if (!$errores){
@@ -48,7 +49,7 @@
                 echo "Asignatura DI <br>";
             }else{
                 foreach ($listaErrores as &$valor) {
-                    echo "$valor <br>";
+                    echo $valor;
                 }
                 mostrarFormulario();
             }
@@ -59,15 +60,15 @@
             mostrarFormulario();
             }
 
-                // en la 67 al final faltaba algo para que muestre si ha habido un error que se guarde
-            function mostrarFormulario(){
+                
+            function mostrarFormulario( ){
                 ?>
                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <label for="txtNombre"><strong>Escriba su nombre:</strong></label>
-                        <input type="text" name="nombre" id="txtNombre" ><br><br>
+                        <input type="text" name="nombre" id="txtNombre" value="<?php if(isset($_POST['nombre'])){echo $_POST['nombre'];} ?>"><br><br>
 
                     <label for="gg"><strong>Escriba su contraseña:</strong></label>
-                        <input type="password" name="contrasenia" id="gg" ><br><br>
+                        <input type="password" name="contrasenia" id="gg" value="<?php if(isset($_POST['contrasenia'])){echo $_POST['contrasenia'];} ?>"><br><br>
 
                     <label for="check"><strong>Aceptar politica de privacidad:</strong></label>
                         <input type="checkbox" name="check"><br><br>
