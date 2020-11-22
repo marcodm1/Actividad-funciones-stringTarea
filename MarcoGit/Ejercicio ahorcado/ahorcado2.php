@@ -2,10 +2,10 @@
 <?php
     // primera vez que pasa
     if (isset($_POST['frase']) ){
-        setcookie("frase", $_POST['frase'], time() +3000);       // frase para adivinar
-        setcookie("vidas", 5, time() +3000);                     // cantidad de vidas
-        $convertidaTotal = ocultar($_POST['frase']);             // creamos la frase $convertidaTotal
-        setcookie("fraseOculta", $convertidaTotal, time() +3000);// creamos cokie de la frase
+        setcookie("frase", $_POST['frase'], time() +3000);       
+        setcookie("intentos", 5, time() +3000);                  
+        $convertidaTotal = ocultar($_POST['frase']);            
+        setcookie("fraseOculta", $convertidaTotal, time() +3000);
     }
               
 ?>
@@ -18,21 +18,43 @@
         <meta name="description" content="ahorcado">
 	</head>
 	<body>
-        <?php // 3 datos, chat, fraseOriginal, fraseOculta
+        <?php 
             if (isset($_COOKIE['frase']) ){
                 $fraseOriginal = $_COOKIE['frase'];
                 $fraseOculta   = $_COOKIE['fraseOculta'];
+                $encontrado    = false;
+                
 
                 if (isset($_POST['char']) ){ 
-                    $fraseModificada = ocultarConCHAR($fraseOriginal);
-
-                    setcookie("fraseOculta", $fraseModificada, time() +3600);
-                    echo $fraseOriginal . "<br>";
+                    $fraseModificada = ocultarConCHAR();
+                    if ($fraseModificada == $fraseOriginal){
+                        echo "Has ganado!";
+                    }else {
+                        setcookie("fraseOculta", $fraseModificada, time() +3600);
+                        echo $fraseModificada . "<br>";
+    
+                        if ($encontrado == false){
+                            $cont = $_COOKIE['intentos'] -1;
+                            setcookie("intentos", $cont, time() +3000);
+                            if ($cont == 0){
+                                echo "Has legado a 5 intentos, has perdido";
+                                ?>
+                                    <form action="ahorcado.php" method="post">
+                                        <input type="submit" value="Volver a jugar">
+                                    </form>
+                                <?php
+                            }else{
+                                echo "Te quedan " . $cont . " vidas";
+                                formulario();
+                            }
+                        }else {
+                            formulario();
+                        }
+                    }
                 }else {
                     echo $_COOKIE['fraseOculta'] . "<br>";
+                    formulario();
                 }
-                formulario();
-               // falta el contador
             }else {
                 echo "no se ha pasado ninguna frase";
                 ?>
@@ -55,39 +77,23 @@
             }
 
 
-            function ocultarConCHAR ($fraseOriginal){
+            function ocultarConCHAR (){
                 $fraseOriginal    = $_COOKIE['frase'];
                 $fraseDescubierta = $_COOKIE['fraseOculta'];
-
                 $letra = $_POST['char'];
-                
+                global $encontrado;
+
                 for ($i=0; $i<strlen($fraseOriginal); $i++){
                     $posicion = $fraseOriginal[$i];
-
-                    if ($posicion != " "){
-                    }else {
-                        if ($posicion == $letra){
-                            $fraseDescubierta[$i] = $letra;
-                        }
+                    if ($posicion == $letra){
+                        $fraseDescubierta[$i] = $letra;
+                        $encontrado = true;
                     }
                 }
+                
                 return $fraseDescubierta;
             }
 
-
-            // function adivinar($letra, $frase, $fraseOculta){
-
-            //     for ($i=0; $i<strlen($frase); $i++){
-            //         if ($letra == $frase[$i]){
-            //             $fraseOculta[$i] = $letra;
-            //         }
-            //     }
-            //     return $fraseOculta;
-            // }
-
-         
-
-            //<input type="hidden" name="caracter" value=' . $aniadido = $aniadido + $_POST['char'] . '>
 
             function formulario(){
                 ?>
