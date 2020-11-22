@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <?php
+    // primera vez que pasa
     if (isset($_POST['frase']) ){
-        setcookie("frase", $_POST['frase'], time() +3600);  // frase para adivinar
-        setcookie("vidas", 5, time() +3600);                // cantidad de vidas
-        $convertida = convertir($_POST['frase']);           // creamos la frase convertida
-        setcookie("fraseOculta", $convertida, time() +3600);// creamos cokie de la frase
+        setcookie("frase", $_POST['frase'], time() +3000);       // frase para adivinar
+        setcookie("vidas", 5, time() +3000);                     // cantidad de vidas
+        $convertidaTotal = ocultar($_POST['frase']);             // creamos la frase $convertidaTotal
+        setcookie("fraseOculta", $convertidaTotal, time() +3000);// creamos cokie de la frase
     }
-
-    if (isset($_POST['char']) ){ 
-        setcookie("char", $_POST['char'], time() +3600);
-    } // char para adivinar
-
-    
-                   
+              
 ?>
 
 <html lang="es">
@@ -23,23 +18,29 @@
         <meta name="description" content="ahorcado">
 	</head>
 	<body>
-        <?php 
+        <?php // 3 datos, chat, fraseOriginal, fraseOculta
             if (isset($_COOKIE['frase']) ){
-                $frase = $_COOKIE['frase'];
-                
-                $fraseOculta = convertir($frase);
-                echo $fraseOculta . "<br>";
-            
+                $fraseOriginal = $_COOKIE['frase'];
+                $fraseOculta   = $_COOKIE['fraseOculta'];
+
+                if (isset($_POST['char']) ){ 
+                    $fraseModificada = ocultarConCHAR($fraseOriginal);
+
+                    setcookie("fraseOculta", $fraseModificada, time() +3600);
+                    echo $fraseOriginal . "<br>";
+                }else {
+                    echo $_COOKIE['fraseOculta'] . "<br>";
+                }
                 formulario();
+               // falta el contador
+            }else {
+                echo "no se ha pasado ninguna frase";
+                ?>
+                <a href="http://localhost/Actividad-funciones-stringTarea/MarcoGit/Ejercicio%20ahorcado/ahorcado.php">Pagina principal</a>
+                <?php
+            }
 
-                $fraseOculta = convertir2($frase);
-                echo $fraseOculta . "<br>";
-               
-
-            }else echo "no se ha pasado ninguna frase";
-       
-
-            function convertir($frase){
+            function ocultar($frase){
                 $builder = null;
                 for ($i=0; $i<strlen($frase); $i++){
                     $posicion = $frase[$i];
@@ -54,27 +55,23 @@
             }
 
 
-            function convertir2 ($frase){
-                $builder = null;
-               
-                if (isset($_POST['char'])){
-                    $letra = $_POST['char'];
-                }
+            function ocultarConCHAR ($fraseOriginal){
+                $fraseOriginal    = $_COOKIE['frase'];
+                $fraseDescubierta = $_COOKIE['fraseOculta'];
 
-                for ($i=0; $i<strlen($frase); $i++){
-                    $posicion = $frase[$i];
+                $letra = $_POST['char'];
+                
+                for ($i=0; $i<strlen($fraseOriginal); $i++){
+                    $posicion = $fraseOriginal[$i];
 
-                    if ($posicion == " "){
-                        $builder = $builder . " ";
-                    }else{
+                    if ($posicion != " "){
+                    }else {
                         if ($posicion == $letra){
-                            $builder = $builder . $letra;
-                        }else{
-                            $builder = $builder . "_";
+                            $fraseDescubierta[$i] = $letra;
                         }
                     }
                 }
-                return $builder;
+                return $fraseDescubierta;
             }
 
 
@@ -94,10 +91,8 @@
 
             function formulario(){
                 ?>
-
                 <form action="ahorcado2.php" method="post">
                     Introduzca una letra <input type="text" name="char" id="txt" ><br><br>
-                    <input type="hidden" name="frase" value="<?php $_POST['frase']?>">
                     <input type="submit" value="enviar">
                 </form>
 
