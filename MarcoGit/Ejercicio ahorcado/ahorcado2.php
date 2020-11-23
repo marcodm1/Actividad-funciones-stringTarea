@@ -24,11 +24,15 @@
                 $fraseOculta   = $_COOKIE['fraseOculta'];
                 $encontrado    = false;
                 
-
                 if (isset($_POST['char']) ){ 
                     $fraseModificada = ocultarConCHAR();
                     if ($fraseModificada == $fraseOriginal){
                         echo "Has ganado!";
+                        ?>
+                                    <form action="ahorcado.php" method="post">
+                                        <input type="submit" value="Volver a jugar">
+                                    </form>
+                                <?php
                     }else {
                         setcookie("fraseOculta", $fraseModificada, time() +3600);
                         echo $fraseModificada . "<br>";
@@ -90,7 +94,6 @@
                         $encontrado = true;
                     }
                 }
-                
                 return $fraseDescubierta;
             }
 

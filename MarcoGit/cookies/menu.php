@@ -8,12 +8,15 @@
         
 	</head>
 	<body>
-        <a href="cookieCrear.php"> Crea cookie.</a><br> 
-        <a href="cookieBorrar.php"> Borra cookie</a><br> 
+        <a href="crearCookie.php"> Crea cookie</a><br> 
+        <a href="borrarCookie.php"> Borra cookie</a><br>
+        <a href="crearCookieSegura.php"> Crear cookie segura</a><br> 
+        <a href="borrarCookieSegura.php"> Borrar cookie segura</a><br> 
+        <a href="leerCookie.php"> Leer cookie </a><br> 
+        <a href="leerCookieSegura.php"> Leer cookie segura</a><br>
 
         <?php 
-            // comprobamos si la cookie esta disponible y dura 
-            // lo que dure abierta la pagina web
+            // comprobamos si la cookie esta disponible
             if (!empty($_COOKIE['nombre']) ) {
                 echo "La cookie nombre esta disponible: " . $_COOKIE['nombre'] . "<br>";
             }else{

@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-	
-    <?php
-            // crear cookie
+        <?php
             setcookie("nombre", "Marco", time() +3600);
         ?>
 	</head>
 	<body>
-    <a href="index.php"> Volver a index</a><br> 
-
+    <a href="menu.php"> Volver a index</a><br> 
     </body>
 </html>
