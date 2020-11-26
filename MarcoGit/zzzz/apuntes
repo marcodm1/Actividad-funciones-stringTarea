@@ -1,0 +1,20 @@
+comprobar si da errores                     // ok
+comprobar con validator                     // ok
+comprovar las etiquetas                     // he puesto dos titles...
+errores de estilo en los identificadores    // ok
+tipos de datos se adecuan al tipo de input  // he puesto text en password
+el ejercicio tiene que ser generico         // ok
+validator pagina mensajes                   // error en un label txtNombre
+validator pagina zzz                        // ok
+los contadores y funciones                  // ok
+
+
+
+
+
+
+
+
+
+
+
