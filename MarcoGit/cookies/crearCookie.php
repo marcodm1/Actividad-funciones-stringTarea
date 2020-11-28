@@ -2,10 +2,10 @@
 <html lang="es">
 	<head>
         <?php
-            setcookie("nombre", "Marco", time() +3600);
+            setcookie("nombre", "Marco", time() +10);
+            header("Location:menu.php");
         ?>
 	</head>
 	<body>
-    <a href="menu.php"> Volver a index</a><br> 
     </body>
 </html>

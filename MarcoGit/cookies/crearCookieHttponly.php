@@ -8,9 +8,8 @@
 	</head>
 	<body>
         <?php 
-            setcookie("cookieSegura", "Marco Segura", time() -1, '/', 'localhost', true);
+            setcookie("cookieHttponly", "Marco httponly", time() +60, '/', 'localhost', false, true);
             header("Location:menu.php");
         ?>
-         
     </body>
 </html>

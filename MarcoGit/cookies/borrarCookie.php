@@ -3,9 +3,9 @@
 	<head>
         <?php
             setcookie("nombre", "Marco", time() -1);
+            header("Location:menu.php");
         ?>
 	</head>
 	<body>
-    <a href="menu.php"> Volver a index</a><br> 
     </body>
 </html>
