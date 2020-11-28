@@ -11,9 +11,7 @@
         <?php
             session_destroy();
         ?>
-        <a href="formu.php"> Sesion cerrada</a><br> 
+        <a href="menu.php"> Sesion cerrada</a><br> 
 
     </body>
 </html>
-
-

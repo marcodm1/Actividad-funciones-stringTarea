@@ -14,9 +14,6 @@
             print_r($_SESSION);
             echo "<br><br>";
 
-            var_dump($_SESSION['nombre']);
-
-            echo "<br>";
         ?>
         <br><a href="menu.php"> Volver al menu</a><br> 
 

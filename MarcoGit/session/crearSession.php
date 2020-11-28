@@ -1,4 +1,4 @@
-zzz<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 	<head>
 		<title>Marco Domínguez</title>
@@ -15,7 +15,8 @@ zzz<!DOCTYPE html>
             $_SESSION['apellido1'] = "Dominguez";
             $_SESSION['apellido2'] = "Mateos";
 
-            echo "he creado una session con 3 parametros:<br>";
+            echo "Creo una session con 3 parametros: <br>"; 
+            echo "[nombre] [apellido1] [apellido2]<br>";
         ?>
         <a href="menu.php"> Volver al menu</a><br> 
 
