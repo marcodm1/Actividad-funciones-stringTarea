@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 <!--
 <form action="EjercicioString.php" method="post">
 
@@ -93,7 +88,7 @@ saludo("ana", "Buenas tardes"); -->
 
 
 <!-- 
-// convertir cadena en array
+                        // convertir cadena en array
            
            // $pizza  = "porción1 porción2 porción3 porción4 porción5 porción6";
            // $porciones = explode(" ", $pizza);
@@ -160,6 +155,8 @@ saludo("ana", "Buenas tardes"); -->
            // levenshtein — Cálculo de la distancia Levenshtein entre dos strings
            // localeconv — Obtener información sobre el formato numérico
            // ltrim — Retira espacios en blanco (u otros caracteres) del inicio de un string
+           // rtrim — Retira los espacios en blanco (u otros caracteres) del final de un string
+           // trim — Elimina espacio en blanco (u otro tipo de caracteres) del inicio y el final de la cadena
            // md5_file — Calcula el resumen criptográfico md5 de un archivo dado
            // md5 — Calcula el 'hash' md5 de un string
            // metaphone — Calcula la clave metaphone de un string
@@ -174,7 +171,6 @@ saludo("ana", "Buenas tardes"); -->
            // quoted_printable_decode — Convierte un string quoted-printable en un string de 8 bits
            // quoted_printable_encode — Convierte un string de 8 bits en un string quoted-printable
            // quotemeta — Escapa meta caracteres
-           // rtrim — Retira los espacios en blanco (u otros caracteres) del final de un string
            // setlocale — Establecer la información del localismo
            // sha1_file — Calcula el hash sha1 de un archivo
            // sha1 — Calcula el 'hash' sha1 de un string
@@ -222,7 +218,6 @@ saludo("ana", "Buenas tardes"); -->
            // substr_count — Cuenta el número de apariciones del substring
            // substr_replace — Reemplaza el texto dentro de una porción de un string
            // substr — Devuelve parte de una cadena
-           // trim — Elimina espacio en blanco (u otro tipo de caracteres) del inicio y el final de la cadena
            // ucfirst — Convierte el primer caracter de una cadena a mayúsculas
            // ucwords — Convierte a mayúsculas el primer caracter de cada palabra de una cadena
            // vfprintf — Escribe un string con formato en un flujo
