@@ -7,37 +7,38 @@
         <meta name="description" content="ejercicio fechas">
 	</head>
 	<body>
-        <form action="fechas.php" method="get">
+        <!-- <form action="fechas.php" method="get">
             Fecha (día, mes, año): <input type="date" name="fecha" id="txt" ><br><br>
             <input type="submit" value="enviar"><br><br>
-        </form>
+        </form> -->
 
         <?php 
-            if (isset($_GET['fecha'])){
-               echo $fechaAhora = date("Y-m-d");
-                $fechaUsuario = $_GET['fecha'];
-                plazo ($fechaAhora, $fechaUsuario);
-            }
-
-            function plazo ($fechaAhora, $fechaUsuario){
-                if ($fechaAhora >= $fechaUsuario){
-                    echo $fechaAhora . ": Esta fuera de fecha";
-                }else {
-                    echo $fechaUsuario . ": Esta en fecha";
-                }
-            }
+            // if (isset($_GET['fecha'])){
+            //     $fechaAhora = date("Y-m-d");
+            //     echo $fechaAhora . " Fecha actual<br>";
+            //     $fechaUsuario = $_GET['fecha'];
+            //     echo $fechaUsuario . " Fecha elegida por el usuario<br>";
+            //     if ($fechaAhora >= $fechaUsuario){
+            //         echo $fechaAhora . ": Fecha anterior a la actual";
+            //     }else {
+            //         echo $fechaUsuario . ": Fecha posterior a la actual";
+            //     }
+            // }
+            define('CONSTANTE', 13);
+            $fecha_actual = date("d-m-Y");
+            echo "La fecha actual es... " . $fecha_actual . "<br>";
+            
+            $suma =  date("d-m-Y",strtotime($fecha_actual .  CONSTANTE . " day")); 
+            echo "Si le sumamos 13 dias... " . $suma;
      
-            // $s = getdate(); // Obtiene datos de la fecha y hora actual
-            // echo $s['seconds']; // los segundos
-            // echo $s['minutes']; // los minutos
-            // echo $s['hours']; // la hora
-            // echo $s['mday']; // el día del mes
-            // echo $s[wday]; // el nº del día de la semana
-            // echo $s[mon]; // el nº del mes
-            // echo $s[year]; // el año
-            // echo $s[yday]; // nº del día en el año
-            // echo $s[weekday]; // el día de la semana
-            // echo $s[month]; // el nombre del mes
+            $suma2 =  date("d-m-Y" . "1 day");
+            echo $suma2;
+
+            echo "<br><br>_______________________________<br><br>";
+
+            $fechaActual = date("d-m-Y");
+
+            echo "Fecha actual = " . $fecha_actual;
     
  
     
