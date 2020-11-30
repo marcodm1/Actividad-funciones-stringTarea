@@ -23,11 +23,11 @@
                 }
             }else {
                 $errores = true;
-                $listaErrores[] = "Error: no se ha leido el fichero correctamente."
+                $listaErrores[] = "Error: no se ha leido el fichero correctamente.";
             }
        }else {
             $errores = true;
-            $listaErrores[] = "Error: no se ha pasado el fichero."
+            $listaErrores[] = "Error: no se ha pasado el fichero.";
        }
            
         
