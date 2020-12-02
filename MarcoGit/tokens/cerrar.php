@@ -11,8 +11,10 @@
         <?php
             session_start();
             session_destroy();
+            header("Location:inicio.php");
+
         ?>
-        <a href="menu.php"> Sesion cerrada</a><br> 
+         
 
     </body>
 </html>

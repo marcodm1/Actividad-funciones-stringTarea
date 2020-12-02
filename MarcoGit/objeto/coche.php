@@ -1,8 +1,7 @@
 <?php
 
 
-    class Coche{
-        //propiedades
+    class Coche {
         private $color;
         private $velocidad;
         const VELOCIDAD_MAXIMA  = 120;
@@ -12,9 +11,10 @@
         //constructores
         /*
         - no recibe nada: inicialice los valores a color=<COLOR DE SERIE>, velocidad =<VELOCIDAD INICIAL >
-        - recibe la color: color será el que nos dan,  y la velocidad la inicial
+        - recibe la color: lor será el que nos dan,  y la velocidad la inicial
         - recibe la color y la velocidad: inicializa las propiedades con los valores que nos dan. 
 
+        constante, objetos, tokens, repaso del examen, js
         */
         public function __construct(){ // si no recibe parametros
             if (func_num_args() == 0){ 
@@ -66,7 +66,13 @@
 
     //PROGRAMA PRINCIPAL.
     $seat = new Coche("verde", 100);
+    
     echo Coche::VELOCIDAD_MAXIMA . '<br>';
+
+    
+    // echo $seat::VELOCIDAD_MAXIMA . "<br>";
     echo $seat->getVelocidad() . '<br>';
 
+    // para ver elos metodos o las variables de un objeto, se usa ->
+    // para ver las constantes se usa ::
 ?>
