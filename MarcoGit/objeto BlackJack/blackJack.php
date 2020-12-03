@@ -1,41 +1,20 @@
-<!-- 
-El juego es el Black Jack, un juego de cartas que consiste
-en acercarse lo maximo posible a 21 sin pasarte, y todas las figuras
-cuentan 10 puntos y el 1 cuenta 1 u 11
-definir UML de las clases -->
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>Marco Domínguez</title>
+		<meta charset="UTF-8">
+        <meta name="author" content="Marco Dominguez">
+        <meta name="description" content="Black Jack">
+	</head>
+	<body>
+        <form action="back.php" method="post">
+        <label for="txtNombre">Escriba su nombre:</label>
+            <input type="text" name="nombre" id="txtNombre"><br><br>
 
-<?php
-    // implementar si hace falta la interfaz Juego
+        <input type="submit" value="jugar">
+    </body>
+</html>
 
 
-    class Carta implements A {
-        private $numero;
-        // private $color;
-        // private $figura; 
-        // private $as;
-        // private $palo;
-        // metodos();
-      
-    }
 
-    public function otraCarta(){
-        $num = rand(1, 10);
-        $carta = new Carta($num);
-        return $carta;
-    }
 
-    public function terminar(){
-        return true;
-    }
-
-    public function baraja() {
-        $bajara = array ();
-        for ($i=0; $i<52; $i++){
-            $baraja[$i] = otraCarta();
-        }
-    }
-
-    // poner algo para que la maquina termine si le toca entre 17 y 21
-    // primero juega el usuario y luego la maquina
-    // hacer el juego paso a paso
-?>
