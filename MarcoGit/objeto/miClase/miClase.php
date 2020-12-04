@@ -4,7 +4,7 @@
     class Coche implements interMotor {
         private $color;
         private $precio;
-        private function __construct($color, $precio) {
+        public function __construct($color, $precio) {
             $this->color  = $color;
             $this->precio = $precio;
         }
@@ -17,7 +17,7 @@
         }
         
         public function getPrecio(){
-            return $this::$precio;
+            return $this->precio;
         }
 
         public function setColor($a){
@@ -33,19 +33,18 @@
     class Quad extends Coche {
         private $modelo;
         private $rejilla;
-        private function __construct($modelo, $rejilla, $color, $precio) {
+        public function __construct($modelo, $rejilla, $color, $precio) {
             parent::__construct($color, $precio);
             $this->modelo  = $modelo;
             $this->rejilla = $rejilla;
         }
-        public function caballito(){}
 
         public function getModelo(){
             return $this->modelo;
         }
         
         public function getRejilla(){
-            return $this::$rejilla;
+            return $this->rejilla;
         }
 
         public function setModelo($a){
@@ -61,15 +60,13 @@
     class MaquinaCoser implements interMotor {
         private $potencia;
         private $hilo;
-        private function __construct($potencia, $hilo) {
+        public function __construct($potencia, $hilo) {
             $this->potencia  = $potencia;
             $this->hilo      = $hilo;
         }
         function arrancar(){}
         function frenar(){}
         function acelerar(){}
-
-        public function pinchar(){}
 
         public function getPotencia(){
             return $this->potencia;
