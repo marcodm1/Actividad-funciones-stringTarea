@@ -36,7 +36,7 @@
              
         }
         class C extends X {
-             use Info; ….. 
+             use Info;
         }
 
         ?>

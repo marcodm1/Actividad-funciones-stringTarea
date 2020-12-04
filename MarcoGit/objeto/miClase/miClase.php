@@ -8,21 +8,53 @@
             $this->color  = $color;
             $this->precio = $precio;
         }
-        private function arrancar(){}
-        private function frenar(){}
-        private function acelerar(){}
+        function arrancar(){}
+        function frenar(){}
+        function acelerar(){}
+
+        public function getColor(){
+            return $this->color;
+        }
+        
+        public function getPrecio(){
+            return $this::$precio;
+        }
+
+        public function setColor($a){
+            $this->color = $a;
+        }
+        
+        public function setPrecio($a){
+            $this->precio = $a;
+        }
     }
 
 
     class Quad extends Coche {
         private $modelo;
         private $rejilla;
-        private function __construct($modelo, $rejilla) {
+        private function __construct($modelo, $rejilla, $color, $precio) {
             parent::__construct($color, $precio);
             $this->modelo  = $modelo;
             $this->rejilla = $rejilla;
         }
-        private function caballito(){}
+        public function caballito(){}
+
+        public function getModelo(){
+            return $this->modelo;
+        }
+        
+        public function getRejilla(){
+            return $this::$rejilla;
+        }
+
+        public function setModelo($a){
+            $this->modelo = $a;
+        }
+        
+        public function setRejilla($a){
+           $this->rejilla = $a;
+        }
     }
         
 
@@ -31,14 +63,35 @@
         private $hilo;
         private function __construct($potencia, $hilo) {
             $this->potencia  = $potencia;
-            $this->hilo = $hilo;
+            $this->hilo      = $hilo;
         }
-        private function arrancar(){}
-        private function frenar(){}
-        private function acelerar(){}
+        function arrancar(){}
+        function frenar(){}
+        function acelerar(){}
 
-        private function pinchar(){}
+        public function pinchar(){}
+
+        public function getPotencia(){
+            return $this->potencia;
+        }
+        
+        public function getHilo(){
+            return $this->hilo;
+        }
+
+        public function setPotencia($a){
+            $this->potencia = $a;
+        }
+        
+        public function setHilo($a){
+            $this->hilo = $a;
+        }
     }
+
+
+
+
+
    
 ?>
        
