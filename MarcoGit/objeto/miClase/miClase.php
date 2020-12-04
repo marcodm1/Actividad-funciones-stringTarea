@@ -1,51 +1,44 @@
 <?php
-include "inter.php";
+    include "inter.php";
 
-class Coche implements interMotor {
-    public function arrancar(){}
-    public function frenar(){}
-    public function acelerar(){}
-    public $color;
-    public $precio;
-
-    public function __construct($color, $precio) {
-    $this->color  = $color;
-    $this->precio = $precio;
-    }
-
-}
-
-
-class Quad extends Coche {
-    public function caballito(){}
-    public $modelo;
-    public $rejilla;
-
-    public function __construct($modelo, $rejilla) {
-        $this->modelo  = $modelo;
-        $this->rejilla = $rejilla;
+    class Coche implements interMotor {
+        private $color;
+        private $precio;
+        private function __construct($color, $precio) {
+            $this->color  = $color;
+            $this->precio = $precio;
         }
-}
-    
-
-class MaquinaCoser implements interMotor {
-    public function arrancar(){}
-    public function frenar(){}
-    public function acelerar(){}
-
-    public function pinchar(){}
-    public $potencia;
-    public $hilo;
-
-    public function __construct($potencia, $hilo) {
-        $this->potencia  = $potencia;
-        $this->hilo = $hilo;
+        private function arrancar(){}
+        private function frenar(){}
+        private function acelerar(){}
     }
-}
 
 
+    class Quad extends Coche {
+        private $modelo;
+        private $rejilla;
+        private function __construct($modelo, $rejilla) {
+            parent::__construct($color, $precio);
+            $this->modelo  = $modelo;
+            $this->rejilla = $rejilla;
+        }
+        private function caballito(){}
+    }
+        
 
-    
+    class MaquinaCoser implements interMotor {
+        private $potencia;
+        private $hilo;
+        private function __construct($potencia, $hilo) {
+            $this->potencia  = $potencia;
+            $this->hilo = $hilo;
+        }
+        private function arrancar(){}
+        private function frenar(){}
+        private function acelerar(){}
+
+        private function pinchar(){}
+    }
    
 ?>
        

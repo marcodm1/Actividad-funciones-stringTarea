@@ -49,12 +49,24 @@
     echo "El coche seat tiene una velocidad de: " . $seat->getVelocidad() . '<br>';
 
     // para ver elos metodos o las variables de un objeto, se usa ->
-    // para ver las constantes se usa ::
+    //  ::
 
     // unset lo pone a null
     // parent es la referencia del super
-    // __destructi solo dice que cuando se destryua por el recolector de basuda destruct hace cosas
-    // __destruct es unconstructor magico
+    // __destruct solo dice que cuando se destryua por el recolector de basuda destruct hace cosas
+
+    // si quiero usar el metodo de la clase padre, se pone ::parent
+    // y se tiene que poner dentro del objeto hija
+    // metodo abstracto es para que solo los usen las clase hijas
+    // no la propia clase que los contiene public abstract function gg{}
+    // y public static function gg{} no necesita un crear un objeto para usarlo
+    // si no se pone constructor, php lo hace solo
+
+// si hay dos traits con el mismo metodos, para usar el de uno en concreto
+// ponemos nombreTrait1::metodo insteadof nombreTrait2;
+// y si ya estamos usando uno de los dos metodos, y queremos usar el otro
+// ponemos en vez de insteadof, as y le ponemos un nombre sin comillas;
+
 
 
 ?>
