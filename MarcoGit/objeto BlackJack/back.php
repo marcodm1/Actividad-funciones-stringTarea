@@ -12,21 +12,48 @@ definir UML de las clases -->
         header("Location:menu.php");
     }
 
-    class Carta implements Juego {
-        public function g(){}
+    class Carta {
+        private $numeroCarta;
 
-        private $numero;
-
-        // private $color;
         // private $figura; 
         // private $as;
         // private $palo;
         // metodos();
 
-        public function __construct($num){
-        $this->numero = $num;
+        public function __construct($numeroCarta){
+            $this->numeroCarta = $numeroCarta;
         }
     }  
+
+    class Baraja { 
+        private const CANTIDAD = 52;
+        private $barajaCartas = array();
+        // metodos repartir mezclar
+        
+        public function __construct(){
+            for ($i=0; $i<4; $i++){
+                for ($j=0; $j<13; $j++){
+                    $barajaCartas[] = new Carta($j);
+                }
+                $j = 0;
+            }
+        }
+
+        function repartir(){
+            // le quita 2 objetos a baraja para jugador1
+            // le quita 2 objetos a baraja para IA
+            $aux = 0;
+            $aux = 0;
+            for ($i=0; $i<2; $i++){
+                $num= rand(1, count($this->barajaCartas));
+                $aux = $this->barajaCartas[$num];
+                unset($barajaCartas[$num]);
+            }
+        }
+
+    }
+
+    
 
     function otraCarta(){
         $num = rand(1, 13);
@@ -38,18 +65,12 @@ definir UML de las clases -->
         return true;
     }
 
-    function baraja() { // ponerlo a lo mejor como class posibles metodos repartir mezclat etc...
-        $bajara = array ();
-        for ($i=0; $i<52; $i++){
-            $baraja[$i] = otraCarta();
-        }
-        return $baraja;
-    }
-
-
-
     // -------- programa ---------
     
+    $baraja = new Baraja();
+    $baraja->repartir(); // 2 al jugador
+    // repartir 2 cartas a cada uno
+
     // $respuesta = true/false 
   
     // poner algo para que la maquina termine si le toca entre 17 y 21
