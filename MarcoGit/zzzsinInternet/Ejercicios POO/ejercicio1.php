@@ -8,22 +8,28 @@
             $this->nombre = $nombre;
         }
 
-        public function estaRellena(){
+        abstract private function estaRellena(){
             $this->esRellena = true;
         }
 
-        public function estaVacia(){
+        abstract private function estaVacia(){
             $this->esRellena = true;
         }
         
-        public function showInfo(){
-            echo "El nombre es: " . $nombre.getNombre();
-            echo "El color es: "  . $color.getColor();
+        abstract public function showInfo(){
+            echo "El nombre del padre es: " . $nombre.getNombre();
+            echo "El color del padre es: "  . $color.getColor();
             if ($esRellena){
-                echo "La figura esta rellena.";
+                echo "La figura del padre esta rellena.";
             }else {
-                echo "La figura no esta rellena.";
+                echo "La figura del padre no esta rellena.";
             }
+            echo "El radio del Circulo es: " . $radio.getNombre();
+            echo "El area del Circulo es: "  . $radio.getArea();
+            echo "El radio del Circulo es: " . $radio.getRadio();
+            echo "El lado del Cuadrado es: " . $cuadrado.getLado();
+            echo "El area del Cuadrado es: " . $cuadrado.getArea();
+
 
             // mostrar propiedades de as dos hijas
         }
@@ -108,6 +114,9 @@
     $cuadrado = new Cuadrado(5, "cuadrado");
 
 
+
+// posibles fallos: Utilizando parent::, ampliar showInfo() para que muestre las propiedades de la clase hija, tanto
+// en Circulo como en Cuadrado.
 
 
 ?>
