@@ -7,7 +7,7 @@
         <meta name="description" content="Black Jack">
 	</head>
 	<body>
-        <form action="back.php" method="post">
+        <form action="back.php" method="POST">
         <label for="txtNombre">Escriba su nombre:</label>
             <input type="text" name="nombre" id="txtNombre"><br><br>
 

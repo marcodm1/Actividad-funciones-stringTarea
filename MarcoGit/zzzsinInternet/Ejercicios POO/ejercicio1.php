@@ -1,4 +1,5 @@
 <?php
+
     class Figura {
         private $nombre;
         private $color;

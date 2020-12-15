@@ -1,39 +1,79 @@
-<!-- 
-El juego es el Black Jack, un juego de cartas que consiste
-en acercarse lo maximo posible a 21 sin pasarte, todas las figuras
-cuentan 10 puntos y el 1 cuenta 1 u 11
-definir UML de las clases -->
-<!-- // implementar si hace falta la interfaz Juego -->
+
 <?php
-    include "interface.php";
+    // include "interface.php";
 
     if (isset($_POST['nombre'])){
-    }else{
+    }else {
         header("Location:menu.php");
+    }
+
+    class Jugador {
+        private $dineroTotal;
+
+        public function __construct($dineroTotal){
+            $this->dineroTotal = $dineroTotal;
+        }
+
+        private function apostar($num) {
+            if ($num < $this->dineroTotal){
+                $this->dineroTotal = $this->dineroTotal - $num;
+                return $num;
+            }else {
+                $error = "Error: No puedes apostar mas de lo que tienes total.";
+                return $error;
+            }
+            
+        }
+        // private function plantarse() {}
+        // private function retirarse() {}
     }
 
     class Carta {
         private $numeroCarta;
-
+        // private $figura  = false;
         // private $figura; 
-        // private $as;
-        // private $palo;
-        // metodos();
+         
 
-        public function __construct($numeroCarta){
-            $this->numeroCarta = $numeroCarta;
+        public function __construct($num){
+            switch ($num){
+                case 1: 
+                    if ($num >0 && $num <10){
+                        return $this->numeroCarta = $num;
+                    }
+                case 2:
+                    if ($num >= 10 && $num <14){
+                        return $this->numeroCarta = 10;
+                    }
+            }
+        }
+
+        private function cambiarAS($num) {
+            if ($num == 1){
+                return $this->numeroCarta = 11;
+            }else {
+                return "Error: solo puedes modificar el 1 por el 11";
+            }
         }
     }  
 
     class Baraja { 
         private const CANTIDAD = 52;
         private $barajaCartas = array();
-        // metodos repartir mezclar
+        
         
         public function __construct(){
+            $J  = 10;
+            $Q  = 10;
+            $K  = 10;
+            $AS = 11;
+
             for ($i=0; $i<4; $i++){
                 for ($j=0; $j<13; $j++){
-                    $barajaCartas[] = new Carta($j);
+                    if ($j >= 10){
+                        $barajaCartas[] = new Carta($j);
+                    }else{
+                        $barajaCartas[] = new Carta($j);
+                    }
                 }
                 $j = 0;
             }
@@ -50,6 +90,7 @@ definir UML de las clases -->
                 unset($barajaCartas[$num]);
             }
         }
+        // metodos mezclar
 
     }
 
