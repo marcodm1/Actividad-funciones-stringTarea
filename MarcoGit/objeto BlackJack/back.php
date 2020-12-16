@@ -1,16 +1,26 @@
 
 <?php
-
+    // _______________________________JUGADOR_______________________________
     class Jugador {
-        private $cartera;
+        private $dineroCartera;
+        private $cartasMano = array();
 
-        public function __construct($cartera) {
-            $this->cartera = $cartera;
+        public function __construct($dineroCartera) {
+            $this->dineroCartera = $dineroCartera;
+        }
+
+       
+        private function getSumaCartasMano(){
+            $suma = 0;
+            for ($i=0; $i<count($this->cartasMano); $i++){
+                $suma += $this->cartasMano[$i]->getNumeroCarta();
+            }
+            return $suma;
         }
 
         private function apostar($num) {
-            if ($num < $this->cartera) {
-                $this->cartera = $this->cartera - $num;
+            if ($num < $this->dineroCartera) {
+                $this->dineroCartera -= $num;
                 return $num;
             }else {
                 $error = "Error: No puedes apostar mas de lo que tienes total.";
@@ -18,25 +28,81 @@
             }
             
         }
-        // private function plantarse() {}
-        // private function pedirCarta() {}
-        private function cambiarAS($num) {
-            if ($num == 1) {
-                return $this->numeroCarta = 11;
-            }else {
-                return "Error: Solo se puede modificar el 1 por el 11.";
-            }
+
         
+        public function getDineroCartera() {
+            return $this->dineroCartera;
         }
 
-    }
+        public function setDineroCartera($num) {
+            if ($num >= 0) {
+                $this->dineroCartera += $num;
+            }else {
+                $this->dineroCartera -= $num;
+            }
+        } 
+        
+         
+        
 
+        // funcion para ver cuantas cartas tengo
+        // funcion para ver la carta en la posicion x
+        // private function plantarse() {}
+        // private function pedirCarta() {}
+
+        // private function cambiarAS($num) {
+        //     if ($num == 1) {
+        //         return $this->numeroCarta = 11;
+        //     }else {
+        //         return "Error: Solo se puede modificar el 1 por el 11.";
+        //     }
+        
+        // }
+
+    }
+    // _______________________________CASINO_______________________________
+    class Casino {
+        private $caja;
+
+        public function __construct($num){
+            $this->caja = $num;
+        }
+
+        private function getCaja(){
+            return $this->caja;
+        }
+        public function setCaja($num) {
+            if ($num >= 0) {
+                $this->caja += $num;
+            }else {
+                $this->caja -= $num;
+            }
+        } 
+
+        private function empezarPartida(){
+            for ($i=0; $i<2; $i++) { // numero de jugadores
+                for ($i=0; $i<2; $i++) { // 2 cartas por cada jugador
+                    $num = mt_rand(1, 13);
+                    $this->Baraja->repartirInicioPartida();
+
+                }
+                $num = mt_rand(1, count($this->barajaCartas));
+            }
+        }
+
+        // private function comenzarJuego() {}
+        // private function recogerCartas() {}
+        // private function entregarDinero() {}
+        // private function recogerDinero() {}
+
+
+    }
+    // _______________________________CARTA_______________________________
     class Carta {
         private $numeroCarta;
         // private $figura  = false;
         // private $figura; 
          
-
         public function __construct($num){
             switch ($num){
                 case 1: 
@@ -49,38 +115,23 @@
                     }
             }
         }
-    }  
 
-    class Casino {
-        private $caja;
-
-        public function __construct($num){
-            $this->caja = $num;
+        private function getNumeroCarta() {
+            return $this->numeroCarta;
         }
 
-        // private function repartir(){
-        //     // -2 a bajara para jugador1
-        //     // -2 a naraka para casiono
-        //     $aux = 0;
-        //     for ($i=0; $i<2; $i++) {
-        //         $num = rand(1, count($this->barajaCartas));
-        //         $aux = $this->barajaCartas[$num];
+        // private function setNumeroCarta($num) {
+        //     if () {
+        //         $this->numeroCarta = 11;
         //     }
+            
         // }
-
-        // private function comenzarJuego() {}
-        // private function recogerCartas() {}
-        // private function entregarDinero() {}
-        // private function recogerDinero() {}
-
-
-    }
-
+    }  
+    // _______________________________BARAJA_______________________________
     class Baraja { 
         private $barajaCartas = array();
         
         public function __construct(){
-
             for ($i=0; $i<4; $i++){
                 for ($j=1; $j<14; $j++){
                     $barajaCartas[] = new Carta($j);
@@ -91,37 +142,54 @@
 
         // private function quitarCarta(){}
 
-        private function repartir(){
+        private function repartirUna() {
+
+        }
+        
+        private function repartirInicioPartida(){
             // le quita 2 objetos a baraja para jugador1
             // le quita 2 objetos a baraja para IA
-            $aux = 0;
-            $aux = 0;
             for ($i=0; $i<2; $i++){
-                $num= rand(1, count($this->barajaCartas));
+                $num= mt_rand(1, 13);
                 $aux = $this->barajaCartas[$num];
-                unset($barajaCartas[$num]);
+                unset($barajaCartas[$num]);  // unset elimina variable
             }
         }
-        // metodos mezclar
 
     }
+    // _______________________________PROGRAMA_______________________________
 
+    // crear jugador
+    $miJugador = new Jugador(100, 0 , null, null);
+    // crear casino
+    $miCasino = new Casino(1000);
+    // crear baraja 
+    $miBaraja = new Baraja();
     
 
+    // -------- 1ª partida ---------
 
-   
+    $miCasino
+    // jugador pide
+    // casino reparte1
+    // jugador se planta
 
-    // -------- programa ---------
-    
-    $baraja = new Baraja();
-    // $baraja->repartir(); // 2 al jugador
-    // repartir 2 cartas a cada uno
+    // casino se reparte
+    // casino se reparte
+    // casino se reparte
+    // casino se pasa
+    // casino da dinero
+    // partida finalziada
 
-    // $respuesta = true/false 
-  
-    // poner algo para que la maquina termine si le toca entre 17 y 21
-    // primero juega el usuario y luego la maquina
-    // hacer el juego paso a paso
+    // 2ª partida
+
+    // casino reparte
+    // jugador pide
+    // casino reparte1
+    // jugador pide
+    // jugador se pasa
+    // casino recoje dinero
+    // partida finalizada
 
     
 
