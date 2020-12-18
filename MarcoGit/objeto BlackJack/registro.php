@@ -11,6 +11,9 @@
         <label for="txtNombre">Escriba su nombre:</label>
             <input type="text" name="nombre" id="txtNombre"><br><br>
 
+        <label for="dinero1">Escriba su limite total a jugar:</label>
+            <input type="number" name="dinero" id="dinero1"><br><br>
+
         <input type="submit" value="jugar">
     </body>
 </html>

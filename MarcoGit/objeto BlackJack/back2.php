@@ -6,7 +6,8 @@
     if (!isset($_POST['continuar'])){
         echo "Error: no ha seleccionado nada.";
     }
- 
+     // es para leer la session del objeto...
+    // $object = unserialize($_SESSION['nombre']); 
 
     // _______________________________JUGADOR_______________________________
     class Jugador {
@@ -23,7 +24,46 @@
             }
             return $suma;
         }
+        // public function apostar($num) {
+        //     if ($num < $this->dineroCartera) {
+        //         $this->dineroCartera -= $num;
+        //         return $num;
+        //     }else {
+        //         $error = "Error: No puedes apostar mas de lo que tienes total.";
+        //         return $error;
+        //     }
+        // }
+        // public function getDineroCartera() {
+        //     return $this->dineroCartera;
+        // }
+        // public function setDineroCartera($num) {
+        //     if ($num >= 0) {
+        //         $this->dineroCartera += $num;
+        //     }else {
+        //         $this->dineroCartera -= $num;
+        //     }
+        // } 
+        // public function getManoJugador() {
+        // }
+        // public function setManoJugador() {
+        // }
         
+        // public function cambiarAS($num) {  
+        //     if ($num == 1) {
+        //         return $this->numeroCarta = 11;
+        //     }else {
+        //         return "Error: Solo se puede modificar el 1 por el 11.";
+        //     }  
+        // }
+        // public function pedirCarta($respuesta){
+        //     if ($respuesta) {
+                
+        //     }else {
+        //         // finalizarRonda();
+        //     }
+        // }
+      
+
         
 
     }
@@ -65,6 +105,40 @@
 
         }
 
+        // public function getCaja(){
+        //     return $this->caja;
+        // }
+        // public function setCaja($num) {
+        //     if ($num >= 0) {
+        //         $this->caja += $num;
+        //     }else {
+        //         $this->caja -= $num;
+        //     }
+        // } 
+        // public function getManoCasino() {
+        // }
+        // public function setManoCasino() {
+        // }
+
+
+        // public function quitarCarta($carta) {
+        //     for ($i=0; $i<count($this->baraja); $i++) {
+        //         if ($this->baraja[$i]->getNumeroCarta() == $carta->getNumeroCarta()) {
+        //             unset($this->baraja[$i]);
+        //         }
+        //     }
+        // }
+        
+        // public function finalizarRonda() {
+        //     $casino  = $this->casino->getSumaManoCasino();
+        //     $jugador = $this->jugador->getSumaManoJugador();
+        //     if ($casino >= $jugador) {
+        //         $this->caja->setCaja($this->apuesta);
+        //         $this->jugador->setDineroCartera($this->apuesta);
+        //     }
+        // }
+        // public function entregarDinero() {}
+        // public function recogerDinero() {}
     }
     // _______________________________CARTA_______________________________
     class Carta {
@@ -86,13 +160,27 @@
             return $this->numeroCarta;
         }
     }  
-  
+    // _______________________________BARAJA_______________________________
+    // class Baraja { 
+    //     private $baraja = array();
+        
+    //     public function __construct(){
+    //         for ($i=0; $i<4; $i++){
+    //             for ($j=1; $j<14; $j++){
+    //                 $baraja[] = new Carta($j);
+    //             }
+    //             $j = 1;
+    //         }
+    //     }
+    // }
     // _______________________________PROGRAMA_______________________________
 
+    // crear jugador
     $miJugador = new Jugador(100);
-   
+    // crear casino
     $miCasino = new Casino(1000);
-   
+    // crear baraja 
+    // $miBaraja = new Baraja();
     
 
     // -------- 1ª partida ---------
@@ -102,10 +190,35 @@
     $miJugador->getSumaManoJugador(); // 5-10
     seguirJugando();
     if ($_POST['continuar'] == 'no') {
+        // finalizarRonda();
     }else {
         
     }
     
+    // if ($jugador->){
+
+    // }
+    
+    // casino reparte1
+    // jugador se planta
+
+    // casino se reparte
+    // casino se reparte
+    // casino se reparte
+    // casino se pasa
+    // casino da dinero
+    // partida finalziada
+
+    // 2ª partida
+
+    // casino reparte
+    // jugador pide
+    // casino reparte1
+    // jugador pide
+    // jugador se pasa
+    // casino recoje dinero
+    // partida finalizada
+
     
     // _______________________________FUNCIONES_______________________________
 

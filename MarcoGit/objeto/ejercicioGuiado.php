@@ -1,123 +1,110 @@
 <?php
 
-    class Figura {
+    interface Imprimible {
+        public function imprime();
+    }
+
+    abstract class Figura {
         private $nombre;
         private $color;
         private $esRellena = false;
 
-        public function __constructor($nombre){
+        public function __constructor($nombre) {
             $this->nombre = $nombre;
         }
 
-        abstract private function estaRellena(){
+        private function estaRellena() {
             $this->esRellena = true;
         }
-
-        abstract private function estaVacia(){
+        private function estaVacia() {
             $this->esRellena = true;
         }
-        
-        abstract public function showInfo(){
-            echo "El nombre del padre es: " . $nombre.getNombre();
-            echo "El color del padre es: "  . $color.getColor();
-            if ($esRellena){
+        private function showInfo() {
+            echo  "El nombre del padre es: " . $this->nombre->getNombre();
+            echo  "El color del padre es: "  . $this->color->getColor();
+            if ($this->esRellena) {
                 echo "La figura del padre esta rellena.";
             }else {
                 echo "La figura del padre no esta rellena.";
             }
-            echo "El radio del Circulo es: " . $radio.getNombre();
-            echo "El area del Circulo es: "  . $radio.getArea();
-            echo "El radio del Circulo es: " . $radio.getRadio();
-            echo "El lado del Cuadrado es: " . $cuadrado.getLado();
-            echo "El area del Cuadrado es: " . $cuadrado.getArea();
+            echo "El radio del Circulo es: "  . $this->radio->getRadio();
+            echo "El area del Circulo es: "   . $this->radio->getArea();
+            echo "El radio del Circulo es: "  . $this->radio->getRadio();
+            echo "El radio del Cuadrado es: " . $this->cuadrado->getLado();
+            echo "El radio del Cuadrado es: " . $this->cuadrado->getArea();
 
-
-            // mostrar propiedades de as dos hijas
+            // mostrar propiedades de las hijas 
         }
 
-        public function getNombre(){
+        private function getNombre() {
             return $this->nombre;
         }
-
-        final function setNombre($nombre){
+        final function setNombre($nombre) {
             $this->nombre = $nombre;
         }
-
-        public function getColor(){
+        private function getColor() {
             return $this->color;
         }
-
-        public function setColor($color){
+        private function setColor($color) {
             $this->color = $color;
         }
-
     }
 
-    class Circulo extends Figura(){
+
+    class Circulo extends Figura {
         private $radio;
 
         public function __constructor($radio, $nombre){
-            parent::__construct($nombre);
-            $this->radio = $radio
-        }
-
-        public getRadio(){
-            return $this->radio;
-        }
-
-        public setRadio($radio){
+            parent::__constructor($nombre);
             $this->radio = $radio;
         }
 
-        public getNombre(){
+        public function getRadio() {
+            return $this->radio;
+        }
+
+       
+        public function setRadio($radio){
+            $this->radio = $radio;
+        }
+
+        public function getNombre(){
             return "circulo";
         }
 
-        public getArea(){
-            $area = pi() * pow($radio.getRadio(), 2); 
+        public function getArea(){
+            $area = pi() * pow($this->radio->getRadio(), 2); 
             return "El area del circulo es: " . $area;
         }
-
     }
 
-    class Cuadrado extends Figura(){
+
+    class Cuadrado extends Figura implements Imprimible {
         private $lado;
 
         public function __constructor($lado, $nombre){
-            parent::__construct($nombre);
-            $this->lado = $lado
-        }
-
-        public getLado(){
-            return $this->lado;
-        }
-
-        public setLado($lado){
+            parent::__constructor($nombre);
             $this->lado = $lado;
         }
 
-        public getArea(){
-            $area = pow($lado.getLado(), 2); 
-            return "El area del cuadrado es: " . $area;
+        public function getLado(){
+            return $this->lado;
         }
 
+        public function setLado($lado){
+            $this->lado = $lado;
+        }
+
+        public function imprime() {
+            if($esRellena) {
+                echo '<div style="width: 1in; height: 1in;"/>';
+            }
+            else echo "<div style=\"width: 1in; height: 1in; background-color: ${$color};\"/>";
+        }
+
+   
     }
 
-
-    $figura = new Figura("cuadrado");
-    $figura.setColor("azul");
-    $figura.estaRellena();
-    $figura.showInfo();
-    // _____________________
-    $cirulo = new Circulo(10, "circulo");
-    $circulo.getArea();
-    // _____________________
-    $cuadrado = new Cuadrado(5, "cuadrado");
-
-
-
-// posibles fallos: Utilizando parent::, ampliar showInfo() para que muestre las propiedades de la clase hija, tanto
-// en Circulo como en Cuadrado.
 
 
 ?>
