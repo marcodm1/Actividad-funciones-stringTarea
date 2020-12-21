@@ -7,14 +7,27 @@
         <meta name="description" content="Black Jack">
 	</head>
 	<body>
-        <form action="back.php" method="POST">
-        <label for="txtNombre">Escriba su nombre:</label>
-            <input type="text" name="nombre" id="txtNombre"><br><br>
+        <?php
+            if (empty($_POST['nombre'])){
+                formulario();
+            }else {
+                session_start();
+                $_SESSION['nombre'] = $_POST['nombre'];
+                header("Location:back.php");
+            }
+        
+            function formulario() {
+                ?>
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
 
-        <label for="dinero1">Escriba su limite total a jugar:</label>
-            <input type="number" name="dinero" id="dinero1"><br><br>
+                    <label for="txtNombre">Escriba su nombre:</label>
+                        <input type="text" name="nombre" id="txtNombre"><br><br>
 
-        <input type="submit" value="jugar">
+                    <input type="submit" value="jugar">
+                <?php
+            }
+        
+        ?>
     </body>
 </html>
 

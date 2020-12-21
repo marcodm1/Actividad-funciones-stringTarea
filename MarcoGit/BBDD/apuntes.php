@@ -13,14 +13,14 @@
 // desc mysql.user;
 // desc mysql.user \g;
 // desc user;
-# es para comentarios, no lo ejecuta
-// varchar  // reserva el espacio de memoria que ocupe el contenido
-// char(5);  // reserva el espacio de memoria de 5
-// mysqli  // nos permite conectarnos con una base de datos
-// para ejecutar un script:
-// source C:\datos_21\… la direccion donde este el script “no ponerl a ruta con espacios 
-
 // create database dews; // para crear labase de datos
 // use dwes; // para usar la base de datos
+
+
+//SCRIPT
+// para ejecutar un script:
+// source la direccion donde este el script en clase es: C:\xampp\htdocs\PHP-GIT\MarcoGit\BBDD\script.sql
+
+
 
 ?>
