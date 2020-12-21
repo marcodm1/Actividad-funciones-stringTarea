@@ -27,9 +27,9 @@
                 return $this->manoJugador;
         }
 
-        public function setManoJugador($num) {
-                $this->manoJugador[] = $num;
-                return $this;
+        public function setManoJugador() {
+            $num = mt_rand(1, 13); // le doy una carta
+            $this->manoJugador[] = $num;
         }
 
     }
@@ -53,9 +53,9 @@
         public function getManoCasino() {
                 return $this->manoCasino;
         }
-        public function setManoCasino($num) {
-                $this->manoCasino[] = $num;
-                return $this;
+        public function setManoCasino() {
+            $num = mt_rand(1, 13); // le doy una carta
+            $this->manoCasino[] = $num;
         }
         public function getListaJugadores() {
                 return $this->listaJugadores;
@@ -68,7 +68,6 @@
     }
 
     function guardarPartida($miJugador, $miCasino){
-        session_start(); // creo que ya hay sesion iniciada desde registro.php
 
         if (empty($_SESSION['jugador'])) {
             $_SESSION['jugador'] = serialize($miJugador);
@@ -108,56 +107,49 @@
         otraCarta(); 
         if ($_POST['otra'] == "si") {
             $miJugador->manoJugador[] = $num = mt_rand(1, 13); // le doy una carta
+            contarMano($miJugador);
         }
     }
     function juegaCasino($miCasino) {
-        while ($miCasino->getSumaManoCasino() < 16 || $miCasino->getSumaManoCasino() > 21){
-            $num = mt_rand(1, 13); // le doy una carta
-            añadirCartaAcasino($miCasino, $num);
-            if ($miCasino->getSumaManoCasino() > 21) {
-                echo "Has ganado!";
-                break;
-            }
+        añadirCartaAcasino($miCasino);
+        if ($miCasino->getSumaManoCasino() > 21) {
+            echo "Has ganado!";
         }
     }
-    function añadirCartaAjugador($miJugador, $num) {
-        $miJugador->setManoJugador($num);
+    function añadirCartaAjugador($miJugador) {
+        $miJugador->setManoJugador();
     }
-    function añadirCartaAcasino($miCasino, $num) {
-        $miCasino->setManoCasino($num);
+    function añadirCartaAcasino($miCasino) {
+        $miCasino->setManoCasino();
     }
 
     if (empty($_POST['otra'])) {
-        echo "El jugador " . $_SESSION['nombre'] . " comienza partida.<br>";
+        echo "Hola " . $_SESSION['nombre'] . " comienza partida.<br>";
         $cartasEnLaMano = array();
         $miJugador = new Jugador($cartasEnLaMano);
         $arrayJ    = array();
         $arrayJ[]  = $miJugador;
         $miCasino  = new Casino($cartasEnLaMano, $arrayJ);
 
-        $num = mt_rand(1, 13); // le doy una carta
-        añadirCartaAjugador($miJugador, $num);
-        $num = mt_rand(1, 13); // le doy una carta
-        añadirCartaAcasino($miCasino, $num);
-        $num = mt_rand(1, 13); // le doy una carta
-        añadirCartaAjugador($miJugador, $num);
-        $num = mt_rand(1, 13); // le doy una carta
-        añadirCartaAcasino($miCasino, $num);
+        añadirCartaAjugador($miJugador);
+        añadirCartaAcasino($miCasino);
+        añadirCartaAjugador($miJugador);
+        añadirCartaAcasino($miCasino);
        
         contarMano($miJugador);
-        // crear sesiones antes de salir de aqui
+        guardarPartida($miJugador, $miCasino);
     }
-    
     if ($_POST['otra'] == "si") {
-        contarMano($miJugador);
-    } 
-
-    juegaCasino($miCasino);
-    
-    if ($miCasino->getSumaManoCasino() < $miJugador->getManoJugador()) {
-        echo "Has ganado!";
-    }else {
-        echo "Has perdido!";
+        contarMano($_SESSION['jugador']);
+    }else{
+        juegaCasino($_SESSION['casino']);
+        if ($miCasino->getSumaManoCasino() < $miJugador->getManoJugador()) {
+            echo "Has ganado!";
+        }else {
+            echo "Has perdido!";
+        }
     }
+
+    
     
 ?>
