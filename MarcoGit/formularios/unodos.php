@@ -92,6 +92,12 @@
         ?>
         
 
+    <!-- 
+            formulario de abrir archivos
+    <input type="file" name="archivo" accept=".pdf, .jpg, .png, .txt" multiple />
+
+
+     -->
 
       
     </body>
