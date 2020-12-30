@@ -11,11 +11,13 @@ body {
     padding-bottom: 30px;
 }
 
-.campoNombre, .campoApellido,.campoCantidad, .campoEdad {
+.campoNombre, .campoCantidad, .campoEdad {
     /* border: solid black 1px; */
     display: block;
-    margin-top: 20px; 
+    margin-top: 20px;
+    width: 150px; 
 }
+
 h2 {
     margin: 0px;
     text-align: center;
@@ -25,7 +27,7 @@ h2 {
     text-align: center;
 }
 .otraCarta {
-    /* border: solid black 1px; */
+    border: solid black 1px;
     text-align: center;
 }
 .registro h2 img {
@@ -50,11 +52,11 @@ h2 {
     padding: 30px;
 }
 .resultado {
-    /* border: solid black 1px; */
+    border: solid black 1px;
     text-align: center;
     margin-bottom: 10px;
 }
 
 .volverJugar {
-    /* border: solid black 1px; */
+    border: solid black 1px;
 }
