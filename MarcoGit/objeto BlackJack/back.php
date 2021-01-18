@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlackJack</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="estilo_1.0.css">
 </head>
 <body>
     <?php
@@ -150,7 +150,7 @@
                 echo "El casino se ha pasado con ";
                 foreach ($miCasino->getManoIMG() as &$valor) {
                     ?>
-                   <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                   <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                    <?php
                 }
                 ?>
@@ -159,7 +159,7 @@
                 echo "Tu ganas:";
                 foreach ($miCasino->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 volveraJugar();
@@ -167,7 +167,7 @@
                 echo "El casino tiene:";
                 foreach ($miCasino->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas1" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas1" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                     ?>
@@ -175,7 +175,7 @@
                     <?php
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 volveraJugar();
@@ -183,7 +183,7 @@
                 echo "El casino tiene:";
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png"><br><br>
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png"><br><br>
                     <?php
                 }
                 ?>
@@ -192,7 +192,7 @@
                 echo "Has ganado!";
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 volveraJugar();
@@ -200,7 +200,7 @@
                 echo "El casino tiene:";
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 ?>
@@ -208,7 +208,7 @@
                 <?php
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 echo "Has perdido!";
@@ -223,7 +223,7 @@
                 echo "Tienes mas de 21, pierdes";
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 volveraJugar();
@@ -231,7 +231,7 @@
                 echo "El casino empieza con:";
                 foreach ($miCasino->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas1" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas1" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 ?>
@@ -240,7 +240,7 @@
                 echo "Tu tienes: BlackJack!";
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 volveraJugar();
@@ -248,7 +248,7 @@
                 echo "El casino empieza con:";
                 foreach ($miCasino->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas1" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas1" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 ?>
@@ -257,7 +257,7 @@
                 echo "Tu tienes:";
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
-                    <img name="cartitas" src="baraja/corazones/<?php $valor?>.png">
+                    <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
                     <?php
                 }
                 otraCarta();
