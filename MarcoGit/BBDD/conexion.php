@@ -13,11 +13,11 @@ if (!$con->set_charset ("utf8")) { // esto hay que ponelo siempre
 } 
 
 //PASO 3. Realizar la consulta
-$usuario = $con->real_escape_string ("Ramón");
-$clave = $con->real_escape_string ('Nohay2"sin3');
+$usuario   = $con->real_escape_string ("Ramón");
+$clave     = $con->real_escape_string ('Nohay2"sin3');
 $sentencia = "insert into usuarios values('$usuario', '$clave')";
 echo $sentencia;
-$insert = $con->query($sentencia);
+$insert    = $con->query($sentencia);
 echo "Realiza el insert <br>";
 
 if (!$insert) {
