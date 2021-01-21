@@ -17,7 +17,7 @@
 // use dwes; // para usar la base de datos
 
 
-//SCRIPT..
+//SCRIPT
 // para ejecutar un script:
 // source la direccion donde este el script en clase es: C:\xampp\htdocs\PHP-GIT\MarcoGit\BBDD\script.sql
 
