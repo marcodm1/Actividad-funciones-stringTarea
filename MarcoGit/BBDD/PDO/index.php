@@ -6,7 +6,7 @@
 
 //1 Ejecutar sentencias basicas sin ontraseña
     // (1) conexion a la BBDD que guardamos en la variable $pdo
-    $pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
 
     // (2) Definir la sentencia SQL
     $comando = $pdo->query("select * from usuarios");
@@ -23,7 +23,7 @@
 //2 Ejecutar sentencias basicas pero con parametros
 
     //Cambiar el nombre de la base de datos, usuario y clave
-    $pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
 
     // (1) Definir SQL
     $comando = $pdo->prepare("select * from usuarios where estado = :estado");
@@ -48,14 +48,14 @@
 //3 Agregar informacion en la BBDD
 
     //Cambiar el nombre de la base de datos, usuario y clave
-    $pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
 
     // (1) Definir SQL
     $comando = $pdo->prepare("insert into usuarios (nombre, email, estado) values(:nombre, :email, :estado)");
 
     // (2) Asignar valores a los parametros
     $estado = 'Activo';
-    $email  = 'demo@gmail.com';
+    $email  = 'dwes@gmail.com';
     $nombre = 'Gaby Cruz';
     $comando->bindParam(':estado', $estado);
     $comando->bindParam(':email', $email);
@@ -69,7 +69,7 @@
 //4 Eliminar informacion en la BBDD
 
 //Cambiar el nombre de la base de datos, usuario y clave
-$pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
 
 // (1) Definir SQL
 $comando = $pdo->prepare("delete from usuarios where id = :id");
