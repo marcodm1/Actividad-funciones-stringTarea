@@ -8,7 +8,6 @@
     }
     $nombreUsuario  = $_POST['name'];
     $password       = $_POST['password'];
-
     $conexion = new mysqli("localhost", "root", "", "dwes");
     
     if ($conexion->connect_errno) {
