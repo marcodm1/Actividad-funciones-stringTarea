@@ -5,13 +5,13 @@
     $pdo = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
 
     // (2) Definir la sentencia SQL
-    $comando = $pdo->query("select * from usuarios");
+    $consulta = $pdo->query("select * from usuarios");
 
     // (3) Ejecutar la sentencia SQL
-    $comando->execute();
+    $consulta->execute();
 
     // (4) Recuperar información
-    $resultado = $comando->fetchAll();
+    $resultado = $consulta->fetchAll();
 
     // Imprimir en pantalla
     var_dump($resultado);
@@ -22,20 +22,20 @@
     $pdo = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
 
     // (1) Definir SQL
-    $comando = $pdo->prepare("select * from usuarios where estado = :estado");
+    $consulta = $pdo->prepare("select * from usuarios where estado = :estado");
 
     // (2) Asignar valores a los parametros. pero:
         // el método bindParam asociamos esta variable 
         // con el parámetro de la sentencia SQL.
     $estado = 'Activo';
-    $comando->bindParam(':estado', $estado);
+    $consulta->bindParam(':estado', $estado);
 
     // (3) Ejecutar SQL
-    $comando->execute();
+    $consulta->execute();
 
     // (4) Recuperar información como en el ejemplo uno pero se guarda en un
         // array asociativo
-    $resultado = $comando->fetchAll(PDO::FETCH_ASSOC);
+    $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
     // Imprimir en pantalla
     var_dump($resultado);
@@ -47,23 +47,23 @@
     $pdo = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
 
     // (1) Definir SQL
-    $comando = $pdo->prepare("insert into usuarios (nombre, edad) values(:nombre, :edad)");
+    $consulta = $pdo->prepare("insert into usuarios (nombre, edad) values(:nombre, :edad)");
     $edad   = '30';
     $nombre = 'marco';
-    $comando->bindParam(':edad', $edad);
-    $comando->bindParam(':nombre', $nombre);
+    $consulta->bindParam(':edad', $edad);
+    $consulta->bindParam(':nombre', $nombre);
 
             // otra forma
-    $comando = $pdo->prepare("insert into usuarios (nombre, edad) values(?, ?)");
+    $consulta = $pdo->prepare("insert into usuarios (nombre, edad) values(?, ?)");
     $edad   = '30';
     $nombre = 'marco';
-    $stmt->bindParam(1, $nombre);
-    $stmt->bindParam(2, $edad);
+    $consulta->bindParam(1, $nombre);
+    $consulta->bindParam(2, $edad);
 
     // Con bindParam() la variable es enlazada como una referencia y sólo será evaluada cuando se llame a execute():
     // Con bindValue() se enlaza el valor de la variable y permanece hasta execute():
     // (3) Ejecutar SQL
-    $comando->execute();
+    $consulta->execute();
 
 
 
@@ -73,14 +73,14 @@
 $pdo = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
 
 // (1) Definir SQL
-$comando = $pdo->prepare("delete from usuarios where name = :name");
+$consulta = $pdo->prepare("delete from usuarios where name = :name");
 
 // (2) Asignar valores a los parametros
 $name = "marco";
-$comando->bindParam(':name', $name);
+$consulta->bindParam(':name', $name);
 
 // (3) Ejecutar SQL
-$comando->execute();
+$consulta->execute();
 
 
 
