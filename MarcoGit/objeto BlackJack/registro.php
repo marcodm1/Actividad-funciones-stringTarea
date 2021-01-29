@@ -8,8 +8,8 @@
         <link rel="stylesheet" href="index.css">
 	</head>
 	<body>
-    <img src="/JavaScript/JS/ejercicios/img/img/0.png" name="imagen"> 
-        <script>
+    <!-- <img src="/JavaScript/JS/ejercicios/img/img/0.png" name="imagen">  -->
+        <!-- <script>
             var imgArray = new Array("0.png", "1.png", "2.png", "3.png");
             cambiarFoto();
             function cambiarFoto(){
@@ -17,7 +17,7 @@
                 document.images["imagen"].src = "/JavaScript/JS/ejercicios/img/img/" + imgArray[numero];
                 setTimeout(cambiarFoto, 1000);
             }
-        </script>
+        </script> -->
 
         <?php
             session_start();

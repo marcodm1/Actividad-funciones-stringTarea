@@ -228,7 +228,7 @@
                 }
                 volveraJugar();
             }elseif ($miJugador->suma() == 21) {  // puede que no haga falta
-                echo "El casino empieza con:";
+                echo "Casino:";
                 foreach ($miCasino->getManoIMG() as &$valor) {
                     ?>
                     <img name="cartitas1" src="baraja/corazones/<?php echo $valor;?>.png">
@@ -254,7 +254,7 @@
                 ?>
                 <br><br>
                 <?php
-                echo "Tu tienes:";
+                echo "Tu:";
                 foreach ($miJugador->getManoIMG() as &$valor) {
                     ?>
                     <img name="cartitas" src="baraja/corazones/<?php echo $valor;?>.png">
