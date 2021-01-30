@@ -9,18 +9,20 @@
 </head>
 <body>
     <?php 
+        if (isset($_POST['name']) && isset($_POST['password'])){
+            echo "Error: algun dato introducido no es correcto.";
+        }
+
         mostrarFormulario();
         function mostrarFormulario( ){
             ?>
             <h1> Para conectarse a las BBDD como un usaurio</h1>
-                <form action="conexion.php" method="post">
-                    <label for="txtNombre">Escriba su nombre:       </label>
+                <form action="connLOGIN.php" method="post">
+                    <label for="txtNombre">Nombre:</label>
                         <input type="text" name="name" id="txtNombre"><br><br>
-                    <label for="pwd1">Nueva contraseña:</label>
-                        <input type="password" name="newPassword" id="pwd1"><br><br>
-                    <label for="pwd2">Repetir nueva contraseña:</label>
-                        <input type="password" name="repeatPassword" id="pwd2"><br><br>
-                    
+                    <label for="pwd"> Contraseña:</label>
+                        <input type="password" name="password" id="pwd"><br><br>
+                 
                     <input type="submit" value="enviar">
                 </form>
             <?php
@@ -30,5 +32,3 @@
 
 </body>
 </html>
-
-
