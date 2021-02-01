@@ -13,10 +13,27 @@ CREATE TABLE usuarios(
 );
 
 INSERT INTO usuarios 
-	VALUES ( 'laura', '1234');
+	VALUES ( 'p', '123');
 	
 
 SELECT * FROM USUARIOS;
 
-insert into personas
-	values ('52', 'Pablo', 'Mateos', 'España');
+insert into personas_trabajos
+	values (752, 70, 900, 'media', 555);
+
+
+
+-- que me muestre las personas con nombre Pablo que cobren mas de 1000
+-- y que tenga un trabajo de informatico
+SELECT p.nombre, t.trabajaComo , pt.salario from personas as p
+	inner join personas_trabajos as pt 
+	on pt.fk_personas = p.id
+	inner join trabajos as t
+	on pt.fk_trabajos = t.id
+	where p.nombre = 'Pablo' and salario > 1000;
+
+
+-- para renombrar una columna
+
+ALTER TABLE nombreTabla CHANGE nombreActual nuevoNombre VARCHAR(20);
+
