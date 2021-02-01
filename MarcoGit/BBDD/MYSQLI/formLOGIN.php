@@ -9,19 +9,19 @@
 </head>
 <body>
     <?php 
-        if (isset($_POST['name']) && isset($_POST['password'])){
+        if (isset($_POST['name']) && isset($_POST['id'])){
             echo "Error: algun dato introducido no es correcto.";
         }
 
         mostrarFormulario();
         function mostrarFormulario( ){
             ?>
-            <h1> Para conectarse a las BBDD como un usaurio</h1>
+            <h1> Logearse como usuario de la tabla</h1>
                 <form action="connLOGIN.php" method="post">
                     <label for="txtNombre">Nombre:</label>
                         <input type="text" name="name" id="txtNombre"><br><br>
-                    <label for="pwd"> Contraseña:</label>
-                        <input type="password" name="password" id="pwd"><br><br>
+                    <label for="pwd"> ID:</label>
+                        <input type="id" name="id" id="pwd"><br><br>
                  
                     <input type="submit" value="enviar">
                 </form>

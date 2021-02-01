@@ -11,7 +11,7 @@
     $password       = $_POST['password'];
     $newPassword    = $_POST['newPassword'];
     $repPassword    = $_POST['repeatPassword'];
-    $conexion       = new mysqli("localhost", "alumno", "1234", "dwes");
+    $conexion       = new mysqli("localhost", "host", "12345", "dwes");
     
     if ($conexion->connect_errno) {
         echo "Ha habido un error";
@@ -25,6 +25,7 @@
         echo $conexion->errno;
         echo $conexion->error;
     }
-    
+       
+    header("formLOGIN.php");
 
 ?>

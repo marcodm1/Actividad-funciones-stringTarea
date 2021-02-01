@@ -15,9 +15,8 @@ CREATE TABLE usuarios(
 INSERT INTO usuarios 
 	VALUES ( 'laura', '1234');
 	
-# COMENTARIOS:
-# show tables;
-# desc usuarios;
-
 
 SELECT * FROM USUARIOS;
+
+insert into personas
+	values ('52', 'Pablo', 'Mateos', 'España');
