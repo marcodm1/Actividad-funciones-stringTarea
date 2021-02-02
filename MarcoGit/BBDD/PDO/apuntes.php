@@ -217,3 +217,70 @@ $consulta->execute();
 
 
 ?>
+
+<?php
+    class Consulta {
+        private static $consulta;
+        private $conexion;
+
+        private function __construct() { // privado 
+            $this->conexion = new PDO("mysql:host=localhost; dbname=dwes" , 'root' , ''); 
+        }
+
+        public static function singleton(){ 
+            if (!isset(self::$consulta)) { // se usa :: porque es static
+                $miclase = __CLASS__;// __CLASS__ retorna el nombre de la clase
+                 self::$consulta = new $miclase;
+            }
+            return self::$consulta;
+        }
+
+        public function __clone() { 
+            trigger_error('La clonación de este objeto no está permitida', E_USER_ERROR);
+        }
+
+    }
+
+
+    class Dao {
+        private $conexion;
+        private static $instancia;
+
+        private function __construct() {
+            $this->conexion = new mysqli("localhost", "root", "", "dwes");
+        }
+        public static function singleton(){ 
+            if (!isset(self::$instancia)) { // se usa :: porque es static
+                $miclase = __CLASS__;// __CLASS__ retorna el nombre de la clase
+                 self::$instancia = new $miclase;
+            }
+            return self::$instancia;
+        }
+        public function __clone() { 
+            trigger_error('La clonación de este objeto no está permitida', E_USER_ERROR);
+        }
+
+        function actualizarContraseña($usuario, $contraseñaActual, $nuevaContraseña) {
+            $consulta = $this->conexion->prepare("update personas set contraseña=? where nombre=? and contraseña=?");
+            $consulta->bind_param("iss", $nuevaContraseña , $usuario, $contraseñaActual );
+            $consulta->execute();
+        }
+    }
+
+    $a = Dao::singleton(); // devuelve una instancia de Dao
+
+    $a->actualizarContraseña($usuario, $contraseñaActual, $nuevaContraseña);
+
+
+
+
+?>
+
+
+<!-- 
+
+
+            
+
+
+ -->
