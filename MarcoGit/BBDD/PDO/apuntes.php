@@ -112,22 +112,22 @@ $consulta->execute();
     2 ejemplos:
 
     // FETCH_ASSOC
-    $stmt = $dbh->prepare("SELECT * FROM Clientes");
+    $sentencia = $dbh->prepare("SELECT * FROM Clientes");
     // Especificamos el fetch mode antes de llamar a fetch()
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $sentencia->setFetchMode(PDO::FETCH_ASSOC);
     // Ejecutamos
-    $stmt->execute();
+    $sentencia->execute();
     // Mostramos los resultados
-    while ($row = $stmt->fetch()){
+    while ($row = $sentencia->fetch()){
         echo "Nombre: {$row["nombre"]} <br>";
         echo "Ciudad: {$row["ciudad"]} <br><br>";
     }
     // FETCH_OBJ
-    $stmt = $dbh->prepare("SELECT * FROM Clientes");
+    $sentencia = $dbh->prepare("SELECT * FROM Clientes");
     // Ejecutamos
-    $stmt->execute();
+    $sentencia->execute();
     // Ahora vamos a indicar el fetch mode cuando llamamos a fetch:
-    while($row = $stmt->fetch(PDO::FETCH_OBJ)){
+    while($row = $sentencia->fetch(PDO::FETCH_OBJ)){
         echo "Nombre: " . $row->nombre . "<br>";
         echo "Ciudad: " . $row->ciudad . "<br>";
     }
@@ -137,7 +137,7 @@ $consulta->execute();
 /*
     Si lo que quieres es llamar al constructor ANTES de que se asignen los datos, se hace lo siguiente:
 
-    $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Clientes';
+    $sentencia->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Clientes';
     Si en el ejemplo anterior añadimos PDO::FETCH_PROPS_LATE, el nombre y la ciudad se mostrarán como aparecen en la base de datos.
 */
 
@@ -146,101 +146,43 @@ $consulta->execute();
     Finalmente, para la consulta de datos también se puede emplear directamente PDOStatement::fetchAll(), que devuelve un array con todas las filas devueltas por la base de datos con las que poder iterar. También acepta estilos de devolución:
 
     // fetchAll() con PDO::FETCH_ASSOC
-    $stmt = $dbh->prepare("SELECT * FROM Clientes");
-    $stmt->execute();
-    $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sentencia = $dbh->prepare("SELECT * FROM Clientes");
+    $sentencia->execute();
+    $clientes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     foreach($clientes as $cliente){
         echo $cliente['nombre'] . "<br>";
     }
     // fetchAll() con PDO::FETCH_OBJ
-    $stmt = $dbh->prepare("SELECT * FROM Clientes");
-    $stmt->execute();
-    $clientes = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $sentencia = $dbh->prepare("SELECT * FROM Clientes");
+    $sentencia->execute();
+    $clientes = $sentencia->fetchAll(PDO::FETCH_OBJ);
     foreach ($clientes as $cliente){
         echo $cliente->nombre . "<br>";
     }
 */
 
-/*
-    Existen otras funciones en PDO que pueden ser de utilidad:
+            // tabla1
+        // nombre      apellido        id
+        // juan        jj              43
+        
+                    // metodos de PDO
 
-    PDO::exec(). Ejecuta una sentencia SQL y devuelve el número de filas afectadas. Devuelve el número de filas modificadas o borradas, no devuelve resultados de una secuencia SELECT:
-        // Si lo siguiente devuelve 1, es que se ha eliminado correctamente:
-        echo $dbh->exec("DELETE FROM Clientes WHERE nombre='Luis'");
-        // No devuelve el número de filas con SELECT, devuelve 0
-        echo $dbh->exec("SELECT * FROM Clientes");
-    PDO::lastInsertId(). Este método devuelve el id autoincrementado del último registro en esa conexión:
-        $stmt = $dbh->prepare("INSERT INTO Clientes (nombre) VALUES (:nombre)");
-        $nombre = "Angelina";
-        $stmt->bindValue(':nombre', $nombre);
-        $stmt->execute();
-        echo $dbh->lastInsertId();
-    PDOStatement::fetchColumn(). Devuelve una única columna de la siguiente fila de un conjunto de resultados. La columna se indica con un integer, empezando desde cero. Si no se proporciona valor, obtiene la primera columna.
-        $stmt = $dbh->prepare("SELECT * FROM Clientes");
-        $stmt->execute();
-        while ($row = $stmt->fetchColumn(1)){
-            echo "Ciudad: $row <br>";
-        }
-    PDOStatement::rowCount(). Devuelve el número de filas afectadas por la última sentencia SQL:
-        $stmt = $dbh->prepare("SELECT * FROM Clientes");
-        $stmt->execute();
-        echo $stmt->rowCount();
-*/
+        $pdo      = new PDO('mysql:host=localhost;dbname=dwes', 'root', '1234');
+        $añadidos = $pdo->exec("INSERT INTO Clientes values ('Pedro', 30)");//con INSERT devuelve el número de filas afectadas.
+        $borrados = $pdo->exec("DELETE FROM Clientes WHERE nombre='Pedro'");//con DELETE devuelve el número de filas afectadas.
+        $juanes   = $dbh->exec("SELECT * FROM Clientes WHERE nombre='Pedro'");// con SELECT devuelve 0 porque no ha modificado nada, encuentre o no.
+        
+        $filasAfectadas = $sentencia->rowCount(); // es como el exec, devuelve numero de filas afectadas
+        $ultimoPKcreado = $pdo->lastInsertId(); // Este método devuelve el numero de PK creados.
 
+        $gg = $pdo->prepare("INSERT INTO Clientes values (:nombre,:id) "); // prepare devuelve un objeto tipo sentencia
+        $gg->bindParam(":nombre", "Juan"); // que es lo mismo que el bind_param pero sin _ y sin el "si" inicial
+        $gg->bindParam(":id", 20);
+        $gg->execute();
 
-/*
-    Si los datos necesitan una transformación antes de que salgan de la base de datos, se puede hacer automáticamente cada vez que se crea un objeto:
+        $datoX = $gg->fetchColumn(1); // devuelve el dato de la columna elegida, en este caso 1, devolveria el apellido
 
-    class Clientes
-    {
-        public $nombre;
-        public $ciudad;
-        public $otros;
-        public function __construct($otros = ''){
-            $this->nombre = strtoupper($this->nombre);
-            $this->ciudad = mb_substr($this->ciudad, 0, 3);
-            $this->otros = $otros;
-        }
-        // ....Código de la clase....
-    }
-    $stmt = $dbh->prepare("SELECT * FROM Clientes");
-    $stmt->setFetchMode(PDO::FETCH_CLASS, 'Clientes');
-    $stmt->execute();
-    while ($objeto = $stmt->fetch()){
-        echo $objeto->nombre . " -> ";
-        echo $objeto->ciudad . "<br>";
-    }
-
-*/
-
-
-
-
-?>
-
-<?php
-    class Consulta {
-        private static $consulta;
-        private $conexion;
-
-        private function __construct() { // privado 
-            $this->conexion = new PDO("mysql:host=localhost; dbname=dwes" , 'root' , ''); 
-        }
-
-        public static function singleton(){ 
-            if (!isset(self::$consulta)) { // se usa :: porque es static
-                $miclase = __CLASS__;// __CLASS__ retorna el nombre de la clase
-                 self::$consulta = new $miclase;
-            }
-            return self::$consulta;
-        }
-
-        public function __clone() { 
-            trigger_error('La clonación de este objeto no está permitida', E_USER_ERROR);
-        }
-
-    }
-
+   
 
     class Dao {
         private $conexion;
@@ -249,13 +191,27 @@ $consulta->execute();
         private function __construct() {
             $this->conexion = new mysqli("localhost", "root", "", "dwes");
         }
+
         public static function singleton(){ 
             if (!isset(self::$instancia)) { // se usa :: porque es static
                 $miclase = __CLASS__;// __CLASS__ retorna el nombre de la clase
-                 self::$instancia = new $miclase;
+                self::$instancia = new $miclase;
             }
             return self::$instancia;
         }
+
+        public function setConexion($conn){
+            $this->conexion = $conn;
+        }
+
+        public function comprobarConexion() {
+            if ($this->conexion->connect_errno) {
+                echo "Ha habido un error";
+            }else {
+                echo "Conexion ok!";
+            }
+        }
+        
         public function __clone() { 
             trigger_error('La clonación de este objeto no está permitida', E_USER_ERROR);
         }
@@ -267,20 +223,12 @@ $consulta->execute();
         }
     }
 
-    $a = Dao::singleton(); // devuelve una instancia de Dao
-
+    // main
+    $connn = new mysqli("localhost", "root", "", "dwes");
+    $a = Dao::singleton();
+    $a->setConexion($connn);
+    $a->comprobarConexion();
     $a->actualizarContraseña($usuario, $contraseñaActual, $nuevaContraseña);
 
 
-
-
 ?>
-
-
-<!-- 
-
-
-            
-
-
- -->
