@@ -8,14 +8,14 @@
     
     $nombreUsuario  = $_POST['name'];
     $id             = $_POST['id'];
+
     $conexion       = new mysqli("localhost", "root", "", "dwes");
     // me faltan ls real_scape_strings o el cuote para PDO para hacerla mas segura
-    // xss
     
     if ($conexion->connect_errno) {
         echo "Ha habido un error";
     }else {
-        $consulta = $conexion->prepare("select * from personas where id = ? and nombre = ?");// para evitar sql injection
+        $consulta = $conexion->prepare("select * from personas where id = ? and nombre = ?");// prepare para evitar sql injection
         $consulta->bind_param("is", $id, $nombreUsuario);
         $consulta->execute();
         
