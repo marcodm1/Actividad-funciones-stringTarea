@@ -1,18 +1,18 @@
 <?php
-    La consulta de datos se realiza mediante PDOStatement::fetch, que obtiene la siguiente fila de un conjunto de resultados. Antes de llamar a fetch (o durante) hay que especificar como se quieren devolver los datos:
+    // La consulta de datos se realiza mediante PDOStatement::fetch, que obtiene la siguiente fila de un conjunto de resultados. Antes de llamar a fetch (o durante) hay que especificar como se quieren devolver los datos:
 
-    $pd->FETCH_ASSOC: devuelve un array indexado cuyos keys son el nombre de las columnas.
-    $pd->FETCH_NUM: devuelve un array indexado cuyos keys son números.
-    $pd->FETCH_BOTH: valor por defecto. Devuelve un array indexado cuyos keys son tanto el nombre de las columnas como números.
-    $pd->FETCH_BOUND: asigna los valores de las columnas a las variables establecidas con el método PDOStatement::bindColumn.
-    $pd->FETCH_CLASS: asigna los valores de las columnas a propiedades de una clase. Creará las propiedades si éstas no existen.
-    $pd->FETCH_INTO: actualiza una instancia existente de una clase.
-    $pd->FETCH_OBJ: devuelve un objeto anónimo con nombres de propiedades que corresponden a las columnas.
-    $pd->FETCH_LAZY: combina $pd->FETCH_BOTH y $pd->FETCH_OBJ, creando los nombres de las propiedades del objeto tal como se accedieron.
+    $pd->FETCH_ASSOC: // devuelve un array indexado cuyos keys son el nombre de las columnas.
+    $pd->FETCH_NUM:   // devuelve un array indexado cuyos keys son números.
+    $pd->FETCH_BOTH:  // valor por defecto. Devuelve un array indexado cuyos keys son tanto el nombre de las columnas como números.
+    $pd->FETCH_BOUND: // asigna los valores de las columnas a las variables establecidas con el método PDOStatement::bindColumn.
+    $pd->FETCH_CLASS: // asigna los valores de las columnas a propiedades de una clase. Creará las propiedades si éstas no existen.
+    $pd->FETCH_INTO:  // actualiza una instancia existente de una clase.
+    $pd->FETCH_OBJ:   // devuelve un objeto anónimo con nombres de propiedades que corresponden a las columnas.
+    $pd->FETCH_LAZY:  // combina $pd->FETCH_BOTH y $pd->FETCH_OBJ, creando los nombres de las propiedades del objeto tal como se accedieron.
     Los más utilizados son FETCH_ASSOC, FETCH_OBJ, FETCH_BOUND y FETCH_CLASS.
 
 
-    2 ejemplos:
+    // 2 ejemplos:
 
     // FETCH_ASSOC
     $sentencia = $dbh->prepare("SELECT * FROM personas");
@@ -38,16 +38,16 @@
 
 
 
-    Si lo que quieres es llamar al constructor ANTES de que se asignen los datos, se hace lo siguiente:
+    // Si lo que quieres es llamar al constructor ANTES de que se asignen los datos, se hace lo siguiente:
 
     $sentencia->setFetchMode($pd->FETCH_CLASS | $pd->FETCH_PROPS_LATE, 'personas';
-    Si en el ejemplo anterior añadimos $pd->FETCH_PROPS_LATE, el nombre y la ciudad se mostrarán como aparecen en la base de datos.
+    // Si en el ejemplo anterior añadimos $pd->FETCH_PROPS_LATE, el nombre y la ciudad se mostrarán como aparecen en la base de datos.
 
 // Imprimir en pantalla
 var_dump($resultado);
 
 
-    Finalmente, para la consulta de datos también se puede emplear directamente PDOStatement::fetchAll(), que devuelve un array con todas las filas devueltas por la base de datos con las que poder iterar. También acepta estilos de devolución:
+    // Finalmente, para la consulta de datos también se puede emplear directamente PDOStatement::fetchAll(), que devuelve un array con todas las filas devueltas por la base de datos con las que poder iterar. También acepta estilos de devolución:
 
     // fetchAll() con $pd->FETCH_ASSOC
     $sentencia = $dbh->prepare("SELECT * FROM personas");
