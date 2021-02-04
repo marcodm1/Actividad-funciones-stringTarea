@@ -1,52 +1,67 @@
--- DROP DATABASE IF EXISTS dwes;
+-- tabla personas:
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(10)     | NO   | PRI | NULL    | auto_increment |
+| nombre   | varchar(20) | YES  |     | NULL    |                |
+| apellido | varchar(20) | YES  |     | NULL    |                |
+| pais     | varchar(20) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
 
--- CREATE DATABASE dwes;
+-- tabla trabajos:
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id          | int(20)     | NO   | PRI | NULL    | auto_increment |
+| trabajaComo | varchar(20) | NO   |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
 
--- USE dwes;
+-- tabla personas_trabajos
+
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| fk_personas | int(20)     | NO   |     | NULL    |                |
+| fk_trabajos | int(20)     | NO   |     | NULL    |                |
+| salario     | int(20)     | NO   |     | NULL    |                |
+| jornada     | varchar(20) | NO   |     | NULL    |                |
+| id          | int(20)     | NO   | PRI | NULL    | auto_increment |
++-------------+-------------+------+-----+---------+----------------+
 
 
--- CREATE TABLE usuarios(
--- 	login VARCHAR(10),
--- 	clave VARCHAR(10) NOT NULL,
--- 	PRIMARY KEY (login)
 
--- );
 
--- INSERT INTO usuarios 
--- 	VALUES ( 'p', '123');
-	
 
--- SELECT * FROM USUARIOS;
 
--- insert into personas_trabajos
--- 	values (52, 55, 1300, 'comlpeta', 444);
-
--- insert into trabajos 
--- 	values (70, 'Carpintero');
-
--- dessc nombreTabla para ver el contenido
-
--- que me muestre las personas con nombre Pablo que cobren mas de 1000
--- y que tenga un trabajo de informatico
-
+-- un select triple
 SELECT p.nombre, t.trabajaComo , pt.salario from personas as p
 	inner join personas_trabajos as pt 
 	on pt.fk_personas = p.id
 	inner join trabajos as t
 	on pt.fk_trabajos = t.id
 	where p.nombre = 'Pablo' and salario > 1000;
+-- con esta consulta devuelve
++--------+-------------+---------+
+| nombre | trabajaComo | salario |
++--------+-------------+---------+
+| Pablo  | Informatico |    1300 |
++--------+-------------+---------+
 
 
--- para renombrar una columna
 
 -- para eliminar columna
-alter table usuarios drop column nombreColumna;
+alter table personas drop column nombreColumna;
 
 -- para añadir columna
 update tabla set nombreColumna
 
-ALTER TABLE nombreTabla CHANGE nombreActual nuevoNombre VARCHAR(20);
+-- para cambiar el nombre de una columna
+ALTER TABLE personas CHANGE nombreActual nuevoNombre VARCHAR(20);
 
+-- para ver el contenido de una tabla
+describe personas
 
+-- hacer un insert en trabajos
 
--- has
+insert into trabajos 
+	values (70, 'Carpintero');

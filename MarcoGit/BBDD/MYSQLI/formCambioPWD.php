@@ -14,7 +14,7 @@
         }
 
         mostrarFormulario();
-        function mostrarFormulario( ){
+        function mostrarFormulario(){
             ?>
             <h1> Para cambiar la contraseña del usuario</h1>
                 <form action="connCambioPWD.php" method="post">

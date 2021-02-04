@@ -16,20 +16,16 @@
     if ($conexion->connect_errno) {
         echo "Ha habido un error";
     }else {
-        $consulta = $conexion->prepare("select * from personas where id = ? and nombre = ?");// prepare para evitar sql injection
-        
-
-        $consulta->bind_param("is", $id, $dfdfd);
+        $consulta = $conexion->prepare("select * from personas where nombre = ?");// prepare para evitar sql injection
+        $consulta->bind_param("s", $nombreUsuario);
         $consulta->execute();
-        
-
         $resultado = $consulta->get_result();
 
         if ($resultado->num_rows == 0) {
             header("Location:formLOGIN.php");
         }else {
-            setcookie("usuario", $nombreUsuario, time() +3600);
-            setcookie("id",      $id ,           time() +3600);
+            setcookie("name", $nombreUsuario, time() +3600);
+            setcookie("id",   $id,            time() +3600);
             header("Location:menu.php");
         }
     }

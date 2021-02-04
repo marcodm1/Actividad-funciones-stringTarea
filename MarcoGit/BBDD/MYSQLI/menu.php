@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php 
-        if (!isset($_COOKIE['usuario'])){
+        if (!isset($_COOKIE['name'])){
             echo "Error: No se ha logeado correctamente.";
             header("connLOGIN.php");
         }
@@ -22,7 +22,7 @@
                 <p>Elija una opción:</p>
                 <div>
                     <li><a href="formCambioPWD.php">Cambiar contraseña</a></li>
-                    <li><a href="mostrarNombreClave.php">Ver su nombre y clave</a></li>
+                    <li><a href="mostrarInfo.php">Ver su informacion</a></li>
                 </div>
             <?php
         }

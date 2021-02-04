@@ -16,7 +16,7 @@
                 <form action="connLOGIN.php" method="post">
                     <label for="txtNombre">Nombre:</label>
                         <input type="text" name="name" id="txtNombre"><br><br>
-                    <label for="pwd"> ID:</label>
+                    <label for="pwd"> Id:</label>
                         <input type="id" name="id" id="pwd"><br><br>
                 
                     <input type="submit" value="enviar">
