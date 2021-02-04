@@ -29,12 +29,9 @@
 +-------------+-------------+------+-----+---------+----------------+
 
 
-
-
-
-
--- un select triple
-SELECT p.nombre, t.trabajaComo , pt.salario from personas as p
+-- un select triple es necesario el inner?
+SELECT p.nombre, t.trabajaComo , pt.salario 
+	from personas as p
 	inner join personas_trabajos as pt 
 	on pt.fk_personas = p.id
 	inner join trabajos as t
