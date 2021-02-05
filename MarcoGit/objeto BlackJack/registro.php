@@ -8,17 +8,6 @@
         <link rel="stylesheet" href="index.css">
 	</head>
 	<body>
-    <!-- <img src="/JavaScript/JS/ejercicios/img/img/0.png" name="imagen">  -->
-        <!-- <script>
-            var imgArray = new Array("0.png", "1.png", "2.png", "3.png");
-            cambiarFoto();
-            function cambiarFoto(){
-                var numero = Math.floor(Math.random()*4);
-                document.images["imagen"].src = "/JavaScript/JS/ejercicios/img/img/" + imgArray[numero];
-                setTimeout(cambiarFoto, 1000);
-            }
-        </script> -->
-
         <?php
             session_start();
             session_destroy();
