@@ -1,12 +1,13 @@
 -- tabla personas:
-+----------+-------------+------+-----+---------+----------------+
-| Field    | Type        | Null | Key | Default | Extra          |
-+----------+-------------+------+-----+---------+----------------+
-| id       | int(10)     | NO   | PRI | NULL    | auto_increment |
-| nombre   | varchar(20) | YES  |     | NULL    |                |
-| apellido | varchar(20) | YES  |     | NULL    |                |
-| pais     | varchar(20) | YES  |     | NULL    |                |
-+----------+-------------+------+-----+---------+----------------+
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(10)      | NO   | PRI | NULL    | auto_increment |
+| nombre     | varchar(20)  | NO   |     | NULL    |                |
+| apellido   | varchar(20)  | NO   |     | NULL    |                |
+| pais       | varchar(20)  | NO   |     | NULL    |                |
+| contraseña | varchar(200) | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
 
 -- tabla trabajos:
 +-------------+-------------+------+-----+---------+----------------+
@@ -46,19 +47,22 @@ SELECT p.nombre, t.trabajaComo , pt.salario
 
 
 
--- para eliminar columna
-alter table personas drop column nombreColumna;
+-- eliminar columna
+alter TABLE personas drop column nombreColumna;
 
--- para añadir columna
-update tabla set nombreColumna
+-- añadir columna
+alter TABLE personas add contraseña VARCHAR(200);
 
--- para cambiar el nombre de una columna
+-- cambiar el nombre de una columna
 ALTER TABLE personas CHANGE nombreActual nuevoNombre VARCHAR(20);
 
--- para ver el contenido de una tabla
+-- cambiar algo de una tabla hay dos formas
+ALTER TABLE personas modify contraseña VARCHAR(200) not null;
+ALTER TABLE personas ALTER COLUMN contraseña VARCHAR(200) NOT NULL;
+
+-- ver el contenido de una tabla
 describe personas
 
 -- hacer un insert en trabajos
-
 insert into trabajos 
 	values (70, 'Carpintero');
