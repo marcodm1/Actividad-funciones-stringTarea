@@ -39,6 +39,7 @@
         }
        
         function createUsuario($id, $name, $apellido, $pais, $password) {
+            // id automatico y contraseña hasehada
             $consulta = $this->conexion->prepare("insert into personas values (?, ?, ?, ?)");
             $consulta->bind_param("ssss", $name, $apellido, $pais, $password);
             $consulta->execute();
@@ -49,10 +50,10 @@
             $consulta->bind_param("s", $name); 
             $consulta->execute();
             
-            $resultado = $consulta->fetch_all();
-            print_r($resultado);
+            $resultado = $consulta->get_result();
+            $resultado = $resultado->fetch_all();
             return $resultado;
-            // $resultado = $consulta->get_result();
+            // 
             // if ($resultado->num_rows) {// retorna informacion de la tabla y fetch_all los resultados de la consulta
             //     $resultado->fetch_all(MYSQLI_ASSOC);
             //     return $resultado;
