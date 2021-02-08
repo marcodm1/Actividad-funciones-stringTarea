@@ -13,7 +13,6 @@
         $consulta  = ConectaBD::singleton();
         $resultado = $consulta->readUsuario($name);
         print_r($resultado);
-        echo '<br>' .$resultado->field_count;
         ?>
             <li><a href="menu.php">Volver al menu</a></li>
         <?php
