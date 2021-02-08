@@ -5,14 +5,15 @@
     }
 
     if ( !isset($_POST['name']) ) {
-        echo "no ha introducido el campo correctamente";
+        echo "Rellene los campos.";
         formularioUsuario(); 
     }else {
         $name = $_POST['name'];
         require_once("ConectaBD.php");
         $consulta  = ConectaBD::singleton();
-        $resultado = $consulta->createUsuario($name);
-        var_dump($resultado->fetch_all());
+        $resultado = $consulta->readUsuario($name);
+        print_r($resultado);
+        echo '<br>' .$resultado->field_count;
         ?>
             <li><a href="menu.php">Volver al menu</a></li>
         <?php

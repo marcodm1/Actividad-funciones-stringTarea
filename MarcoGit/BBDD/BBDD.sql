@@ -8,6 +8,21 @@
 | pais       | varchar(20)  | NO   |     | NULL    |                |
 | contraseña | varchar(200) | NO   |     | NULL    |                |
 +------------+--------------+------+-----+---------+----------------+
++----+--------+----------+-----------+--------------------------------------------------------------+
+| id | nombre | apellido | pais      | contraseña                                                   |
++----+--------+----------+-----------+--------------------------------------------------------------+
+|  1 | Ruben  | Lopez    | Italia    | $2y$10$3y0pJ98K6TCIwwyqN2qCsu4hIaCKiCyhEx4WHjYOzPuQBjF6fYEMa |
+|  2 | Fran   | Aldo     | Francia   | $2y$10$IhKCNQIb8h9CXYeMq1RwBuM2K9yIcTbQbkPWK/hLW9fMTMb16BDSi |
+|  3 | Pablo  | Mat      | España    | $2y$10$o1UYUgDUn29YG1uMoD1nbuXc04Dokl8ROuGpgP9JKKlQJFQHQDaum |
+|  4 | Sara   | Jimenez  | EEUU      | $2y$10$CG/RBPMF7i1Swjb7eqdHhernO4y/f03o0Y3dXh.0BO9THpklCODQC |
+|  5 | Alex   | Mateos   | España    | $2y$10$k8dKj2IeJoF6Kdtm6.OsI.NqiJ5EvwAW1BacleHjXUV.2eV1zrN3K |
+|  6 | Ralf   | Naumer   | Alemania  | $2y$10$3iJXkkWpPg/TcNP5nigSh.ejMMXohq9kO5jT45BFkl16QTc3KexWS |
+|  7 | Pedro  | Lopez    | España    | $2y$10$0ft1p81nnjinfOfVCye9WOm0BSog/ruSC2YK/QP6WJw.uBCXKIdBO |
+|  8 | Sofia  | Olmedo   | Paraguay  | $2y$10$e6r94XTzV6p4z8cycz5P5uG6n1ueG2CXghCSWw.go0k/36HdvnJHy |
+|  9 | Julian | Sabina   | Argentina | $2y$10$mhBqj4uDpT.rW3W/px58a.vrD7hFwoBv4/nEH7IBRzcHbLWVtMIqu |
+| 10 | Liz    | Olmedo   | Paraguay  | $2y$10$589s1KGpK8.OdznJ4vtG3eSVVvv2RvZg8hLUWqr0lfScxzWMT9jIG |
++----+--------+----------+-----------+--------------------------------------------------------------+
+
 
 -- tabla trabajos:
 +-------------+-------------+------+-----+---------+----------------+
@@ -16,9 +31,15 @@
 | id          | int(20)     | NO   | PRI | NULL    | auto_increment |
 | trabajaComo | varchar(20) | NO   |     | NULL    |                |
 +-------------+-------------+------+-----+---------+----------------+
++----+-------------+
+| id | trabajaComo |
++----+-------------+
+| 55 | Informatico |
+| 70 | Carpintero  |
++----+-------------+
+
 
 -- tabla personas_trabajos
-
 +-------------+-------------+------+-----+---------+----------------+
 | Field       | Type        | Null | Key | Default | Extra          |
 +-------------+-------------+------+-----+---------+----------------+
@@ -28,14 +49,19 @@
 | jornada     | varchar(20) | NO   |     | NULL    |                |
 | id          | int(20)     | NO   | PRI | NULL    | auto_increment |
 +-------------+-------------+------+-----+---------+----------------+
++-------------+-------------+---------+----------+-----+
+| fk_personas | fk_trabajos | salario | jornada  | id  |
++-------------+-------------+---------+----------+-----+
+|          52 |          55 |    1300 | comlpeta | 444 |
+|         752 |          70 |     900 | media    | 555 |
++-------------+-------------+---------+----------+-----+
 
 
--- un select triple es necesario el inner?
 SELECT p.nombre, t.trabajaComo , pt.salario 
 	from personas as p
-	inner join personas_trabajos as pt 
+	join personas_trabajos as pt 
 	on pt.fk_personas = p.id
-	inner join trabajos as t
+	join trabajos as t
 	on pt.fk_trabajos = t.id
 	where p.nombre = 'Pablo' and salario > 1000;
 -- con esta consulta devuelve
@@ -66,3 +92,12 @@ describe personas
 -- hacer un insert en trabajos
 insert into trabajos 
 	values (70, 'Carpintero');
+
+
+-- para cambiar el campo contraseña, ponerlo en mi casa
+UPDATE personas 
+	SET contraseña = 'Mat'
+	WHERE nombre = 'Pablo' and apellido = 'Mateos'; 
+
+-- para actualizar algo de una columna, ponerlo en mi casa
+	UPDATE personas set id = '123' where nombre = 'Pedro';

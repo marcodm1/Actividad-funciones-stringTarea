@@ -9,7 +9,7 @@
 	<body>
         <?php 
        
-            if (!isset($_POST['nombre']) && !isset($_POST['password'])){
+            if (!isset($_POST['name']) && !isset($_POST['password'])){
                 mostrarFormulario();
             }else {
                 $name      = $_POST['name'];
@@ -17,10 +17,11 @@
                 require_once("ConectaBD.php");
                 $consulta  = ConectaBD::singleton();
                 $resultado = $consulta->comprobarUsuario($name, $password);
+                setcookie("name", $_POST['name'], time() +3600);
                 header("Location:menu.php");
             }
 
-            function mostrarFormulario( ){
+            function mostrarFormulario(){
                 ?>
                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                         <label for="txtNombre"><strong>Nombre:</strong></label>

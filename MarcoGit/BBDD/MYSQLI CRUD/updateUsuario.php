@@ -5,7 +5,7 @@
     }
 
     if ( !isset($_POST['name']) && !isset($_POST['password']) && !isset($_POST['password2']) && !isset($_POST['password3'])) {
-        echo "no ha introducido los campos correctamente";
+        echo "Rellene los campos.";
         formularioUsuario(); 
     }else {
         require_once("ConectaBD.php");

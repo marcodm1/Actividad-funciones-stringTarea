@@ -10,7 +10,6 @@
 <body>
     <?php 
         if (!isset($_COOKIE['name']) && isset($_COOKIE['password'])){
-            echo "Error: No se ha logeado correctamente.";
             header("Location:logearse.php");
         }
 
