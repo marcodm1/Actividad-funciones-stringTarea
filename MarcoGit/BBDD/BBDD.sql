@@ -94,10 +94,10 @@ insert into trabajos
 	values (70, 'Carpintero');
 
 
--- para cambiar el campo contraseña, ponerlo en mi casa
+-- para cambiar aldo de una columna
 UPDATE personas 
-	SET contraseña = 'Mat'
+	SET apellido = 'Mat'
 	WHERE nombre = 'Pablo' and apellido = 'Mateos'; 
 
--- para actualizar algo de una columna, ponerlo en mi casa
-	UPDATE personas set id = '123' where nombre = 'Pedro';
+-- pero si quiero añadir una contraseña hay que hashearla
+password_hash('123', PASSWORD_DEFAULT);

@@ -5,7 +5,7 @@
         private static $instancia;
 
         private function __construct() {
-            $this->conexion = new mysqli("localhost", "root", "", "dwes");
+            $this->conexion = new PDO('mysql:host=localhost;dbname=dwes', 'root', '');
         }
 
         public static function singleton(){     // comprueba si hay una instancia, y si no hay, se crea el objeto en la variable $instancia
@@ -17,14 +17,10 @@
         } 
 
         function comprobarUsuario($name, $password) {
-            $consulta = $this->conexion->prepare("SELECT * from personas where nombre = ?");// quito contraseña
-            $consulta->bind_param("s", $name); 
+            $consulta = $this->conexion->prepare("SELECT * from personas where nombre = :nombre");// quito contraseña
+            $consulta->bindParam(":nombre", $name); 
             $consulta->execute();
-
-            $resultado    = $consulta->get_result(); // devuelve los resultado en forma de array
-            
-            $resultado    = $resultado->fetch_array(MYSQLI_NUM);// resultado es un array, fetch_array devuelve resultado de la consulta, y el MYSQLI_NUM lo muestra de x manera
-            
+            $resultado    = $consulta->fetchAll(PDO::FETCH_ASSOC);
             $passwordHash = $resultado[0]['contraseña']; 
             
             password_verify($password, $passwordHash); // hashea la contraseña actual y la compara con la contraseña de la BBDD
@@ -38,16 +34,20 @@
             }
         }
        
-        function createUsuario($id, $name, $apellido, $pais, $password) {
-            // id automatico y contraseña hasehada
-            $consulta = $this->conexion->prepare("insert into personas values (?, ?, ?, ?)");
-            $consulta->bind_param("ssss", $name, $apellido, $pais, $password);
+        function createUsuario($nombre, $apellido, $pais, $contraseña) {
+            // autoincrementa y aplica id
+            $pass     = password_hash($contraseña, PASSWORD_DEFAULT);
+            $consulta = $this->conexion->prepare("insert into personas values (:nombre, :apellido, :pais, :contraseña)");
+            $consulta->bindParam(":nombre"      , $nombre);
+            $consulta->bindParam(":apellido"    , $apellido);
+            $consulta->bindParam(":pais"        , $pais);
+            $consulta->bindParam(":contraseña"  , $pass);
             $consulta->execute();
         }
 
         function readUsuario($name) {
             $consulta = $this->conexion->prepare("select * from personas where nombre = ?");
-            $consulta->bind_param("s", $name); 
+            $consulta->bindParam("s", $name); 
             $consulta->execute();
             
             $resultado = $consulta->get_result();
@@ -64,13 +64,13 @@
 
         function updateUsuario($name, $password, $newPassword) {
             $consulta = $this->conexion->prepare("UPDATE personas set contraseña = ? where nombre = ? and contraseña = ?");
-            $consulta->bind_param("sss", $newPassword, $name, $password); 
+            $consulta->bindParam("sss", $newPassword, $name, $password); 
             $consulta->execute();
         }
 
         function deleteUsuario($name, $password) {
             $consulta = $this->conexion->prepare("DELETE from personas where contraseña = ? and nombre = ?");// prepare para evitar sql injection
-            $consulta->bind_param("ss", $password, $name); // esto es anti SQL injection
+            $consulta->bindParam("ss", $password, $name); // esto es anti SQL injection
             $consulta->execute();
         }
 
