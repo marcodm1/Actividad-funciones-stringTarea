@@ -9,7 +9,7 @@
 | contraseña | varchar(200) | NO   |     | NULL    |                |
 +------------+--------------+------+-----+---------+----------------+
 +----+--------+----------+-----------+--------------------------------------------------------------+
-| id | nombre | apellido | pais      | contraseña                                                   |
+| id | nombre | apellido | pais      | contrasenia                                                   |
 +----+--------+----------+-----------+--------------------------------------------------------------+
 |  1 | Ruben  | Lopez    | Italia    | $2y$10$3y0pJ98K6TCIwwyqN2qCsu4hIaCKiCyhEx4WHjYOzPuQBjF6fYEMa |
 |  2 | Fran   | Aldo     | Francia   | $2y$10$IhKCNQIb8h9CXYeMq1RwBuM2K9yIcTbQbkPWK/hLW9fMTMb16BDSi |
@@ -93,3 +93,6 @@ describe personas
 insert into trabajos 
 	values (70, 'Carpintero');
 
+-- eliminar fila
+DELETE FROM usuarios
+WHERE nombre = "hh";
