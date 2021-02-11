@@ -9,7 +9,7 @@
         formularioUsuario(); 
     }else {
         require_once("ConectaBD.php");
-        $consulta = ConectaBD ::singleton();
+        $consulta = ConectaBD::singleton();
         $name     = $_POST['name'];
         $password = $consulta->hashearContraseña($_POST['password']);
 

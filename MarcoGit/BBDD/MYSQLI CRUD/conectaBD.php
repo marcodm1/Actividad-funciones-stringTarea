@@ -17,13 +17,13 @@
         } 
 
         function comprobarUsuario($name, $password) {
-            $consulta = $this->conexion->prepare("SELECT * from personas where nombre = :nombre");// quito contraseña
+            $consulta = $this->conexion->prepare("SELECT * from personas where nombre=:nombre");// quito contraseña
             $consulta->bindParam(":nombre", $name); 
             $consulta->execute();
             $resultado    = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            $passwordHash = $resultado[0]['contraseña']; 
+            $passwordHash = $resultado[0]['contrasenia']; 
             
-            password_verify($password, $passwordHash); // hashea la contraseña actual y la compara con la contraseña de la BBDD
+            password_verify($password, $passwordHash); // hashea la contrasenia actual y la compara con la contraseña de la BBDD
             $resultado = $consulta->get_result();
             
             if ($resultado->num_rows) {// retorna informacion de la tabla y fetch_all los resultados de la consulta
@@ -53,7 +53,6 @@
             $resultado = $consulta->get_result();
             $resultado = $resultado->fetch_all();
             return $resultado;
-            // 
             // if ($resultado->num_rows) {// retorna informacion de la tabla y fetch_all los resultados de la consulta
             //     $resultado->fetch_all(MYSQLI_ASSOC);
             //     return $resultado;
