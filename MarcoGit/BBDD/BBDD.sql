@@ -93,11 +93,3 @@ describe personas
 insert into trabajos 
 	values (70, 'Carpintero');
 
-
--- para cambiar el campo contraseña, ponerlo en mi casa
-UPDATE personas 
-	SET contraseña = 'Mat'
-	WHERE nombre = 'Pablo' and apellido = 'Mateos'; 
-
--- para actualizar algo de una columna, ponerlo en mi casa
-	UPDATE personas set id = '123' where nombre = 'Pedro';
