@@ -1,4 +1,4 @@
-<?php
+<!-- <php
     $conexion = new mysqli("localhost", "root", "", "dwes");
     $id       = '10';
     $nombre   = 'Liz';
@@ -12,4 +12,4 @@
     
 
 
-?>
+?> -->
