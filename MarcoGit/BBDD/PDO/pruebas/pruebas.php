@@ -1,6 +1,11 @@
 <?php
+<<<<<<< HEAD
     $conexionBBDD = new PDO('mysql:host=localhost;dbname=dwes', 'root', '');
 
+=======
+    $conexionBBDD      = new PDO('mysql:host=localhost;dbname=dwes', 'root', '');
+    $conexionBBDD->
+>>>>>>> dfe3d2dc0efb4d87d227f06322f671097e20fbb1
     $sentencia = $conexionBBDD->prepare("SELECT * from personas"); // prepare devuelve un objeto tipo sentencia
     $sentencia->execute();
     // $nombres = $sentencia->fetchColumn(1); // devuele el primer registro de la consulta, y en el parametro el numero de columna
