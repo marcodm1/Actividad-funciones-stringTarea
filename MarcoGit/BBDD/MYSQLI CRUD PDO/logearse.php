@@ -9,25 +9,29 @@
 	<body>
         <?php 
        
-            if (!isset($_POST['name']) && !isset($_POST['password'])){
+            if (!isset($_POST['id']) && !isset($_POST['password'])){
                 mostrarFormulario();
             }else {
-                $name      = $_POST['name'];
+                $id        = $_POST['id'];
                 $password  = $_POST['password'];
                 require_once("ConectaBD.php");
                 $consulta  = ConectaBD::singleton();
-                $resultado = $consulta->comprobarUsuario($name, $password);
-                setcookie("name", $_POST['name'], time() +3600);
+                $resultado = $consulta->comprobarUsuario($id, $password);
+                if (!$resultado) {
+                    echo "Ha introducido mal algun dato";
+                    mostrarFormulario();
+                }
+                setcookie("id", $_POST['id'], time() +3600);
                 header("Location:menu.php");
             }
 
             function mostrarFormulario(){
                 ?>
                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-                        <label for="txtNombre"><strong>Nombre:</strong></label>
-                            <input type="text" name="name" id="txtNombre"><br><br>
+                        <label for="txtId">Id:</label>
+                            <input type="text" name="id" id="txtId"><br><br>
 
-                        <label for="pwd"><strong>Contraseña:</strong></label>
+                        <label for="pwd">Contraseña:</label>
                             <input type="password" name="password" id="pwd"><br><br>
 
                         <input type="submit" value="enviar">

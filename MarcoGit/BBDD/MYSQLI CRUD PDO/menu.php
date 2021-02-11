@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php 
-        if (!isset($_COOKIE['name']) && isset($_COOKIE['password'])){
+        if (!isset($_COOKIE['id']) ){
             header("Location:logearse.php");
         }
 
@@ -17,13 +17,13 @@
 
         function formularioUsuario(){
             ?>
-            <h1> Hola <?php echo $_COOKIE['name'];?></h1>
+            <h1> Hola</h1>
                 <p>Elija una opción:</p>
                 <div>
                     <li><a href="createUsuario.php">Añadir un usuario nuevo a la tabla</a></li>
                     <li><a href="readUsuario.php">  Mostrar nombres</a></li>
-                    <li><a href="updateUsuario.php">Cambiar contraseña</a></li>
-                    <li><a href="deleteUsuario.php">Elimina un usuario</a></li>
+                    <li><a href="updateUsuario.php">Cambiar nombre de una persona</a></li>
+                    <li><a href="deleteUsuario.php">Eliminar nuestra cuenta</a></li>
                 </div>
             <?php
         }

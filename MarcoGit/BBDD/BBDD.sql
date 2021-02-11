@@ -2,7 +2,7 @@
 +------------+--------------+------+-----+---------+----------------+
 | Field      | Type         | Null | Key | Default | Extra          |
 +------------+--------------+------+-----+---------+----------------+
-| id         | int(10)      | NO   | PRI | NULL    | auto_increment |
+| id         | int(20)      | NO   | PRI | NULL    | auto_increment |
 | nombre     | varchar(20)  | NO   |     | NULL    |                |
 | apellido   | varchar(20)  | NO   |     | NULL    |                |
 | pais       | varchar(20)  | NO   |     | NULL    |                |

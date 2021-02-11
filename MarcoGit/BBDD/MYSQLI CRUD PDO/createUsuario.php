@@ -1,5 +1,5 @@
 <?php
-    if (!isset($_COOKIE['name']) && isset($_COOKIE['password'])){
+    if (!isset($_COOKIE['id'])){
             header("connLOGIN.php");
     }
 
@@ -14,7 +14,6 @@
 
         require_once("ConectaBD.php");
         $consulta = ConectaBD::singleton();
-        $password = $consulta->hashearContraseña($password);
         $consulta->createUsuario($name, $apellido, $pais, $password);
         ?>
             <li><a href="menu.php">Volver al menu</a></li>
