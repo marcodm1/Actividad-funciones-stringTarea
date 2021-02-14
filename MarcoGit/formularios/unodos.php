@@ -8,7 +8,7 @@
 	</head>
 	<body>
         <?php 
-        $errores = false;
+        $errores      = false;
         $listaErrores = array();
 
         // aqui conprueba que se haya enviado el formulario con "algo"
@@ -74,10 +74,11 @@
                             <input type="checkbox" name="check"><br><br>
 
                         <label for="sexo"><strong>Seleccione su sexo:</strong></label>
+
                         <label for="hombre">Hombre</label>
                             <input type="radio" name="sexo" value="hombre">
                         <label for="mujer">Mujer</label>
-                                <input type="radio" name="sexo" value="mujer">
+                            <input type="radio" name="sexo" value="mujer">
 
                         <label for="asignatura"><strong>Seleccione su asignatura:</strong></label>
                             <select name="asignatura[]" id="asignatura">

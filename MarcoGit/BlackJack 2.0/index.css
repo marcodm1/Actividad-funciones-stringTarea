@@ -1,0 +1,64 @@
+
+body {
+    background-color: rgb(112, 197, 112);
+    margin-top: 100px;
+}
+.registro {
+    background-color: rgb(139, 197, 112);
+    border:         solid black 2px;
+    max-width:      600px;
+    margin:         0 auto;
+    padding-top:    20px;
+    padding-bottom: 30px;
+}
+
+.campoNombre, .campoCantidad, .campoEdad {
+    /* border: solid black 1px; */
+    display: block;
+    margin-top: 20px;
+    width: 150px; 
+}
+h2 {
+    margin: 0px;
+    text-align: center;
+}
+.formulario {
+    padding-top: 20px;
+    text-align: center;
+    /* display: inline; */
+}
+.otraCarta {
+    border: solid black 1px;
+    text-align: center;
+}
+.registro h2 img {
+    /* border: solid black 1px; */
+    max-width: 10%;
+}
+/* __________________Segunda parte________________________ */
+
+.imaggen img {
+    /* border: solid black 1px; */
+    max-width: 4%;
+}
+.juegoDIV {
+    background-color: rgb(139, 197, 112);
+    border: solid black 2px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 30px;
+}
+.resultado {
+    border: solid black 1px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.volverJugar {
+    border: solid black 1px;
+}
+
+.cartitas, .cartitas1 {
+    max-width: 10%;
+}

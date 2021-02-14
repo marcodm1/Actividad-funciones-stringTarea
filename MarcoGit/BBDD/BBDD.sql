@@ -96,3 +96,16 @@ insert into trabajos
 -- eliminar fila
 DELETE FROM usuarios
 WHERE nombre = "hh";
+
+
+
+// en el cmd
+drop table BlackJack;
+
+create table BlackJack (
+    id int(20) not null primary key auto_increment,
+    nombre varchar(20) not null,
+    apellido varchar(20) not null,
+    edad int(20) not null,
+    contrasenia int(200) not null
+    );
