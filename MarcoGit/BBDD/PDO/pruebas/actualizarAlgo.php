@@ -31,19 +31,19 @@
     
     
     // script para crear un nuevo usuario con contraseña hasheada e id autoincrementado
-    // $conexion = new PDO('mysql:host=localhost;dbname=dwes', 'root', '');
+    $conexion = new PDO('mysql:host=localhost;dbname=dwes', 'root', '');
     
-    // $nombre     = "hdfd";
-    // $apellido   = "fdfdhh";
-    // $pais       = "hdfdh";
-    // $pass       = password_hash(123, PASSWORD_DEFAULT);
+    $nombre     = "jj";
+    $apellido   = "jj6";
+    $pais       = "jj";
+    $pass       = password_hash(123, PASSWORD_DEFAULT);
 
-    // $consulta = $conexion->prepare("insert into personas (nombre, apellido, pais, contrasenia)  values (:nombre, :apellido, :pais, :contrasenia)");
-    // $consulta->bindParam(":nombre"     , $nombre);
-    // $consulta->bindParam(":apellido"   , $apellido);
-    // $consulta->bindParam(":pais"       , $pais);
-    // $consulta->bindParam(":contrasenia", $pass);
-    // $consulta->execute();
+    $consulta = $conexion->prepare("insert into personas (nombre, apellido, pais, contrasenia)  values (:nombre, :apellido, :pais, :contrasenia)");
+    $consulta->bindParam(":nombre"     , $nombre);
+    $consulta->bindParam(":apellido"   , $apellido);
+    $consulta->bindParam(":pais"       , $pais);
+    $consulta->bindParam(":contrasenia", $pass);
+    $consulta->execute();
 
 
 // script para eliminar una fila
