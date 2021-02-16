@@ -43,16 +43,15 @@
         }
 
         function readUsuario($name, $pagina) {
-            
             $consulta1 = $this->conexion->prepare("SELECT count(*) FROM personas WHERE nombre = :nombre1");
             $consulta1->bindParam(":nombre1", $name); 
             $consulta1->execute(); // como es count devuelve una tabla con una columna y una fila, con el numero de resultados encontrados
             $count         = $consulta1->fetchColumn(); // devuelve el 1º resultado de la columna 1ª y si se vuelve a llamar, devuelve el 2º resultado de la misma columna
             $limitePagina  = 2;
             $numeroPaginas = ceil($count/$limitePagina); //ceil simplemente redondea hacia arriba el numero de paginas que se van a crear
-            $numRegistro   = ($pagina - 1) * $limitePagina;
+            $empiezaEn     = ($pagina - 1) * $limitePagina;
 
-            $consulta2 = $this->conexion->prepare("SELECT * FROM personas WHERE nombre = :nombre ORDER BY apellido asc limit $numRegistro, $limitePagina");
+            $consulta2 = $this->conexion->prepare("SELECT * FROM personas WHERE nombre = :nombre ORDER BY apellido asc limit $empiezaEn, $limitePagina");
             $consulta2->bindParam(":nombre", $name); 
             $consulta2->execute();
             $resultado2 = $consulta2->fetchAll(PDO::FETCH_ASSOC);
