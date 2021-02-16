@@ -9,28 +9,26 @@
 	</head>
 	<body>
         <?php
-            if (!empty($_POST['regis'])){
-
-                if ($_POST['regis'] == 'conectarse') { //regis devuelve of/off no true o false ni conectarse ni registrarse
+            if (!empty($_POST['formu'])){
+                if ($_REQUEST['formu']=="conectarse"){
                     conectarse();
                 }else {
                     registrarse();
                 }
-                 
             }else {
                 ?>
                     <div class="registro"> 
                     <h2><img class="imaggen" src="baraja/ases.png"></h2>
                         <form class="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-                        
-                        <label for="regis">Seleccione si esta o no registrado:</label>
 
-                        <label for="txtConectarse">conectarse</label>
-                            <input type="radio" name="regis" id="txtConectarse">
-                        <label for="txtRegistrarse">registrarse</label>
-                            <input type="radio" name="regis" id="txtRegistrarse">
+                        <label for="formu">Seleccione opcion:</label><br><br>
 
-                        <input type="submit" value="conectarse/registrarse">
+                        <label for="conectarse">conectarse</label>
+                            <input type="radio" name="formu" value="conectarse">
+                        <label for="registrarse">registrarse</label>
+                            <input type="radio" name="formu" value="registrarse"><br><br>
+
+                        <input type="submit"  value="enviar">
                     </div>
                 <?php
             }
@@ -40,19 +38,18 @@
                 ?>
                     <div class="registro">
                         <h2>Registrarse al BlackJack <img class="imaggen" src="baraja/ases.png"></h2>
-                        <form class="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                        <form class="formulario" action="back.php" method="POST">
 
                         <label for="txtNombre">Escribe tu nombre:</label>
-                            <input type="text" name="name" id="txtNombre">
-
+                            <input type="text" name="name" id="txtNombre"><br>
                         <label for="txtApellido">Escriba su apellido</label>
-                            <input type="text" name="apellido" id="txtApellido">
+                            <input type="text" name="apellido" id="txtApellido"><br>
                         <label for="intEdad">Edad</label>
-                            <input type="number" name="edad" id="intEdad">
+                            <input type="number" name="edad" id="intEdad"><br>
                         <label for="intCant">Cantidad de dinero a su cuenta para jugar?</label>
-                            <input type="number" name="banco" id="intCant">
+                            <input type="number" name="banco" id="intCant"><br>
                         <label for="intPass">Contraseña</label>
-                            <input type="number" name="password" id="intPass">
+                            <input type="number" name="password" id="intPass"><br>
                         <input type="submit" value="jugar">
                     </div>
                 <?php
@@ -62,12 +59,12 @@
                 ?>
                     <div class="registro">
                         <h2>Conectarse al BlackJack <img class="imaggen" src="baraja/ases.png"></h2>
-                        <form class="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                        <form class="formulario" action="back.php" method="POST">
 
                         <label for="txtNombre">Escribe tu nombre:</label>
-                            <input type="text" name="name" id="txtNombre">
+                            <input type="text" name="name" id="txtNombre"><br>
                         <label for="intPass">Contraseña</label>
-                            <input type="text" name="password" id="intPass">
+                            <input type="text" name="password" id="intPass"><br>
                         <input type="submit" value="jugar">
                     </div>
                 <?php
