@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
-	<head>
-		<title>Marco Domínguez</title>
-		<meta charset="UTF-8">
-        <meta name="author" content="Marco Dominguez">
-        <meta name="description" content="Ejercicio Bucles anidados.">
-	</head>
-	<body>
-    <?php 
+<?php 
 
 // ------------- esto es array asociativa --------------
         $array1 = ["nombre" => "pepe", "talla"=> 180, "idiomas" =>["ingles", "frances", "español"] ];
-
         $alumno["saludo"] = "hola";
 
-
-// -------------- esto es array simple -----------
-        // forma buena
-        $array1 = ["pepe", 180, ["ingles", "frances", "español"] ];
+// -------------- esto es array simple ----------- forma buena
+        $array1   = ["pepe", 180, ["ingles", "frances", "español"] ];
         $alumno[] = "hola"; // esto no se si es asi
-
-
 
 //------------------------
         foreach ($alumno as $clave => $valor){
@@ -54,6 +40,4 @@
 
         echo $alumno2[3];
 
-    ?>
-    </body>
-</html>
+?>
