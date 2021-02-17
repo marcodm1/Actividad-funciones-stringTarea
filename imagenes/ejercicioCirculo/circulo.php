@@ -1,15 +1,15 @@
 <?php  
-// ----------- tamaño de la img
-    $ancho  = 300;
-    $alto   = 300;
-    $imagen = imagecreate($ancho, $alto);
-    $colorFondo  = imagecolorallocate($imagen,0, 100, 0); // color de fondo
+// ----------- crear img con x tamaño y color de fondo
+    $ancho      = 300;
+    $alto       = 300;
+    $imagen     = imagecreate($ancho, $alto); // crea la imagen con x caracteristicas
+    $colorFondo = imagecolorallocate($imagen,0, 100, 0); // color de fondo de la img
 
 //------------- texto y color en la img
-    $letra  = 10; // tamaño de la letra
-    $x      = 1; // posicion donde empieza a escribir
-    $y      = 1; // posicion donde empieza a escribir
-    $texto  = "Blanco: usuario y Negro: relleno";
+    $letra      = 10; // tamaño de la letra
+    $x          = 1; // posicion donde empieza a escribir
+    $y          = 1; // posicion donde empieza a escribir
+    $texto      = "Blanco: usuario y Negro: relleno";
     $colorLetra = imagecolorallocate($imagen,200, 0, 200);
     imagestring($imagen, $letra, $x, $y, $texto, $colorLetra); // pinta un string en la img
 
