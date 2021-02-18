@@ -1,6 +1,6 @@
 <?php
     if (!isset($_COOKIE['id'])){
-            header("connLOGIN.php");
+            header("Location:connLOGIN.php");
     }
 
     if ( !isset($_POST['name']) && !isset($_POST['apellido']) && !isset($_POST['pais']) && !isset($_POST['password']) ) {

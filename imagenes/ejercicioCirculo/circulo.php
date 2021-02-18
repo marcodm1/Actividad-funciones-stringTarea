@@ -6,7 +6,7 @@
     $colorFondo = imagecolorallocate($imagen,0, 100, 0); // color de fondo de la img
 
 //------------- texto y color en la img
-    $letra      = 10; // tamaño de la letra
+    $letra      = 10;// tamaño de la letra
     $x          = 1; // posicion donde empieza a escribir
     $y          = 1; // posicion donde empieza a escribir
     $texto      = "Blanco: usuario y Negro: relleno";
@@ -17,7 +17,7 @@
     $colorCirculoGet = imagecolorallocate($imagen, 255, 255, 255);
     $xc = 150; // la coordenada en x del centro
     $yc = 150; // la coordenada en y del centro
-    $gi = 1; // donde inicia el arco
+    $gi = 1;   // donde inicia el arco
     $gf = (360*$_POST['porcentaje'])/100; // donde termina el arco
     imagearc($imagen, $xc, $yc, $ancho, $alto, $gi, $gf, $colorCirculoGet); // pinta un arco
 

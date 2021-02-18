@@ -1,0 +1,25 @@
+body {
+    background-color: beige;
+}
+.principal {
+    border: solid black 2px;
+    width: 300px;
+    padding: 20px;
+    margin: auto;
+}
+
+.formulario1 {
+    /* border: solid black 1px; */
+    padding: 10px
+}
+
+/* .captcha1 {
+    align-items: center;
+}
+.captcha1>img {
+    margin: auto;
+    padding:0px;
+} */
+img {
+    border: solid black 1px;
+}
