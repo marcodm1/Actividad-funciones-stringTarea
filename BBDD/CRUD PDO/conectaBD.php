@@ -79,6 +79,23 @@
             return true;
         }
 
+
+        // function guardarPartida($miJugador, $miCasino){
+        //     if (empty($_SESSION['jugador'])) {
+        //         $_SESSION['jugador'] = serialize($miJugador); // serializar es como pasar el objeto a string
+        //     }else {
+        //         // unset($_SESSION['jugador']);
+        //         $_SESSION['jugador'] = serialize($miJugador);
+        //     }
+        //     if (empty($_SESSION['casino'])) {
+        //         $_SESSION['casino'] = serialize($miCasino);
+        //         }else {
+        //             unset($_SESSION['casino']);
+        //             $_SESSION['casino'] = serialize($miCasino);
+        //         }
+        // }
+
+    
     }
 ?>  
 

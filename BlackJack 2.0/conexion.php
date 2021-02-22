@@ -1,3 +1,7 @@
+<?php  
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -9,36 +13,39 @@
 	</head>
 	<body>
         <?php
-            if (!empty($_POST['formu'])){
-                if ($_REQUEST['formu']=="conectarse"){
-                    conectarse();
+
+            if (isset($_POST['primerFormu']) ){
+                if ($_POST['primerFormu'] == "conectarse"){
+                    header("Location:gdfgdgf.php");
+
                 }else {
                     registrarse();
                 }
             }else {
+                echo "0";
                 ?>
                     <div class="registro"> 
-                    <h2><img class="imaggen" src="baraja/ases.png"></h2>
-                        <form class="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <h2>Bienvenido al BlackJack ¿Qué desea hacer?<img class="imaggen" src="baraja/ases.png"></h2><br><br>
 
-                        <label for="formu">Seleccione opcion:</label><br><br>
+                        <form class="conectarseRegistrarse" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
 
                         <label for="conectarse">conectarse</label>
-                            <input type="radio" name="formu" value="conectarse">
+                            <input type="radio" name="primerFormu" value="conectarse">
                         <label for="registrarse">registrarse</label>
-                            <input type="radio" name="formu" value="registrarse"><br><br>
+                            <input type="radio" name="primerFormu" value="registrarse"><br><br>
 
-                        <input type="submit"  value="enviar">
+                        <input type="submit"  value="Aceptar">
                     </div>
                 <?php
             }
                 
 
-            function registrarse() {
+            function registrarse() { 
                 ?>
                     <div class="registro">
                         <h2>Registrarse al BlackJack <img class="imaggen" src="baraja/ases.png"></h2>
-                        <form class="formulario" action="back.php" method="POST">
+
+                        <form class="formulario" action="comprobarUsuario.php" method="POST">
 
                         <label for="txtNombre">Escribe tu nombre:</label>
                             <input type="text" name="name" id="txtNombre"><br>
@@ -58,21 +65,34 @@
             function conectarse() {
                 ?>
                     <div class="registro">
-                        <h2>Conectarse al BlackJack <img class="imaggen" src="baraja/ases.png"></h2>
-                        <form class="formulario" action="back.php" method="POST">
+                        <h2>BlackJack <img class="imaggen" src="baraja/ases.png"></h2>
+                        
+                        <form class="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
 
-                        <label for="txtNombre">Escribe tu nombre:</label>
-                            <input type="text" name="name" id="txtNombre"><br>
+                        <label for="intId">Id:</label>
+                            <input type="text" name="id" id="intId"><br>
                         <label for="intPass">Contraseña</label>
-                            <input type="text" name="password" id="intPass"><br>
-                        <input type="submit" value="jugar">
+                            <input type="password" name="password" id="intPass"><br>
+                        <input type="submit" value="Jugar">
                     </div>
                 <?php
             }
+
+            function comprobar() {
+                $id        = $_POST['id'];
+                $password  = $_POST['password'];
+                require_once("conectaBD.php");
+                $consulta  = ConectaBD::singleton();
+                $resultado = $consulta->comprobarUsuario($id, $password);
+                if (!$resultado) {
+                    echo "No coincide el nombre con la contraseña, intentelo de nuevo.";
+                    // conectarse();
+                }
+                setcookie("id", $_POST['id'], time() +3600);
+                header("Location:perfil.php");
+            }
+
+
         ?>
     </body>
 </html>
-
-
-
-

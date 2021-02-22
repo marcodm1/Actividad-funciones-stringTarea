@@ -9,31 +9,57 @@
 
 </head>
 <body>
+    
     <div class="principal">
         <div class="captcha1">
             <img src="captcha.php">
+            
         </div>
         <div class="formulario1">
             <?php  
-                mostrarFormulario(); 
+                session_start();
+
+                if (isset($_POST['campo']) && isset($_SESSION['texto'])) {
+                    if ($_POST['campo'] === $_SESSION['texto']) {
+                        echo "Correcto";
+                        ?>
+                            <form action="principal.php" method="post">
+                            <input type="submit" value="volver">
+                        <?php
+                    }else {
+                        echo "Incorrecto";
+                        ?>
+                            <form action="principal.php" method="post">
+                            <input type="submit" value="volver">
+                        <?php
+                    }
+                }else {
+                    mostrarFormulario();
+                }
+                 
             ?> 
         </div>
     </div>
     
-
-
-    
     <?php    
         function mostrarFormulario(){
             ?>
-                <form action="captcha.php" method="post">
+            
+                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <label for="intNombre">Escriba el captcha:</label>
-                        <input type="number" name="porcentaje" id="intNombre"><br>
-                    <input type="submit" value="enviar">
-                </form> 
+                        <input type="text" name="campo" id="intNombre">
+                        
+                    <input type="submit" value="Enviar">
+                </form>
+
+                <form action="principal.php" method="post">
+                <input type="submit" value="cargar otro captcha"> 
             <?php
         }
     ?>
+
+
+
 </body>
 </html>
 

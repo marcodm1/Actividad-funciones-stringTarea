@@ -8,7 +8,7 @@
     
 ?>
 
-// en el cmd
+<!-- // en el cmd
 drop table BlackJack;
 
 create table BlackJack (
@@ -18,5 +18,5 @@ create table BlackJack (
     edad int(20) not null,
     banco int(20) not null,
     contrasenia int(200) not null
-    );
+); -->
 
