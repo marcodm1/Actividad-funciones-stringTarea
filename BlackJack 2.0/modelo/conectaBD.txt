@@ -1,0 +1,10 @@
+usuario limitado
+pdo
+singleton
+validado html
+formulario con filtrado de valores en el formulario "controlador" que lo pasa al modelo
+sin errores sintacticos, sin warnings, sin errores.
+pide una consulta a una tabla
+ponerle la creacion de la tabla y por otro lado, darle permisos y por ultimo ingresar datos
+
+

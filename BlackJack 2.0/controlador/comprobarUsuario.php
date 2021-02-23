@@ -1,10 +1,10 @@
 <?php  
     if (!isset($_POST['id']) && !isset($_POST['password'])){
-        mostrarFormulario();
+        header("Location:conexion.php");
     }else {
         $id        = $_POST['id'];
         $password  = $_POST['password'];
-        require_once("ConectaBD.php");
+        require_once("conectaBD.php");
         $consulta  = ConectaBD::singleton();
         $resultado = $consulta->comprobarUsuario($id, $password);
         if (!$resultado) {
