@@ -20,11 +20,11 @@
             $consulta = $this->conexion->prepare("SELECT * from personas where id=:id");// quito contraseña
             $consulta->bindParam(":id", $id); 
             $consulta->execute();
-            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            if (count($resultado) == 0) {
-                return false;
+            $resultado = $consulta->fetchObject(); // fetch object convierte el resultado a un obj
+            if (!isset($resultado) ) {
+                echo "error22323";
             }
-            $passwordHash = $resultado[0]['contrasenia'];
+            $passwordHash = $resultado->contrasenia;
             if (!password_verify($password, $passwordHash)) {
                 return false;
             }
@@ -56,6 +56,8 @@
             $consulta2->execute();
             $resultado2 = $consulta2->fetchAll(PDO::FETCH_ASSOC);
 
+
+
             return $resultado2;
 
         }
@@ -79,22 +81,7 @@
             return true;
         }
 
-
-        // function guardarPartida($miJugador, $miCasino){
-        //     if (empty($_SESSION['jugador'])) {
-        //         $_SESSION['jugador'] = serialize($miJugador); // serializar es como pasar el objeto a string
-        //     }else {
-        //         // unset($_SESSION['jugador']);
-        //         $_SESSION['jugador'] = serialize($miJugador);
-        //     }
-        //     if (empty($_SESSION['casino'])) {
-        //         $_SESSION['casino'] = serialize($miCasino);
-        //         }else {
-        //             unset($_SESSION['casino']);
-        //             $_SESSION['casino'] = serialize($miCasino);
-        //         }
-        // }
-
+        
     
     }
 ?>  

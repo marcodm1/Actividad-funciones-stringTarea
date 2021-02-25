@@ -1,5 +1,4 @@
 <?php
-
     class ConectaBD {
         private $conexion;
         private static $instancia;
