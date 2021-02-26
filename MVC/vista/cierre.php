@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="MVC">
+    <meta name="Author" content="Marco Dominguez">
+    <title>MVC</title>
 </head>
 <body>
     <?php
-    var_dump($res);
+        var_dump($res);
     ?>
-   
 </body>
 </html>
 

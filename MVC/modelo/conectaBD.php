@@ -14,17 +14,13 @@
             }
             return self::$instancia; // devuelve el objeto tipo instancia
         } 
-
         
         function readUsuario() {
             $consulta = $this->conexion->prepare("SELECT * FROM personas");
             $consulta->execute();
             $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
-
             return $resultado;
         }
-        
-    
     }
 ?>  
 
