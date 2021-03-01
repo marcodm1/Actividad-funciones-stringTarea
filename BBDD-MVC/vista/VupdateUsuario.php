@@ -1,32 +1,15 @@
 <?php
     if (!isset($_COOKIE['id'])){
-            echo "Error: No se ha logeado correctamente.";
-            header("logearse.php");
+        require_once("./controlador/Clogearse.php");
     }
 
     if ( !isset($_POST['name']) && !isset($_POST['nameNuevo']) && !isset($_POST['nameNuevoRep']) ) {
-        echo "Rellene los campos.";
-        formularioUsuario(); 
+        formularioUpdate(); 
     }else {
-        require_once("ConectaBD.php");
-        $consulta       = ConectaBD::singleton();
-        $name           = $_POST['name'];
-        $nameNuevo      = $_POST['nameNuevo'];
-        $nameNuevoRep   = $_POST['nameNuevoRep'];
-        $id             = $_COOKIE['id'];
-        if ($nameNuevo != $nameNuevoRep){
-            formularioUsuario();
-        }
-        $consulta->updateUsuario($name, $nameNuevo, $id);
-        ?>
-            <li><a href="menu.php">Volver al menu</a></li>
-        <?php
-        
-      
+        require_once("./controlador/CuldateUsuario.php");
     }
-        
-
-    function formularioUsuario(){
+       
+    function formularioUpdate(){
         ?>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 

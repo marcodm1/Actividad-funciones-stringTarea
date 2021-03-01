@@ -22,7 +22,7 @@
             $consulta->execute();
             $resultado = $consulta->fetchObject(); // fetch object convierte el resultado a un obj
             if (!isset($resultado) ) {
-                echo "error22323";
+                return false;
             }
             $passwordHash = $resultado->contrasenia;
             if (!password_verify($password, $passwordHash)) {

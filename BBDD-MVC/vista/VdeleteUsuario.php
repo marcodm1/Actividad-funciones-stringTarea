@@ -1,30 +1,15 @@
 <?php
     if (!isset($_COOKIE['id'])){
-        echo "Error: No se ha logeado correctamente.";
-        header("logearse.php");
+        require_once("./controlador/Clogearse.php");
     }
     
     if (!isset($_POST['id']) && !isset($_POST['password'])){
-        formularioUsuario();
+        formularioDelete();
     }else {
-        require_once("ConectaBD.php");
-        $consulta = ConectaBD::singleton();
-        $id       = $_POST['id'];
-        $password = $_POST['password'];
-        if (!$consulta->deleteUsuario($id, $password) ) {
-            echo "Ha introducido mal algun dato";
-        }else {
-            echo "Eliminado correctamente";
-        }
-        
-        ?>
-            <li><a href="menu.php">Volver al menu</a></li>
-        <?php
-        
+        require_once("./controlador/CdeleteUsuario.php");
     }
         
-
-    function formularioUsuario(){
+    function formularioDelete(){
         ?>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 

@@ -5,22 +5,13 @@
 
     if ( !isset($_POST['name']) && !isset($_POST['apellido']) && !isset($_POST['pais']) && !isset($_POST['password']) ) {
         echo "Introduzca los campos correctamente.";
-        formularioUsuario(); 
+        formularioCrear(); 
     }else {
-        $name       = $_POST['name'];
-        $apellido   = $_POST['apellido'];
-        $pais       = $_POST['pais'];
-        $password   = $_POST['password'];
-
-        require_once("ConectaBD.php");
-        $consulta = ConectaBD::singleton();
-        $consulta->createUsuario($name, $apellido, $pais, $password);
-        ?>
-            <li><a href="menu.php">Volver al menu</a></li>
-        <?php
+        require_once("./controlador/CcreateUsuario.php");
+        require_once("./vista/Vmenu.php");
     }
 
-    function formularioUsuario(){
+    function formularioCrear(){
         ?>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
                 

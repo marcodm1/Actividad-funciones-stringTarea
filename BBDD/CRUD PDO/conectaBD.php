@@ -55,9 +55,6 @@
             $consulta2->bindParam(":nombre", $name); 
             $consulta2->execute();
             $resultado2 = $consulta2->fetchAll(PDO::FETCH_ASSOC);
-
-
-
             return $resultado2;
 
         }

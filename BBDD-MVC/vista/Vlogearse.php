@@ -9,12 +9,11 @@
 	<body>
         <?php 
             if (!isset($_POST['id']) && !isset($_POST['password'])){
-                mostrarFormulario();
+                formularioLogearse();
             }else {
-                require_once("vista/logearse.php");
+                require_once("../controlador/Clogearse.php");
             }
-
-            function mostrarFormulario(){
+            function formularioLogearse(){
                 ?>
                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                         <label for="txtId">Id:</label>
