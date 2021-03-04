@@ -32,14 +32,18 @@
         }
        
         function createUsuario($nombre, $apellido, $pais, $contraseña) {
-            $conexion = new PDO('mysql:host=localhost;dbname=dwes', 'root', '');
             $pass     = password_hash($contraseña, PASSWORD_DEFAULT);
-            $consulta = $conexion->prepare("insert into personas (nombre, apellido, pais, contrasenia)  values (:nombre, :apellido, :pais, :contrasenia)");
+            $consulta = $this->conexion->prepare("INSERT into personas (nombre, apellido, pais, contrasenia)  values (:nombre, :apellido, :pais, :contrasenia)");
             $consulta->bindParam(":nombre"     , $nombre);
             $consulta->bindParam(":apellido"   , $apellido);
             $consulta->bindParam(":pais"       , $pais);
             $consulta->bindParam(":contrasenia", $pass);
             $consulta->execute();
+            if ($consulta) {
+                return true;
+            }else {
+                return false;
+            }
         }
 
         function readUsuario($name, $pagina) {
@@ -55,38 +59,46 @@
             $consulta2->bindParam(":nombre", $name); 
             $consulta2->execute();
             $resultado2 = $consulta2->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-            return $resultado2;
-
-        }
-
-        function updateUsuario($name, $nameNuevo, $id) {
-            $consulta = $this->conexion->prepare("UPDATE personas set nombre=:nameNuevo where nombre=:nombre and id=:id ");
-            $consulta->bindParam(":nameNuevo", $nameNuevo);
-            $consulta->bindParam(":nombre", $name); 
-            $consulta->bindParam(":id", $id);
-            $consulta->execute();
-        }
-
-        function deleteUsuario($id, $password) {
-            if (!$this->comprobarUsuario($id, $password)) {
+            if ($resultado2) {
+                return $resultado2;
+            }else {
                 return false;
             }
+        }
 
+        function updateUsuario($name, $nameNuevo) {
+            $consulta = $this->conexion->prepare("UPDATE personas set nombre=:nameNuevo where nombre=:nombre ");
+            $consulta->bindParam(":nameNuevo", $nameNuevo);
+            $consulta->bindParam(":nombre", $name);
+            $resultado2 = $consulta->execute();
+            if ($resultado2) {
+                return $resultado2;
+            }else {
+                return false;
+            }
+        }
+
+        function deleteUsuario($id) {
             $consulta = $this->conexion->prepare("DELETE from personas where  id=:id");
             $consulta->bindParam(":id", $id);
-            $consulta->execute();
-            return true;
+            $resultado2 = $consulta->execute();
+            if ($resultado2) {
+                return $resultado2;
+            }else {
+                return false;
+            }
         }
 
 
-        function mostrarTodo($name, $pagina) {
-            $consulta2 = $this->conexion->prepare("SELECT * FROM personas");
+        function mostrarTodo() {
+            $consulta2 = $this->conexion->prepare("SELECT id, nombre FROM personas");
             $consulta2->execute();
             $resultado2 = $consulta2->fetchAll(PDO::FETCH_ASSOC);
-            return $resultado2;
+            if ($resultado2) {
+                return $resultado2;
+            }else {
+                return false;
+            }
         }
         
     
