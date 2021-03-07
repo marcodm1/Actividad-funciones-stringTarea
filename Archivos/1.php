@@ -17,7 +17,7 @@
             // si en vez de una variable ponemos echo, lo mostraria
             fclose($archivo1);
 
-            // abro y sobre escribo
+            // abro y sobreescribo
             $archivo2 = fopen("texto2.txt", "w") or die("No disponible el archivo seleccionado!"); 
             fwrite($archivo2, $variable);
             fclose($archivo2);
