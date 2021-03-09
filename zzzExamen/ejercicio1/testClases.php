@@ -10,21 +10,33 @@ d. Muestra los platos por pantalla, utilizando los métodos adecuados.
 
     require_once("clases.php");    
 
-    $gluten       = new Alergeno("Gluten", 150, 210, 170);
-    $huevo        = new Alergeno("Huevo", 200, 210, 1500);
-    $frutos_secos = new Alergeno("Frutos_secos", 230, 110, 170);
+    $gluten = new Alergeno("Gluten" , 150, 210, 170);
+    // le doy el valor de mi objeto gluten
+    $rojo  = 0; // 150
+    $azul  = 0; // 210
+    $verde = 0; // 170
+    $gluten->getColor($rojo,$azul,$verde);
+    //_______________________________________________________________
 
-    $tomate       = new Ingrediente("Tomate", 12, 3, 2, false);
-    $lechuga      = new Ingrediente("Lechuga", 8, 1, 2, false);
-    $pasta        = new Ingrediente("Pasta",  15, 5, 4, $gluten);
-    $carne        = new Ingrediente("Carne",  12, 3, 2, false); 
+    $tomate = new Ingrediente("Tomate", 12, 3, Ingrediente::LACTEO, $gluten); // si no pusiese el ultimo parametro, el constructor pone uno por defecto 
+
+    $plato1 = new Plato("bolognesa");
+    $palto1->add($tomate, 300);
+
+    //_______________________________________________________________
+
+
 
     $bolognesa    = new Plato("Bolognesa");
     $bolognesa->add("pasta", 450);
+    
     $carbonara    = new Plato("Carbonara");
     $carbonara->add("nata", 300);
 
 
     var_dump($bolognesa);
     var_dump($carbonara);
+
+    
+
 ?>
