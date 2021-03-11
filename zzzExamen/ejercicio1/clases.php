@@ -5,19 +5,50 @@
         private $alergeno;
         private $colorR;   
         private $colorG;   
-        private $colorB;   
+        private $colorB;
+        public static $cantidadAlergenos = 0; // es un atributo relacionado a la clase, no a los objetos creados   
 
+        // constructor magico
         public function __construct($alergeno, $colorR, $colorG, $colorB) { // colores entre 0 y 255 ok
             $this->alergeno = $alergeno;                                    
             $this->colorR   = $colorR;
             $this->colorG   = $colorG;
             $this->colorB   = $colorB;
+            self::$cantidadAlergenos ++; // accedemos a un atriubuto static con el self::
         }
+        // getter normal
         public function getColor(&$rojo, &$verde, &$azul){ // por referencia
             $rojo  = $this->colorR;
             $verde = $this->colorG;
             $azul  = $this->colorB;
         }
+
+        public function getNombre(){ // por referencia
+            return $this->alergeno;
+            
+        }
+
+        // toString magico
+        public function __toString() { // en php no se usan ni los getters ni los setters ni los toString normales 
+            return "Este objeto tiene: " . $this->alergeno . ", ". $this->colorR . ", ". 
+                        $this->colorG . ", ". $this->colorB . ": y la media del color es: " . $this->mediaColor() . ".<br>";
+        }
+
+        // function normal que llama a una function static
+        private function mediaColor() { // metodos private solo se accede a ellos desde otra funcion dentro del objeto
+            return ($this->colorR + $this->colorG + $this->colorB)/3 . self::inicial(); // aqui llamo a function static, pero al reves no podria
+        }
+
+        private static function inicial() { // solo se accede a ellos desde otra funcion dentro del objeto
+            return "Aqui esta la static function"; // un function static solo puede llamar a otro metodo static, no como Ej:mediaColor()
+        }
+
+        public static function ordenar(&$arrayAlergenos) {
+            usort($arrayAlergenos, function ($a, $b){
+                return strcmp($a->getNombre(), $b->getNombre());
+            });
+        }
+
 
     }
 
@@ -27,11 +58,11 @@
         const LACTEO       = 3;
         const SINCALIFICAR = 4;
 
-        public $nombre;   //nombre del ingrediente
-        public $calorias; //calorías cada 100 gramos.
-        public $precio;   //precio por 100 gramos.
-        public $tipo;     //tipo animal, vegetal, lácteo o sin calificar. Utilizar las constantes para
-        public $alergeno; //alérgeno que contiene, puede estar vacío si no tienen ninguno
+        private $nombre;   //nombre del ingrediente
+        private $calorias; //calorías cada 100 gramos.
+        private $precio;   //precio por 100 gramos.
+        private $tipo;     //tipo animal, vegetal, lácteo o sin calificar. Utilizar las constantes para
+        private $alergeno; //alérgeno que contiene, puede estar vacío si no tienen ninguno
     
         public function __construct($nombre, $calorias, $precio, $tipo, $alergeno = null) { // por defecto tendra el valor null
             $this->nombre = $nombre;
@@ -43,16 +74,51 @@
             $this->tipo     = $tipo;
             $this->alergeno = $alergeno;
         }
-        public function __get($hh){ // si llaman a una propiedad que no existe, entra al __getter magioco                                                                   
-            return "No existe esa propiedad";
+
+        public function __get($atributo){  // si llaman a una propiedad que no existe o es privada, entra al __getter magioco                                                                   
+                                            // la diff con un get normal es si llaman a una propiedad que no existe
+            if ($atributo == "resumen") {  // aqui llamamos al atributo "resumen" que no existe
+                return "Nombre " . $this->nombre . " y precio " . $this->precio . "€/kg";    
+            }
+
+            switch($atributo) { // esto es como hacer muchos getters pero en uno
+                case "nombre":
+                    return $this->nombre;
+                case "calorias":
+                    return $this->calorias;
+                case "precio":
+                    return $this->precio;
+                case "tipo":
+                    return $this->tipo;
+                case "alergeno":
+                    return $this->alergeno;
+                default: echo "Error: " . $atributo . ": esta propiedad no existe";
+            }
         }
 
-        public function getNombre(){ // si llaman a una propiedad private, se suele usar get                                                                   
-            return $this->nombre;
-        }
+        public function __set($atributo, $valor){ // para modificar a una propiedad private, se suele usar set                                                                     
+            if ($atributo == "resumen") {  // aqui llamamos al atributo "resumen" que no existe
+                $this->nombre . $this->valor;    
+            }
 
-        public function setNombre($nombre){ // para modificar a una propiedad private, se suele usar set                                                                     
-            $this->nombre = $nombre; 
+            switch ($atributo) { // esto es como hacer muchos getters pero en uno
+                case "nombre":
+                    $this->nombre = $valor;
+                    break;
+                case "calorias":
+                    $this->calorias = $calorias;
+                    break;
+                case "precio":
+                    $this->precio = $precio;
+                    break;
+                case "tipo":
+                    $this->tipo = $tipo;
+                    break;
+                case "alergeno":
+                    $this->alergeno = $alergeno;
+                    break;
+                default: echo "Error: " . $atributo . ": esta propiedad no existe";
+            }
         }
 
     }
