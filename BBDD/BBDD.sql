@@ -109,3 +109,61 @@ create table BlackJack (
     edad int(20) not null,
     contrasenia int(200) not null
     );
+
+
+
+
+	1. Crear un procedimiento que reciba un (número de empleado por parámetro y un número de departamento). Si pertenece a dicho departamento, 
+llame a una función que devuelva la media salarial del departamento. Mostrar por pantalla nombre del departamento y la media desde el procedimiento. 
+Si no pertenece al departamento, que muestre el nombre  de todos los empleados y el nombre de los departamentos a los que pertenece.
+
+CREATE OR REPLACE PROCEDURE nombreProcedimiento (numEmp employees.empno%type, numDep employees.deptno%type) AS TYPE 
+arrayTabla IS TABLE OF EMP_DEPT
+  INDEX BY PLS_INTEGER;
+  listaEmpreadosTabla arrayTabla;
+  v_nombre 	varchar2;
+  v_media 	number(10,2):=0;
+BEGIN
+  select d.dname into v_nombre
+  from departments d
+  join employees e
+  on (d.deptno=e.deptno)
+  where e.empno=numEmp and e.deptno=numDep;
+  v_media:=media(numDep);
+  dbms_output.put_line('La media del departamento: '||v_nombre||' es: '||v_media);
+  exception
+    when no_data_found then
+      select emp_dept(e.ename,d.dname) bulk collect into listaEmpreadosTabla
+      from employees e
+      join departments d
+      on (e.deptno=d.deptno);
+      for i in 1..listaEmpreadosTabla.count loop
+        dbms_output.put_line('Nombre: '||listaEmpreadosTabla(i).nombre_emp||' Departamento: '||listaEmpreadosTabla(i).nombre_dept);
+      end loop;
+END CURSOR3_EJE1_BULK;CREATE OR REPLACE FUNCTION MEDIA (numDep number) RETURN NUMBER AS 
+v_media number(10,2):=0;
+BEGIN
+  select avg(msal) into v_media
+  from employees
+  where deptno=numDep
+  group by deptno;
+  return v_media;
+END MEDIA;
+
+
+
+
+select * bulk collect into array_personas_tabla 
+from tabla1 as a
+join tabla as b
+on a.nombre = b.nombre
+join tabla3 as c
+on b.nombre = c.nombrPapa
+where a.nombre = nombreRefe && c.nombrePpapa = nombrePadre;
+
+
+loop arra_personas_tabla 
+
+dbms_output.put_line();
+
+end loop;
