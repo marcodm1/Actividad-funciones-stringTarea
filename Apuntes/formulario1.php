@@ -17,10 +17,8 @@
             <label for="sexo"><strong>Seleccione su sexo:</strong></label>
                 <label for="hombre">Hombre</label>
                     <input type="radio" name="sexo" value="hombre">
-
                 <label for="mujer">Mujer</label>
                     <input type="radio" name="sexo" value="mujer">
-
                 <label for="otros">Otros</label>
                     <input type="radio" name="sexo" value="otro"><br><br><br>
 

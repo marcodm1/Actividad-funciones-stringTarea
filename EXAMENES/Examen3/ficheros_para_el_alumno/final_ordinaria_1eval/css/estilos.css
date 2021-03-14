@@ -1,0 +1,12 @@
+span.oculta{
+	width: 180px;
+	height: 135px;
+	color: white;
+	background-color: black;
+	display:block;
+	font-size:3em;	
+}
+body{
+	
+	background-color:green;
+}
