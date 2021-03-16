@@ -1,0 +1,2 @@
+1:HARDWARE:Cable de red estropeado:cable_red_roto.jpg:1
+2:SOFTWARE:Fallo en el arranque de Windows:pantallazo_azul.jpg:2

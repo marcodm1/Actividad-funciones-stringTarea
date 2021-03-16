@@ -1,0 +1,42 @@
+table{
+	margin: auto;
+	border-spacing: 0px;
+    background-color: antiquewhite;
+	border-collapse:collapse;
+	
+}
+th{
+    border:  2px black solid;
+    background-color: darkblue;
+    color: white;
+	padding:4px;
+}
+td{
+	text-align:center;
+	border:2px #3239CC solid;
+	margin-left: -40%;
+    background-color: white;
+	padding:4px;
+	
+}
+caption {
+	color:#725F2D;
+	font-weight:bold;
+	padding:4px;
+	
+}
+/* General */
+   BODY {font-family: verdana,arial, sans-serif; font-size: 10pt;}
+
+/* Contenido */
+   H1 {font-size: 16pt; font-weight: bold; color: #0066CC;}
+   H2 {font-size: 12pt; font-weight: bold; font-style: italic; color: black;}
+   H3 {font-size: 10pt; font-weight: bold; color: black;}
+   
+/* Formulario */
+   form.borde {border: 1px dotted #0066CC; padding: 0.5em 0.2em; width: 80%;}
+   form div {clear: left; margin: 0.3em; padding: 0.1em;}
+   form div label {float: left; width: 25%; font-weight: bold;}
+   .error {color: red;}
+
+	span {font-weight:bold;}
