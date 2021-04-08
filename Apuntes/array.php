@@ -11,11 +11,11 @@
 //------------------------
         foreach ($alumno as $clave => $valor){
             echo "$clave => ";
-            if(is_array($valor) == true) { // is_array verifica si es array
+            if (is_array($valor) == true) { // is_array verifica si es array
                 foreach ($valor as $idioma) {
                     echo "$idioma ";
                 }
-            }else{
+            }else {
                 echo " $valor";
             }
             echo "<br>";
