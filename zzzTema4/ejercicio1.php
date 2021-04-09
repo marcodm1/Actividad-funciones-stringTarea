@@ -1,34 +1,45 @@
 <?php
+    $mundo = array(
+        "España"   => ["Madrid", "Barcelona", "Sevilla" , "Valencia"],
+        "Alemania" => ["Berlín", "Múnich"   , "Hamburgo", "Bremen"  ],
+        "Francia"  => ["París" , "Niza"     , "Burdeos" , "Toulouse"],
+        "Italia"   => ["Roma"  , "Florencia", "Venecia" , "Milán"   ]
+    );
 
-    $mundo = array();
+    // foreach ($mundo as $clave => $clave => $valor) {
+    //     if (isset($_GET['España']) ) {
+            
+    //     }else {
+    //         formulario($mundo);
+    //     }
 
-    $españa   = array("Madrid", "Barcelona", "Sevilla", "Valencia");
-    $alemania = array("Berlín", "Múnich", "Hamburgo", "Bremen");
-    $francia  = array("París", "Niza", "Burdeos", "Toulouse");
-    $italia   = array("Roma", "Florencia", "Venecia", "Milán");
-    array_push($mundo, $españa);
-    array_push($mundo, $alemania);
-    array_push($mundo, $francia);
-    array_push($mundo, $italia);
+    // }
 
-    formulario($mundo);
+    if ($_GET['España'] != null) {
+        echo "hhihihih";
+    } else {
+        formulario($mundo);
+    }
+    
+
 
     function formulario($mundo) {
         ?>
         <form action="nombreDelFichero.php" method="get">
         <?php 
-            for ($i = 0; $i < count($mundo); $i++) {
+            foreach ($mundo as $pais => $array) {
                 ?>
-                <label for="pais<?php echo $i ?>"><?php echo "dd"; ?></label>
-                <select name="<?php echo $i ?>[]" id="pais<?php echo $i ?>">
+                <label for="<?php echo $pais ?>"><?php echo $pais . ":"; ?></label>
+                <select name="<?php echo $pais ?>[]" id="<?php echo $pais ?>">
+                <option value="seleccione">--Ninguno--</option>
                 <?php
-                    for ($j = 0; $j < count($mundo[$i]); $j++) {
-                        ?><option value="<?php echo $mundo[$i][$j] ?>"><?php echo $mundo[$i][$j] ?></option>
+                    foreach ($array as $ciudad){
+                        ?><option value="<?php echo $ciudad ?>"><?php echo $ciudad; ?></option>
                     <?php
                     }
                     ?>
                 </select><br><br>
-        <?php
+            <?php
             } 
             ?>
             <input type="submit" value="enviar">
@@ -37,9 +48,3 @@
         <?php
     }
 ?>
-<!-- <label for="asignaturas"><strong>Seleccione su segunda asignatura:</strong></label>
-                <select name="asignaturas[]" id="asignaturas" multiple>
-                    <option value="DWES">DWES</option>
-                    <option value="DWEC">DWEC</option>
-                    <option value="DI">DI</option>
-                </select><br><br> -->
