@@ -11,7 +11,7 @@
     class Clase {
         const INSTITUTO = "inst de FP";
         public static function creaMuestraCTE() {
-            const = OTRACONSTANTE = "VALOR";
+            const OTRACONSTANTE = "VALOR";
             echo OTRACONSTANTE;
         }    
     }
