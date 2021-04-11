@@ -7,44 +7,32 @@
         <meta name="description" content="ejercicio fechas">
 	</head>
 	<body>
-        <!-- <form action="fechas.php" method="get">
-            Fecha (día, mes, año): <input type="date" name="fecha" id="txt" ><br><br>
-            <input type="submit" value="enviar"><br><br>
-        </form> -->
-
         <?php 
-            // if (isset($_GET['fecha'])){
-            //     $fechaAhora = date("Y-m-d");
-            //     echo $fechaAhora . " Fecha actual<br>";
-            //     $fechaUsuario = $_GET['fecha'];
-            //     echo $fechaUsuario . " Fecha elegida por el usuario<br>";
-            //     if ($fechaAhora >= $fechaUsuario){
-            //         echo $fechaAhora . ": Fecha anterior a la actual";
-            //     }else {
-            //         echo $fechaUsuario . ": Fecha posterior a la actual";
-            //     }
-            // }
-            define('CONSTANTE', 13);
-            $fecha_actual = date("d-m-Y");
-            echo "La fecha actual es... " . $fecha_actual . "<br>";
-            
-            $suma =  date("d-m-Y",strtotime($fecha_actual .  CONSTANTE . " day")); 
-            echo "Si le sumamos 13 dias... " . $suma;
-     
-            $suma2 =  date("d-m-Y" . "1 day");
-            echo $suma2;
+            $ahora  = date("d-m-Y");                            // 10-04-2021
+            $ahora2 = date("d/m/Y",strtotime("+1 day"));        // dentro de un dia
+            $ahora3 = date("dxmxY",strtotime("+1 week"));       // dentro de una semana 
+            $ahora4 = date("dçmçY",strtotime("next Thursday")); // proximo jueves 
+            $ahora5 = date("dpmpY",strtotime("last Monday"));   // ultimo lunes
+            $ahora6 = date("d,m,Y",strtotime("next Monday"));   // proximo lunes
+            $ahora7 = date("d_m_Y",strtotime("+1 Month"));      // en un mes
+            $ahora8 = date("d=m=Y",strtotime("next Year"));     // en un mes
+            $ahora9 = date("d-m-Y, g:i");
+            $nuevafecha = strtotime ('+1 hour'   , strtotime($ahora9));
+            $nuevafecha = strtotime ('+13 minute', strtotime($ahora9));
+            $nuevafecha = strtotime ('+30 second', strtotime($ahora9));
+            $nuevafecha = date ('d-m-Y', $nuevafecha);
 
-            echo "<br><br>_______________________________<br><br>";
-
-            $fechaActual = date("d-m-Y");
-
-            echo "Fecha actual = " . $fecha_actual;
+            echo $ahora  . " ahora<br>";  
+            echo $ahora2 . " dentro de un dia<br>"; 
+            echo $ahora3 . " dentro de una semana<br>"; 
+            echo $ahora4 . " proximo jueves<br>";  
+            echo $ahora5 . " ultimo lunes<br>";
+            echo $ahora6 . " proximo lunes<br>";
+            echo $ahora7 . " en un mes<br>";
+            echo $ahora8 . " proximo año<br>";
+            echo $ahora9 . " <br>";
+            echo $nuevafecha . " <br>";
     
- 
-    
-    
-    
-    
-    ?>
+        ?>
     </body>
 </html>

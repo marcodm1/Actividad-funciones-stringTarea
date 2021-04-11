@@ -6,18 +6,21 @@
         "Italia"   => ["Roma"  , "Florencia", "Venecia" , "Milán"   ]
     );
 
-    // foreach ($mundo as $clave => $clave => $valor) {
-    //     if (isset($_GET['España']) ) {
-            
-    //     }else {
-    //         formulario($mundo);
-    //     }
-
-    // }
-
-    if ($_GET['España'] != null) {
-        echo "hhihihih";
-    } else {
+    
+    $cont = 0;
+    foreach ($mundo as $pais => $ciudades) {
+        if (isset($_GET[$pais])) {
+            if ($_GET[$pais][0] != "seleccione") {
+                echo "<pre>";
+                print_r($pais);
+                echo ": ";
+                print_r($_GET[$pais][0]);
+                echo "</pre>";
+                $cont ++;
+            }
+        } 
+    }
+    if ($cont == 0) {
         formulario($mundo);
     }
     
@@ -25,7 +28,7 @@
 
     function formulario($mundo) {
         ?>
-        <form action="nombreDelFichero.php" method="get">
+        <form action="ejercicio1.php" method="get">
         <?php 
             foreach ($mundo as $pais => $array) {
                 ?>
