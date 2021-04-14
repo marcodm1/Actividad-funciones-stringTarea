@@ -2,7 +2,7 @@
 <?php
     // se puede cambiar el formato del $_GET  que es "2021-04-28"
     if (isset($_GET['fecha'])) {
-        $ahora   = date("Y-m-d, g:i");
+        $ahora   = time();
         $elegida = date($_GET['fecha']);
         // echo $ahora . "<br>";
         // echo $elegida;
@@ -11,7 +11,7 @@
         }else if ($elegida < $ahora) {
             echo "Tu fecha elegida ya ha pasado";
         }else if ($elegida == $ahora) {
-            echo "comparar horas";
+            echo "Son iguales";
         }
     }else {
         formulario();
