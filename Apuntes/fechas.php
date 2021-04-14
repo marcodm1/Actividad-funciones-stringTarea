@@ -8,7 +8,7 @@
 	</head>
 	<body>
         <?php 
-            $ahora  = date("d-m-Y");                            // 10-04-2021
+            $ahora  = date("d-m-Y");                            
             $ahora2 = date("d/m/Y",strtotime("+1 day"));        // dentro de un dia
             $ahora3 = date("dxmxY",strtotime("+1 week"));       // dentro de una semana 
             $ahora4 = date("dçmçY",strtotime("next Thursday")); // proximo jueves 
