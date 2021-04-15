@@ -6,12 +6,13 @@
             // ["fecha"]    => string "2021-04-12" 
             // ["telefono"] => "666666666 "}
             $$nombre = $valor;
+            echo ""
         }
-        echo $nombre;
-        echo "<br>";
-        echo $fecha_nacimiento;
-        echo "<br>";
-        echo $telefono;
+        // echo $nombre;
+        // echo "<br>";
+        // echo $fecha_nacimiento;
+        // echo "<br>";
+        // echo $telefono;
 
        
     }else {
