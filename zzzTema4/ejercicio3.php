@@ -1,6 +1,5 @@
 <?php
-    // se puede cambiar el formato del $_GET  que es "2021-04-28"
-    if (isset($_GET['texto'])) {
+    if (!empty($_GET['texto'])) {
         mostrarCadena($_GET['texto']);
         mostrarCadenaAlReves($_GET['texto']);
         mostrarCadenaMinusculas($_GET['texto']);
@@ -47,9 +46,14 @@
         foreach ($modificada as $letra) {
             echo $letra;
         }
-        echo "<br>";
     }
     function mostrarCaracterMasRepetido($texto) {
+        $repetido = count_chars($texto, 1);
+        echo "<br>";
+        foreach ($repetido as $letra => $valor) {
+            echo chr($letra);
+            echo $valor . " veces la letra ";
+        }
         
     }
     function mostrarCadenaHTML($texto) {
@@ -57,7 +61,7 @@
     }
     function contarLetras($texto) {
         $espacios = 0;
-        $letra = 0;
+        $letra    = 0;
         for ($i = 0; $i < strlen($texto); $i++) {
             if ($texto[$i] == " ") {
                $espacios ++;
@@ -65,6 +69,7 @@
                 $letra ++;
             }
         }
+        echo "<br>";
         $veces = strlen($texto);
         echo "La cadena tiene " . $letra . " letras" . " y " . $espacios . " espacios.";
     }
