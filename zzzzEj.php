@@ -16,7 +16,7 @@
 
        
     }else {
-        echo "Rellene correctamente el formulario";
+        echo "Rellene correctamente el formulario0";
         formulario();
     }
 
