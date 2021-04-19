@@ -1,16 +1,17 @@
 <?php
     if (!empty($_GET['nombre']) && !empty($_GET['direccion']) && !empty($_GET['telefono']) && 
             !empty($_GET['altura']) && !empty($_GET['peso']) && !empty($_GET['oficio']) && !empty($_GET['edad'])) {
-                mostrarInfo();
-                echo comprobarApellido();
-                mostrarAlReves();
-                crearOtraMatriz();
+                $array = $_GET;
+                mostrarInfo($array);
+                echo comprobarApellido($array);
+                mostrarAlReves($array);
+                crearOtraMatriz($array);
                 
-                crearArrayNotas();  // - Crear un array asociativo con las notas de un alumno.
-                mostrarArray();     // - mostrar el contenido del array, separado por comas.
-                mostrarNotaAlta();  // - mostrar la nota más alta.
-                mostrarNotaBaja();  // - mostrar la nota más baja.
-                mostrarDwes();      // - comprobar si tiene la nota de dwes, y mostrarla por pantalla.
+                $array = crearArrayNotas($array);  // - Crear un array asociativo con las notas de un alumno.
+                mostrarArray($array);     // - mostrar el contenido del array, separado por comas.
+                mostrarNotaAlta($array);  // - mostrar la nota más alta.
+                mostrarNotaBaja($array);  // - mostrar la nota más baja.
+                mostrarDwes($array);      // - comprobar si tiene la nota de dwes, y mostrarla por pantalla.
     }else {
         formulario();
     }
@@ -45,48 +46,82 @@
         <?php
     }
 
-    function mostrarInfo() {
+    function mostrarInfo($array) {
         //- Mostrar la información del empleado.
-        foreach ($_GET as $dato) {
+        foreach ($array as $dato) {
             echo $dato . "<br>";
         }
     }
-    function comprobarApellido() {
+    function comprobarApellido($array) {
         //- Comprobar si tiene apellidos.
         $tiene = false;
-        foreach ($_GET as $dato) {
+        foreach ($array as $dato) {
             if ($dato == "apellido") {
                 return "Tiene apellido: " . $dato;
             }
         }
         return "No tiene apellido";
     }
-    function mostrarAlReves() {
+    function mostrarAlReves($array) {
         //- cambiar el orden de las claves, para que estén al revés.
+        $array2 = array();
+        foreach ($array as $dato) {
+            array_push($array2, $dato);
+        }
+        echo "<br>";
+        krsort($array2);
+        foreach ($array2 as $dato) {
+            echo($dato) . "<br>";
+        }
 
     }
-    function crearOtraMatriz() {
+    function crearOtraMatriz($array) {
         //- crear otra matriz con los datos de oficio y departamento, y utilizar la función array_replace.
-        
+        $array = ["oficio" => "Carpintero", "departamento"=> "montaje"];
+        $arrayAñadido = array_replace($_GET, $array);
+        echo "<pre>";
+        var_dump($arrayAñadido);
+        echo "</pre>";
     }
 
-
-    function crearArrayNotas() {
-
+    function crearArrayNotas($array) {
+        $array = ["php" => 8, "js"=> 9, "html" => 7, "ingles" => 7];
+        return $array;
     }
-    function mostrarArray() {
-        
+    function mostrarArray($array) {
+        foreach ($array as $dato => $valor) {
+            echo "<br>Nota de " . $dato .  ": ";
+            echo $valor;
+        }
     }
-    function mostrarNotaAlta() {
-        
+    function mostrarNotaAlta($array) {
+        $alta = 0;
+        foreach ($array as $dato) {
+            if ($dato > $alta) {
+                $alta = $dato;
+            }
+        }
+        echo "<br>La nota mas alta es: " . $alta;
     }
-    function mostrarNotaBaja() {
-        
+    function mostrarNotaBaja($array) {
+        $baja = 10;
+        foreach ($array as $dato) {
+            if ($dato < $baja) {
+                $baja = $dato;
+            }
+        }
+        echo "<br>La nota mas baja es: " . $baja;
     }
-    function mostrarDwes() {
-        
+    function mostrarDwes($array) {
+        $encontrado = false;
+        foreach ($array as $asignatura) {
+            if ($asignatura == "dwes") {
+                $encontrado = true;
+                echo "Ha encontrado la asignatura";
+            }
+        }
+        if ($encontrado == false) {
+            echo "<br>No ha encontrado la asignatura";
+        }
     }
-
-   
-
 ?>
