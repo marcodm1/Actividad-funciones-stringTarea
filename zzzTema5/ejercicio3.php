@@ -1,3 +1,13 @@
+<?php
+
+
+
+
+?>
+
+
+
+
 - Comprobar que existe el subdirectorio fotos.
 
 - Leer el contenido del subdirectorio fotos, obtener solo los archivos jpg.
