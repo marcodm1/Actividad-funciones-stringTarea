@@ -74,7 +74,7 @@
             $this->tipo     = $tipo;
             $this->alergeno = $alergeno;
         }
-
+        // con el set tambien
         public function __get($atributo){  // si llaman a una propiedad que no existe o es privada, entra al __getter magioco                                                                   
                                             // la diff con un get normal es si llaman a una propiedad que no existe
             if ($atributo == "resumen") {  // aqui llamamos al atributo "resumen" que no existe

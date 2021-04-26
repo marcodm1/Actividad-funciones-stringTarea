@@ -25,7 +25,7 @@
     echo "Cuantos alergenos se han creado? " . Alergeno::$cantidadAlergenos . ".<br>"; // pregunto por el atribujo de la clase, no del objeto
 
     // mostrar los alergenos
-    for ($i=0; $i<count($arrayAlergenos); $i++) {
+    for ($i = 0; $i < count($arrayAlergenos); $i++) {
         echo "El alergeno nº " . $i . ", es el " . $arrayAlergenos[$i]->getNombre() . "<br>";
     }
     // ordenar los alergenos por nombre, usando usort que es como el short pero para objetos
