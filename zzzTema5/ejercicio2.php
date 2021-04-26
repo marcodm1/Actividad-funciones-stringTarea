@@ -1,5 +1,5 @@
 <?php
-    if (!empty($_POST['nombre']) && !empty($_POST['edadmas']) && !empty($_POST['edadmenos']) && !empty($_POST['checklist']) && !empty($_POST['plato']) && !empty($_POST['horario'])) {
+    if (!empty($_POST['nombre']) && !empty($_POST['edadmas']) && !empty($_POST['checkList']) && !empty($_POST['plato']) && !empty($_POST['horario'])) {
         echo "<ol>";
         foreach ($_POST as $algo) {
             if (is_array($algo)) {
@@ -17,20 +17,13 @@
             $error1 = 'No ha rellenado el campo: "Nombre"';
             array_push($error, $error1);
         }
-        if ((empty($_POST['edadmas']) && empty($_POST['edadmenos'])) || (!empty($_POST['edadmas']) && !empty($_POST['edadmenos'])) ) {
-            $error2 = 'No ha seleccionado campo: "Es mayor o menor de 18 años": debe seleccionar almenos 1.';
+        if (empty($_POST['edadmas']) ) {
+            $error2 = 'No ha seleccionado campo: "Es mayor o menor de 18 años":';
             array_push($error, $error2);
         }
         if (!isset($_POST['checkList'])) {
-            echo "dadada";
             $error3 = 'No ha rellenado el campo: "Seleccione lo que queire en la mesa"';
             array_push($error, $error3);
-        }else {
-            // foreach ($_POST as $clave) {
-            //     if (!empty($clave) ){
-
-            //     }
-            // }
         }
         if (empty($_POST['plato'])) {
             $error4 = 'No ha rellenado el campo: "Seleccione plato principal"';
@@ -51,9 +44,11 @@
         }
         formulario();
         
-        echo "<pre>";
-        print_r($error);
-        echo "</pre";
+        if (!empty($error)) {
+            echo "<pre>";
+            print_r($error);
+            echo "</pre";
+        }
     }
 
     function formulario() {
@@ -66,10 +61,7 @@
             <label for="numEdad">Es mayor de 18 años?:</label>
                 <input type="checkbox" name="edadmas"   id="numEdad" <?php echo comprobar("edadmas", "checkbox"); ?>><br><br>
 
-            <label for="numEdad">Es menor de 18 años?:</label>
-                <input type="checkbox" name="edadmenos" id="numEdad" <?php echo comprobar("edadmenos", "checkbox"); ?>><br><br>
-
-            <label for="checkList">Seleccione lo que quiere en la mesa:</label><br> <!-- no se si hay que poner o no esta linea -->
+            <label for="checkList">Seleccione lo que quiere en la mesa:</label><br>
                 <input type="checkbox" name="checkList[]" value="cuchara"    <?php echo comprobar("checkList", "checkbox", "cuchara");    ?>id="checkList">   <label>cuchara     </label><br/>
                 <input type="checkbox" name="checkList[]" value="tenedor"    <?php echo comprobar("checkList", "checkbox", "tenedor");    ?>> <label>tenedor     </label><br/>
                 <input type="checkbox" name="checkList[]" value="cuchillo"   <?php echo comprobar("checkList", "checkbox", "cuchillo");    ?>> <label>cuchillo    </label><br/>
@@ -97,9 +89,6 @@
             <input type="submit" value="enviar">
         </form>
         <?php
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre";
     }
 
     function comprobar($name, $tipo, $value = null) {

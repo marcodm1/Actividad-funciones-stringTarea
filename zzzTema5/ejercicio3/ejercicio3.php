@@ -1,5 +1,6 @@
 <?php
 
+    file_exists();
 
 
 
@@ -12,7 +13,7 @@
 
 - Leer el contenido del subdirectorio fotos, obtener solo los archivos jpg.
 
-- El ejercicio debe ser genérico. 
+- El ejercicio debe ser genérico.- 
 
 - Mostrar las imágenes en una tabla de dos columnas.
 
