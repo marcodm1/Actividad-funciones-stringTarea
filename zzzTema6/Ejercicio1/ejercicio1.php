@@ -3,13 +3,13 @@
     class Carta {
         const RUTA = "./img/";  //que es donde va a localizar el fichero que representa la carta, será el directorio 'img'
         private $directorio;    //carpeta donde está el fichero de imagen de la carta.
-        private $fichero        //fichero donde está la carta (solo el nombre del fichero no la ruta completa)
+        private $fichero;       //fichero donde está la carta (solo el nombre del fichero no la ruta completa)
         private $nombre;        //nombre de la carta.
         private $puntos;        //puntos que tengo que contabilizar en la partida.
         private $palo;          //nombre del palo 
         private $numero;        //numero de la carta
 
-        public __construct($palo, $numero, $directorio = "") {
+        public function __construct($palo, $numero, $directorio = "") {
             $this->puntos   = $numero;
             $this->palo     = $palo;
             $this->numero   = $numero;
@@ -42,5 +42,5 @@
     }
 
     $corazones1 = new Carta("corazones", 1, "./img/");
-
+    $corazones1->getEtiquetaImg();
 ?>
