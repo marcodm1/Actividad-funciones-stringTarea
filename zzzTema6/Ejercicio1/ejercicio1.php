@@ -13,8 +13,8 @@
             $this->puntos   = $numero;
             $this->palo     = $palo;
             $this->numero   = $numero;
-            $this->fichero  = crearFichero($this->palo, $this->numero);
-            $this->nombre   = crearNombre($nombre, $palo);
+            $this->fichero  = $this->crearFichero($this->palo, $this->numero);
+            $this->nombre   = $this->crearNombre( $this->palo, $this->numero);
 
             if (empty($directorio)) {
                 // "./img/"
@@ -24,24 +24,46 @@
             }
         }
 
-        function crearFichero($palo1, $numero1) {
+        public function crearFichero($palo1, $numero1) {
             $letra      = substr($palo1, 0, 1);
             $numero     = $numero1;
             $extension  = ".svg";
-            return $letra . $numero . $extension;
+            $total = "$letra$numero$extension";
+            return $total;
         }
 
-        function crearNombre($nombre, $palo) {
-            return $nombre . $palo;
+        public function crearNombre($palo, $numero) {
+            $completo = "$numero de $palo";
+            return $completo;
         }
 
         function getEtiquetaImg() {
             ?>
-            <img src="<?php echo $this->directorio?>c1.svg" alt="corazones1"';
+            <img src="<?php echo $this->directorio?><?php echo $this->fichero?>" alt="corazones1" width=100 height=100>
             <?php 
+        }
+
+        public function getNombre() {
+            return $this->nombre;
+        }
+
+        public function getPuntos() {
+            return $this->numero;
         }
     }
 
-    $corazones1 = new Carta("corazones", 1, "./img/");
+    $picas1 = new Carta("picas", 10, "./img/");
+    $picas1->getEtiquetaImg();
+    echo "<br>El nombre completo es: " . $picas1->getNombre() . "<br><br><br>";
+
+    $corazones1 = new Carta("corazones", 9, "./img/");
     $corazones1->getEtiquetaImg();
+    echo "<br>El nombre completo es: " . $corazones1->getNombre() . "<br><br><br>";
+
+    $treboles1 = new Carta("tréboles", 1, "./img/");
+    $treboles1->getEtiquetaImg();
+    echo "<br>El nombre completo es: " . $treboles1->getNombre() . "<br><br><br>";
+
+
 ?>
+
