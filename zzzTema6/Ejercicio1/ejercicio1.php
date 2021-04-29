@@ -36,8 +36,9 @@
         }
 
         function getEtiquetaImg() {
-            echo '<img src="img/c1.svg" alt="corazones1"';
-            return ; 
+            ?>
+            <img src="<?php echo $this->directorio?>c1.svg" alt="corazones1"';
+            <?php 
         }
     }
 
