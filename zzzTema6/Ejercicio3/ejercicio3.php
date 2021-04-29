@@ -19,34 +19,43 @@
     }
 
     class Juego {
-        private $jugador1;
-        private $jugador2;
+        private $jugadorA;
+        private $jugadorB;
         private $premio;
       
-        public function __construct($jugador1, $jugador2, $premio) {
-            $this->jugador1 = $jugador1;
-            $this->jugador2 = $jugador2;
+        public function __construct($jugadorA, $jugadorB, $premio) {
+            $this->jugadorA = $jugadorA;
+            $this->jugadorB = $jugadorB;
             $this->premio   = $premio;
         }
 
-        //jugada no implementado
+        public function jugada() {
 
-        public function getGanador(){ //devuelve el participante que ha ganado.
-            $ganador;
-            return $ganador;
+        }
+
+        public function getGanador($jugadorA, $jugadorB){ //devuelve el participante que ha ganado.
+            if ($jugadorA > $jugadorB) {
+                return "El jugador A ha ganado.";
+            }else {
+                return "El jugador B ha ganado.";
+            }
+
+            if ($jugadorA == $jugadorB) {
+                return "Ha sido un empate.";
+            }
         } 
 
     }
 
     class JuegoDados extends Juego {
-        private $jugador1;
-        private $jugador2;
+        private $jugadorA;
+        private $jugadorB;
         private $premio;
       
-        public function __construct($jugador1, $jugador2, $premio) {
+        public function __construct($jugadorA, $jugadorB, $premio) {
             parent::__construct($nombre, $apellidos, $puntos); 
-            $this->jugador1 = $jugador1;
-            $this->jugador2 = $jugador2;
+            $this->jugadorA = $jugadorA;
+            $this->jugadorB = $jugadorB;
             $this->premio   = $premio;
         }
 
@@ -65,4 +74,7 @@
         }
     }
     
+
+    $pepe = new Participante("Pepe", "Pérez",  0);
+    $juan = new Participante("Juan", "García", 0);
 ?>
