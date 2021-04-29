@@ -31,7 +31,7 @@
 
         //jugada no implementado
 
-        getGanador(){ //devuelve el participante que ha ganado.
+        public function getGanador(){ //devuelve el participante que ha ganado.
             $ganador;
             return $ganador;
         } 
