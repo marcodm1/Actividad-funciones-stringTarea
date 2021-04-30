@@ -14,33 +14,46 @@
             $this->puntos        = $puntos;
         }
 
-        //los metodos que sean necesarios
+        public function __get($atributo) {
+            switch($atributo) {
+                case "identificador": 
+                    return $this->identificador;
+                    break;
+                case "nombre": 
+                    return $this->nombre;
+                    break;
+                case "apellidos": 
+                    return $this->apellidos;
+                    break;
+                case "puntos": 
+                    return $this->puntos;
+                    break;
+            }
+        }
 
     }
 
-    class Juego {
+    abstract class Juego {
         private $jugadorA;
         private $jugadorB;
         private $premio;
       
-        public function __construct($jugadorA, $jugadorB, $premio) {
+        public function __construct(Participante $jugadorA, Participante $jugadorB, $premio) {
             $this->jugadorA = $jugadorA;
             $this->jugadorB = $jugadorB;
             $this->premio   = $premio;
         }
 
-        public function jugada() {
+        public abstract function jugada(); // funcion no impementada
 
-        }
-
-        public function getGanador($jugadorA, $jugadorB){ //devuelve el participante que ha ganado.
-            if ($jugadorA > $jugadorB) {
-                return "El jugador A ha ganado.";
+        public function getGanador(){ // mal: devuelve un jugador
+            if ($this->jugadorA->puntos > $this->jugadorB->puntos) {
+                return "El jugador A ha ganado un premio de: " . $this->premio;
             }else {
-                return "El jugador B ha ganado.";
+                return "El jugador B ha ganado un premio de: " . $this->premio;
             }
 
-            if ($jugadorA == $jugadorB) {
+            if ($this->jugadorA == $this->jugadorB) {
                 return "Ha sido un empate.";
             }
         } 
@@ -48,33 +61,32 @@
     }
 
     class JuegoDados extends Juego {
-        private $jugadorA;
-        private $jugadorB;
-        private $premio;
       
-        public function __construct($jugadorA, $jugadorB, $premio) {
-            parent::__construct($nombre, $apellidos, $puntos); 
-            $this->jugadorA = $jugadorA;
-            $this->jugadorB = $jugadorB;
-            $this->premio   = $premio;
+        public function __construct(Participante $jugadorA, Participante $jugadorB, $premio) {
+            parent::__construct($jugadorA, $jugadorB, $premio); 
         }
 
-
-        // Redefine el método jugada() en la que los jugadores tirarán un dado y el que tire el dado mayor tendrá 3 puntos más.
         public function jugada() {
-            $dadoJ1 = rand(0,6);
-            $dadoJ2 = rand(0,6);
+            $tiradaA = rand(0,6);
+            $tiradaB = rand(0,6);
 
-            if ($dadoJ1 > $dadoJ2) {
-                $dadoJ1 + 3;
+            if ($tiradaA > $tiradaB) {
+                $this->jugadorA->puntos + 3;
             }
-            if ($dadoJ1 < $dadoJ2) {
-                $dadoJ2 + 3;
+            if ($tiradaA < $tiradaB) {
+                $this->jugadorB->puntos + 3;
             }
+
+            echo "Ha ganado el jugador " . $ganador;
         }
     }
     
 
     $pepe = new Participante("Pepe", "Pérez",  0);
     $juan = new Participante("Juan", "García", 0);
+    echo "Participante 1: " . $pepe->nombre . " " . $pepe->apellidos . " con " . $pepe->puntos . " puntos" . "<br>";
+    echo "Participante 2: " . $juan->nombre . " " . $juan->apellidos . " con " . $juan->puntos . " puntos" . "<br>";
+
+    // $juegoDados = new JuegoDados($pepe, $juan);
+    
 ?>
