@@ -79,58 +79,47 @@
             return "Dado del jugadorA = " . $tiradaA . "<br> Dado del jugadorB = " . $tiradaB;
         }
     }
+    if (empty($_GET['nombre1']) || empty($_GET['apellido1']) || empty($_GET['nombre2']) || empty($_GET['apellido2']) ) {
+        formulario();
+    }
+    
     if (empty($_SESSION) ) {
         session_start();
-        $pepe = new Participante($_GET['nombre1'], $_GET['apellido1']);
-        $juan = new Participante($_GET['nombre2'], $_GET['apellido2']);
-        // guardarPartida($pepe);
-        // guardarPartida($juan);
+        $jugador1   = new Participante($_GET['nombre1'], $_GET['apellido1']);
+        $jugador2   = new Participante($_GET['nombre2'], $_GET['apellido2']);
+        $juegoDados = new JuegoDados($jugador1, $jugador2, 100);
+        guardarPartida($pepe);
+        guardarPartida($juan);
+        $_SESSION['juego'] = $juegoDados;
+        formJuego();
 
-        // formJuego();
-        echo $juan->apellido;
         // echo "<pre>";
         // print_r($_SESSION);
         // echo "</pre>";
         // session_destroy();
     }else {
-        // $juegoDados = new JuegoDados($_SESSION[''], $juan, 100);
-        // formJuego();
+        if ($_GET['eleccion'] == "jugar") {
+            $_SESSION['juego']->jugada();
+            echo "Participante 1: " . $pepe->nombre . " " . $pepe->apellidos . " con " . $pepe->puntos . " puntos" . "<br>";
+            echo "Participante 2: " . $juan->nombre . " " . $juan->apellidos . " con " . $juan->puntos . " puntos" . "<br>";
+            formJuego();
+        }else {
+            if ($_GET['eleccion'] == "ver") {
+                echo "final ver";
+                $juego1->getPremio();
+                $juego1->getGanador();
+                formJuego();
+            }
 
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
-        // session_destroy();
-
-        // if (empty($_GET['eleccion']) ) {
-        //     $juegoDados = new JuegoDados($pepe, $juan, 100);
-        //     formJuego();
-        // }else {
-        //     if ($_GET['eleccion'] == "jugar") {
-        //         $juegoDados->jugada();
-        //         echo "Participante 1: " . $pepe->nombre . " " . $pepe->apellidos . " con " . $pepe->puntos . " puntos" . "<br>";
-        //         echo "Participante 2: " . $juan->nombre . " " . $juan->apellidos . " con " . $juan->puntos . " puntos" . "<br>";
-        //         // no se puede iniciar una clase abstracta
-                
-        //     }
-        //     if ($_GET['eleccion'] == "ver") {
-        //         echo "final ver";
-        //         $juego1->getPremio();
-        //         $juego1->getGanador();
-        //         // no se iniciar un objeto abstract, entonces no se como acceder a getGanador.
-        //     }
+        }
     
-        // }
-
-
     }
-
 
     function guardarPartida($jugador) {
         $nombre = $jugador->nombre;
         $_SESSION["$nombre"] = $jugador;
     }
     
-
     function formJuego() {
         ?>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
