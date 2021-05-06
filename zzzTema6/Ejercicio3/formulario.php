@@ -8,11 +8,21 @@
 	</head>
 	<body>
     <?php
-        formulario();
+        if (empty($_GET['nombre1']) || empty($_GET['apellido1']) || empty($_GET['nombre2']) || empty($_GET['apellido2']) ) {
+            echo "Tiene que rellenar todos los campos";
+            formulario();
+        }else {
+            session_start();
+            $_SESSION['jugador1Nombre']   = $_GET['nombre1'];
+            $_SESSION['jugador1Apellido'] = $_GET['apellido1'];
+            $_SESSION['jugador2Nombre']   = $_GET['nombre2'];
+            $_SESSION['jugador2Apellido'] = $_GET['apellido2'];
+            Header("Location:juego.php");
+        }
        
         function formulario() {
             ?>
-                <form action="juego.php" method="get">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
                     <strong>Participante 1: </strong><br>
                     <label for="txtNombre1">Escriba su nombre:</label>
                         <input type="text" name="nombre1" id="txtNombre1" ><br><br>
