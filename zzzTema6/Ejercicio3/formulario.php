@@ -8,8 +8,10 @@
 	</head>
 	<body>
     <?php
-        if (empty($_GET['nombre1']) || empty($_GET['apellido1']) || empty($_GET['nombre2']) || empty($_GET['apellido2']) ) {
-            echo "Tiene que rellenar todos los campos:<br><br>";
+    if (!empty($_POST['formulario'])) {
+        if (empty($_GET['nombre1']) || empty($_GET['apellido1']) || empty($_GET['nombre2']) || empty($_GET['apellido2']) ) { 
+            // hacer comprobaciones de uno por uno para avsar al usuario cual es el error, asi que tengo que hacer un array con errores
+            echo "Aqui mostrar cada campo que no se ha rellenado";
             formulario();
         }else {
             session_start();
@@ -20,6 +22,10 @@
             // session_destroy();
             Header("Location:juego.php");
         }
+    }else {
+        formulario();
+    }
+        
        
         function formulario() {
             ?>
@@ -38,7 +44,7 @@
                     <label for="txtApellido2">Escriba su apellido:</label>
                         <input type="text" name="apellido2" id="txtApellido2" ><br><br>
 
-                    <input type="submit" value="enviar">
+                    <input type="submit" name="formulario" value="enviar">
                 </form>
             <?php   
         }
