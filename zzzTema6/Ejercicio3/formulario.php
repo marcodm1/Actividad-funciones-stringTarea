@@ -9,7 +9,7 @@
 	<body>
     <?php
         if (empty($_GET['nombre1']) || empty($_GET['apellido1']) || empty($_GET['nombre2']) || empty($_GET['apellido2']) ) {
-            echo "Tiene que rellenar todos los campos";
+            echo "Tiene que rellenar todos los campos:<br><br>";
             formulario();
         }else {
             session_start();
@@ -17,6 +17,7 @@
             $_SESSION['jugador1Apellido'] = $_GET['apellido1'];
             $_SESSION['jugador2Nombre']   = $_GET['nombre2'];
             $_SESSION['jugador2Apellido'] = $_GET['apellido2'];
+            // session_destroy();
             Header("Location:juego.php");
         }
        
