@@ -8,7 +8,7 @@
 	</head>
 	<body>
     <?php
-    if (!empty($_POST['formulario'])) {
+    if (!empty($_POST['enviado'])) {
         if (empty($_GET['nombre1']) || empty($_GET['apellido1']) || empty($_GET['nombre2']) || empty($_GET['apellido2']) ) { 
             // hacer comprobaciones de uno por uno para avsar al usuario cual es el error, asi que tengo que hacer un array con errores
             echo "Aqui mostrar cada campo que no se ha rellenado";
@@ -44,7 +44,7 @@
                     <label for="txtApellido2">Escriba su apellido:</label>
                         <input type="text" name="apellido2" id="txtApellido2" ><br><br>
 
-                    <input type="submit" name="formulario" value="enviar">
+                    <input type="submit" name="enviado" value="enviar">
                 </form>
             <?php   
         }
