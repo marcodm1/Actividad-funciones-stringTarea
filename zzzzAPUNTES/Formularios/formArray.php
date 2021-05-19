@@ -15,15 +15,18 @@
             "Italia"   => ["Roma"  , "Florencia", "Venecia" , "Milán"   ]
         );
 
-        if (!empty($_GET['pais'])) {
-            foreach ($mundo as $pais => $ciudades) {
-                if (strcmp($_GET[$pais][0], "seleccione") === 0) {
-                    echo "<pre>";
-                    print_r($pais);
-                    echo ": ";
-                    print_r($_GET[$pais][0]);
-                    echo "</pre>";
-                    $cont ++;
+        if (!empty($_GET['formulario'])) {
+            echo "ggggg";
+            if (!empty($_GET['pais'])) {
+                foreach ($mundo as $pais => $ciudades) {
+                    if (strcmp($_GET[$pais][0], "seleccione") === 0) {
+                        echo "<pre>";
+                        print_r($pais);
+                        echo ": ";
+                        print_r($_GET[$pais][0]);
+                        echo "</pre>";
+                        $cont ++;
+                    }
                 }
             } 
         }else {
@@ -32,7 +35,7 @@
         
         function formulario($mundo) {
             ?>
-            <form action="<?php echo $_SERVER["PHP_SELF"] ?> " method="get">
+            <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="get">
             <?php 
                 foreach ($mundo as $pais => $array) {
                     ?>
@@ -49,7 +52,7 @@
                 <?php
                 } 
                 ?>
-                <input type="submit" value="enviar">
+                <input type="submit" name="formulario" value="enviar">
             </form>
 
             <?php

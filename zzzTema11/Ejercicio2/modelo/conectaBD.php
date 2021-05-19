@@ -1,22 +1,4 @@
 <?php
-    // Ver los vídeos(78,79,80):
-
-    // https://www.youtube.com/watch?v=n_z5f39_iTU&t=2s
-    // https://www.youtube.com/watch?v=2Xb_n-GUSU0
-    // https://www.youtube.com/watch?v=2djO4LzcSNw&t=616s
-    // Realizar la práctica del vídeo, con los siguientes cambios: 
-
-    // Utilizar la tabla productos del SQL que os he enviado en el tema anterior. 
-    // Y la base de datos dwes2, con el usuario: alumno contraseña: 1234
-    // Emplear una clase PDO, para conectar con la base de datos que utilice el patrón Singleton.
-    // Entregar en un Zip las carpetas modelo, vista, controlador, con los fuentes: 
-
-    // inicio.php
-    // controlador/controlador.php
-    // modelo/conectaDB
-    // modelo/Productos_modelo.php
-    // vista/Productos_visat.php
-
     class ConectaBD {
         private $conexion;
         private static $instancia;
@@ -38,70 +20,37 @@
             return self::$instancia; // devuelve el objeto tipo instancia
         } 
        
-        public function createP() {
-            $idFabricante = "marco1";
-            $idProducto   = "marco2";
-            $descripcion  = "marco3";
-            $precio       = "marco4";
-            $existencias  = "marco5";
-            $consulta = $this->conexion->prepare("INSERT into productos(idFabricante,idProducto,descripcion,precio,existencias) values(:idFabricante,:idProducto,:descripcion,:precio,:existencias)");
-            $consulta->bindParam(':idFabricante', $idFabricante);
-            $consulta->bindParam(':idProducto'  , $idProducto);
-            $consulta->bindParam(':descripcion' , $descripcion);
-            $consulta->bindParam(':precio'      , $precio);
-            $consulta->bindParam(':existencias' , $existencias);
-            $consulta->execute();
-            // comprobar si se ha hecho bien o si se ha hecho mal
-        }
-        public function readP($filtro) {
-            switch ($filtro) {
-                case "todos":
-                    $consulta = $this->conexion->prepare("SELECT * from productos");
-                    $consulta->execute();
-                    $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
-                    // comprobar si se ha hecho bien o si se ha hecho mal?
-                    return $consulta;
-                    break;
-                case "caros":
-                    $numero   = 200;
-                    $consulta = $this->conexion->prepare("SELECT * from productos WHERE precio > :numero");
-                    $consulta->bindParam(':numero', $numero); // se tiene que pasar por referencia
-                    $consulta->execute();
-                    $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
-                    // comprobar si se ha hecho bien o si se ha hecho mal?
-                    return $consulta;
-                    break;
-                case "carosPocos":
-                    $numero   = 200;
-                    $numero2  = 20;
-                    $consulta = $this->conexion->prepare("SELECT * from productos WHERE precio > :numero and existencias < :numero2"); // como seria con muchos and?
-                    $consulta->bindParam(':numero', $numero); 
-                    $consulta->bindParam(':numero2', $numero2); 
-                    $consulta->execute();
-                    $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
-                    // comprobar si se ha hecho bien o si se ha hecho mal?
-                    return $consulta;
-                    break;
-                default:
-                    return "No existe el filtro deseado";
+        public function createP($login, $clave) {
+            $consulta = $this->conexion->prepare("INSERT into usuarios (login, clave) values(:login,:clave)");
+            $consulta->bindParam(':login', $login);
+            $consulta->bindParam(':clave', $clave);
+            try {
+                $consulta->execute();
+                return "Creado correctamente";
+            } catch (PDOException $error){
+                return "Error: El usuario no tiene los permisos necesarios para añadir.";
             }
-            
         }
-        public function updateP() {
-            $existencias = "11";
-            $id = "mar";
-            $consulta = $this->conexion->prepare("UPDATE productos SET existencias = :existencias WHERE  idFabricante = :idfabricante");
-            $consulta->bindParam(':existencias', $existencias);
-            $consulta->bindParam(':idfabricante', $id);
-            $consulta->execute();
-            // comprobar si se ha hecho bien o si se ha hecho mal
+        public function readP() {
+            $consulta = $this->conexion->prepare("SELECT * from usuarios");
+            try {
+                $consulta->execute();
+            } catch (PDOException $error){
+                return "Error: No se ha podido acceder a los datos.";
+            }
+            $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $consulta;
         }
-        public function deleteP() {
-            $existencias = 11;
-            $consulta = $this->conexion->prepare("DELETE from productos WHERE existencias = :existencias ");
-            $consulta->bindParam(':existencias', $existencias);
-            $consulta->execute();
-            // comprobar si se ha hecho bien o si se ha hecho mal
+        
+        public function deleteP($login) {
+            $consulta = $this->conexion->prepare("DELETE from usuarios WHERE login = :login ");
+            $consulta->bindParam(':login', $login);
+            try {
+                $consulta->execute();
+                return "Eliminado correctamente";
+            } catch (PDOException $error){
+                return "Error: El usuario no tiene los permisos necesarios para eliminar.";
+            }
         }
 
         

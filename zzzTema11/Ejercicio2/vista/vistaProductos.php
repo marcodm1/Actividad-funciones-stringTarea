@@ -22,58 +22,42 @@
         // - Todo lo relacionado con HTML en la vista.
         // - El controlador recibe datos de la vista o del modelo y hace de intermediario y ejecuta las operaciones decontrol.
         */
-        if (!empty($_GET['formulario'])) {
-            $errores = array();
-            if (!empty($_GET['formulario'])) {
+        require_once("./controlador/controlador.php");
 
-            }
-            if (!empty($_GET['formulario'])) {
-
-            }
-            require_once("modelo/conectaBD.php");
-            require_once("controlador/controlador.php");
-            require_once("vista/vistaProductos.php");
-
-
-        }else {
-            formulario();
-        } 
-
-        $conexion = ConectaBD::singleton();
-        $resultado = $conexion->readP("todos");
-        echo "<pre>";
-        print_r($resultado);
-        echo "</pre>";
-
-
+        // if (isset($errorUsuario)) {
+        //     echo $errorUsuario;
+        // }
+        function mostrarResultados($resultado) {
+            ?>
+            <table style="border: 2px solid black; background-color: #9BBF9D;">
+                <tr><td>Resultado de la busqueda</td></tr>
+                <?php
+                foreach ($resultado as $fila => $contenido) {
+                    ?>
+                    <tr  style="border: 1px solid black; background-color: #5EAC63;"><td>
+                    <?php foreach ($contenido as $columna) {
+                            echo $columna . ": ";
+                          }
+                    ?>
+                    </td></tr>
+                    <?php
+                }
+            ?>
+            </table>
+            <?php
+        }
 
         function formularioAlta() {
             ?>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-            <br><br><strong>Modificación de la base de datos: </strong><br><br>
-                <label for="alumno1">Escriba el nombre del alumno:</label>
-                    <input type="text" name="alumno" id="alumno1" ><br><br>
+            <br><br><strong>Alta de un usuario nuevo: </strong><br><br>
+                <label for="alumno1">Escriba el login:</label>
+                    <input type="text" name="login" id="alumno1" ><br><br>
 
-                <label for="pass1">Escriba la contraseña:</label>
-                    <input type="password" name="passU" id="pass1" ><br><br>
+                <label for="pass1">Escriba la clave:</label>
+                    <input type="password" name="clave" id="pass1" ><br><br>
 
-                <input type="submit" name="formMod" value="alta">
-                <input type="submit" name="formMod" value="modificacion">
-            </form>
-            <?php   
-        }
-
-        function formularioLogin() {
-            ?>
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-                <strong>Participante 1: </strong><br>
-                <label for="txtNombre1">Escriba su login:</label>
-                    <input type="text" name="login" id="txtNombre1" ><br><br>
-
-                <label for="pass1">Escriba su clave:</label>
-                    <input type="password" name="pass" id="pass1"><br><br>
-
-                <input type="submit" name="formularioLogin" value="enviar">
+                <input type="submit" name="formulario" value="alta">
             </form>
             <?php   
         }
