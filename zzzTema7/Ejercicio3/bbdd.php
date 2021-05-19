@@ -17,8 +17,10 @@
         public function consultaUsuarios() {
             //devuelve un array con todos los usuarios, utilizar fetch_all
             $consulta = "Select * from usuarios";
-            $resultadoConsulta = mysqli_query($this->conexion , $consulta); 
-            return $resultadoConsulta->fetch_all(MYSQLI_BOTH);
+            $resultadoConsulta = mysqli_query($this->conexion , $consulta);
+            // aqui me repite nombre y contraseña
+            $r =  $resultadoConsulta->fetch_all(MYSQLI_BOTH);
+            return $r;
         }
         public function modificaUsuarios($login, $clave) {
             //modifica el usuario con mysqli::prepare, mysqli_stm::bind_param, mysqli_stm::execute

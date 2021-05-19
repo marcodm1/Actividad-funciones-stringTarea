@@ -39,25 +39,26 @@
         $conexion = new mysqli("localhost", "alumno", "1234","dwes2"); 
         if ($conexion->connect_errno /*!= 0*/) { // Sí el código de error es distinto de 0
             echo "Fallo al conectar a MySQL: " . $conexion->connect_error ;
-        }
-
-        // Establece el conjunto de caracteres predeterminado a usar cuando se envían datos desde y hacia el servidor de la base de datos.
-        if (!$conexion->set_charset("utf8")) { 
-            printf("Error cargando el conjunto de caracteres utf8: %s\n", $conexion->error);
-        }
-
-        // realiza la consulta a la BBDD
-        $consulta = "Select * from productos;"; 
-        if (mysqli_query($conexion , $consulta)) {
-            $resultadoCon = mysqli_query($conexion , $consulta); 
         }else {
-            echo "Error al intentar conectarse con la base de datos:";
+            // Establece el conjunto de caracteres predeterminado a usar cuando se envían datos desde y hacia el servidor de la base de datos.
+            if (!$conexion->set_charset("utf8")) { 
+                printf("Error cargando el conjunto de caracteres utf8: %s\n", $conexion->error);
+            }
+            // realiza la consulta a la BBDD
+            $consulta = "SELECT * from usuarios"; 
+            if (mysqli_query($conexion , $consulta)) {
+                $resultadoCon = mysqli_query($conexion , $consulta); 
+            }else {
+                echo "Error al intentar conectarse con la base de datos:";
+            }
+            
+            $totalResultados = mysqli_num_rows($resultadoCon); // devuelve el numero de resultados de la consulta
+            mostrarResultados($resultadoCon);
+            echo "<br>Total de productos encontrados : " . $totalResultados;
+            $conexion->close();
         }
         
-        $totalResultados = mysqli_num_rows($resultadoCon); // devuelve el numero de resultados de la consulta
-        mostrarResultados($resultadoCon);
-        echo "<br>Total de productos encontrados : " . $totalResultados;
-        $conexion->close();
+
 
         function mostrarResultados($resultadoCon) {
             ?>
