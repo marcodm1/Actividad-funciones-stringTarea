@@ -6,7 +6,6 @@
         private function __construct() {
             try {
                 $this->conexion = new PDO("mysql:host=localhost;dbname=dwes2","alumno","1234");
-                $this->resultados = array();
             }catch(Exception $error) {
                 die("Error:" . $error->getMessage());
                 echo "Línea del error " . $error->getLine();
@@ -27,7 +26,7 @@
             try {
                 $consulta->execute();
                 return "Creado correctamente";
-            } catch (PDOException $error){
+            } catch (PDOException $error){ // no estoy utilizando $error
                 return "Error: El usuario no tiene los permisos necesarios para añadir.";
             }
         }
@@ -42,6 +41,17 @@
             return $consulta;
         }
         
+        public function updateP($login, $clave) {
+            $consulta = $this->conexion->prepare("UPDAte from usuarios WHERE login = :login ");
+            $consulta->bindParam(':login', $login);
+            try {
+                $consulta->execute();
+                return "Eliminado correctamente";
+            } catch (PDOException $error){
+                return "Error: El usuario no tiene los permisos necesarios para eliminar.";
+            }
+        }
+
         public function deleteP($login) {
             $consulta = $this->conexion->prepare("DELETE from usuarios WHERE login = :login ");
             $consulta->bindParam(':login', $login);
