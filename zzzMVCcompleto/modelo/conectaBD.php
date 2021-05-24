@@ -33,17 +33,6 @@
             }
         }
         public function readP() {
-            $consulta = $this->conexion->prepare("SELECT * from usuarios WHERE login = ?");
-            $consulta->bindParam(1, $loginOld);
-            try {
-                $consulta->execute();
-                $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $error){ // no estoy utilizando $error
-                return "Error: No existe el login indicado.";
-            }
-            // comprobarUsuario();
-
-
             $consulta = $this->conexion->prepare("SELECT * from usuarios");
             try {
                 $consulta->execute();
@@ -55,7 +44,8 @@
         }
         
         public function updateP($loginOld, $loginNew, $claveNew) {
-            $newPass  = password_hash($claveNew, PASSWORD_DEFAULT);
+            $newPass  = password_hash($claveNew, PASSWORD_DEFAULT); 
+            // creo que para comprobarlo es el password_verify();
             $consulta = $this->conexion->prepare("UPDATE usuarios SET login = ?, clave = ? WHERE login = ? ");
             $consulta->bindParam(1, $loginNew);
             $consulta->bindParam(2, $newPass);

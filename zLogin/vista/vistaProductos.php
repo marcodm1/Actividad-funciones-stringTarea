@@ -16,7 +16,20 @@
     <?php
         require_once("./controlador/controlador.php");
 
-        // pasar cada function a una vista difrente 
+        function formLogin() {
+            ?>
+            <form  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+            <br><br><strong>Identificación: </strong><br><br>
+                <label for="log1">Escriba su login:</label>
+                    <input type="text" name="loginID" id="log1" ><br><br>
+
+                <label for="passCr">Escriba su clave:</label>
+                    <input type="password" name="claveID" id="passCr" ><br><br>
+
+                <input type="submit" name="formLogin" value="identificarse">
+            </form>
+            <?php   
+        }
 
         function formOption() {
             ?>
