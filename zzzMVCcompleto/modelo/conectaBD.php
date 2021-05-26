@@ -22,13 +22,13 @@
        
         public function createP($login, $clave) {
             $newPass  = password_hash($clave, PASSWORD_DEFAULT);
-            $consulta = $this->conexion->prepare("INSERT into usuarios (login, clave) values(?, ?)"); // es sql injeccion ?
+            $consulta = $this->conexion->prepare("INSERT into usuarios (login, clave) values(?, ?)");
             $consulta->bindParam(1, $login);
             $consulta->bindParam(2, $newPass);
             try {
                 $consulta->execute();
                 return "Creado correctamente";
-            } catch (PDOException $error){ // no estoy utilizando $error
+            } catch (PDOException $error){
                 return "Error: El usuario no tiene los permisos necesarios para añadir.";
             }
         }
@@ -38,35 +38,54 @@
                 $consulta->execute();
                 $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
                 return $consulta;
-            } catch (PDOException $error){ // no estoy utilizando $error
+            } catch (PDOException $error){
                 return "Error: No se ha podido acceder a los datos.";
             }
         }
         
-        public function updateP($loginOld, $loginNew, $claveNew) {
-            $newPass  = password_hash($claveNew, PASSWORD_DEFAULT); 
-            // creo que para comprobarlo es el password_verify();
+        public function updateP($login1, $login2, $clave) {
+            $newPass  = password_hash($clave, PASSWORD_DEFAULT); 
             $consulta = $this->conexion->prepare("UPDATE usuarios SET login = ?, clave = ? WHERE login = ? ");
-            $consulta->bindParam(1, $loginNew);
+            $consulta->bindParam(1, $login2);
             $consulta->bindParam(2, $newPass);
-            $consulta->bindParam(3, $loginOld);
+            $consulta->bindParam(3, $login1);
             try {
                 $consulta->execute();
                 return "Actualizado correctamente";
-            } catch (PDOException $error){ // no estoy utilizando $error
+            } catch (PDOException $error){
                 return "Error: El usuario no tiene los permisos necesarios para modificar.";
             }
         }
 
-        public function deleteP($loginOld) {
-            $consulta = $this->conexion->prepare("DELETE from usuarios WHERE login = ? ");
-            $consulta->bindParam(1, $loginOld);
+        public function deleteP($login, $clave) {
+            $consulta = $this->conexion->prepare("SELECT clave from usuarios WHERE login = ?");
+            $consulta->bindParam(1, $login);
             try {
                 $consulta->execute();
-                return "Eliminado correctamente";
-            } catch (PDOException $error){ // no estoy utilizando $error
-                return "Error: El usuario no tiene los permisos necesarios para eliminar.";
+                $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($consulta as $poss => $valor) {
+                    foreach ($valor as $clavee) {
+                        $hash = $clavee;
+                    }
+                }
+            } catch (PDOException $error){
+                return "Error: No se ha podido acceder a los datos.";
             }
+            $clave  = password_hash($clave, PASSWORD_DEFAULT);
+            $consulta = $this->conexion->prepare("DELETE from usuarios WHERE login = ?, clave = ? ");
+            if (password_verify($clave, $hash)) {
+                $consulta->bindParam(1, $login);
+                $consulta->bindParam(1, $clave);
+                try {
+                    $consulta->execute(); // PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+                    return "Eliminado correctamente";
+                } catch (PDOException $error){
+                    return "Error: El usuario no tiene los permisos necesarios para eliminar.";
+                }
+            }else {
+                return "La contraseña no coincide";
+            }
+
         }
 
         public function comprobarUsuario($login) {

@@ -1,0 +1,34 @@
+body {
+    background-color: #708090;
+}
+div {
+    border: 2px solid black;
+    background-color: #6B8E23;
+    width: 600px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+}
+form {
+    text-align: center;
+}
+input {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+input[type=submit]:hover {
+    background-color: #726f6f;
+    color: black;
+}
+
+table {
+    border: 2px solid black; 
+    background-color: green; 
+}
+tr {
+    border: 1px solid black; 
+}
+td {
+    background-color: #9BBF9D;
+    text-align: center;
+}
