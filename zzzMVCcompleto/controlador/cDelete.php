@@ -9,26 +9,24 @@
             $error = "No ha rellenado el campo clave.";
             array_push($errores, $error);
         }
-
         if (!empty($errores)) {
-            // hacer un vista para los erroreS?
-            foreach ($errores as $error) {
-                echo $error . "<br>"; // al ser controlador, no tendria que tener ningun echo
-            }
             require_once("../vista/vDelete.php");
+            require_once("../vista/vErrores.php");
         }else {
             require_once("../modelo/conectaBD.php");
             $login    = $_GET['login'];
             $conexion = ConectaBD::singleton();
             if (!$resultado = $conexion->comprobarUsuario($login)) {
                 require_once("../vista/vDelete.php");
-                echo "Error: no existe el login indicado."; // al ser controlador, no tendria que tener ningun echo
+                $error = "Error: no existe el login indicado.";
+                array_push($errores, $error);
+                require_once("../vista/vErrores.php");
             }else {
                 $login     = $_GET['login'];
                 $clave     = $_GET['clave'];
                 $resultado = $conexion->deleteP($login, $clave);
                 require_once("../vista/vDelete.php");
-                echo $resultado;
+                require_once("../vista/vResultado.php");
             }
         }
     }else {

@@ -21,8 +21,7 @@
                 break;
             default:
                 $error = "No ha seleccionado nada";
-                echo $error;
-                // habria que crear un vista con errores etc..
+                require_once("../vista/vError.php");
         }
     }else {
         require_once("./vista/vOption.php");
