@@ -71,7 +71,6 @@
             } catch (PDOException $error){
                 return "Error: No se ha podido acceder a los datos.";
             }
-            $clave  = password_hash($clave, PASSWORD_DEFAULT);
             $consulta = $this->conexion->prepare("DELETE from usuarios WHERE login = ?, clave = ? ");
             if (password_verify($clave, $hash)) {
                 $consulta->bindParam(1, $login);
