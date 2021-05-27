@@ -14,7 +14,9 @@
             require_once("../vista/vErrores.php");
         }else {
             require_once("../modelo/conectaBD.php");
-            $login    = $_GET['login'];
+            require_once("./controlador/vFiltrado.php");
+            $login    = filtrado($_GET['login']);
+            $clave    = filtrado($_GET['clave']);
             $conexion = ConectaBD::singleton();
             if (!$resultado = $conexion->comprobarUsuario($login)) {
                 require_once("../vista/vDelete.php");
@@ -22,8 +24,6 @@
                 array_push($errores, $error);
                 require_once("../vista/vErrores.php");
             }else {
-                $login     = $_GET['login'];
-                $clave     = $_GET['clave'];
                 $resultado = $conexion->deleteP($login, $clave);
                 require_once("../vista/vDelete.php");
                 require_once("../vista/vResultado.php");

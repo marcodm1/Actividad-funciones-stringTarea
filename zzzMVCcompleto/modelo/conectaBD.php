@@ -45,7 +45,7 @@
         
         public function updateP($login1, $login2, $clave) {
             $newPass  = password_hash($clave, PASSWORD_DEFAULT); 
-            $consulta = $this->conexion->prepare("UPDATE usuarios SET login = ?, clave = ? WHERE login = ? ");
+            $consulta = $this->conexion->prepare("UPDATE usuarios SET login = ? and clave = ? WHERE login = ? ");
             $consulta->bindParam(1, $login2);
             $consulta->bindParam(2, $newPass);
             $consulta->bindParam(3, $login1);
@@ -71,20 +71,17 @@
             } catch (PDOException $error){
                 return "Error: No se ha podido acceder a los datos.";
             }
-            $consulta = $this->conexion->prepare("DELETE from usuarios WHERE login = ?, clave = ? ");
-            if (password_verify($clave, $hash)) {
-                $consulta->bindParam(1, $login);
-                $consulta->bindParam(1, $clave);
-                try {
-                    $consulta->execute(); // PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
-                    return "Eliminado correctamente";
-                } catch (PDOException $error){
-                    return "Error: El usuario no tiene los permisos necesarios para eliminar.";
-                }
-            }else {
+            if (!password_verify($clave, $hash)) {
                 return "La contraseña no coincide";
             }
-
+            $consulta = $this->conexion->prepare("DELETE from usuarios WHERE login = ?");
+            $consulta->bindParam(1, $login);
+            try {
+                $consulta->execute(); // PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+                return "Eliminado correctamente";
+            } catch (PDOException $error){
+                return "Error: El usuario no tiene los permisos necesarios para eliminar.";
+            }
         }
 
         public function comprobarUsuario($login) {

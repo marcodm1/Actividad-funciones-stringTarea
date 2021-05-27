@@ -1,0 +1,5 @@
+falta poner el filtrado del controlador, se puede en una funcion los 3  en cualuquier orden vale:
+    $a = trim($datos);
+    $a = stripslashes($datos);
+    $a = htmlspecialchars($datos); este es el importante en el controlador
+    return $a;
