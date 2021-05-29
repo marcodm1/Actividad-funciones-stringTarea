@@ -18,7 +18,7 @@
             require_once("../vista/vErrores.php");
         }else {
             require_once("../modelo/conectaBD.php");
-            require_once("./controlador/vFiltrado.php");
+            require_once("../controlador/cFiltrado.php");
             $login1    = filtrado($_GET['login1']);
             $login2    = filtrado($_GET['login2']);
             $clave     = filtrado($_GET['clave']);

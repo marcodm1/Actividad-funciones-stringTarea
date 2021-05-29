@@ -71,7 +71,7 @@
             } catch (PDOException $error){
                 return "Error: No se ha podido acceder a los datos.";
             }
-            if (!password_verify($clave, $hash)) {
+            if (!password_verify($clave, $hash)) { // no me funciona bien esta parte
                 return "La contraseña no coincide";
             }
             $consulta = $this->conexion->prepare("DELETE from usuarios WHERE login = ?");

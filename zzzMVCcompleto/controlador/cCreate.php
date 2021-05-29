@@ -14,7 +14,7 @@
             require_once("../vista/vErrores.php");
         }else {
             require_once("../modelo/conectaBD.php");
-            require_once("./controlador/vFiltrado.php");
+            require_once("../controlador/cFiltrado.php");
             $login    = filtrado($_GET['login']);
             $conexion = ConectaBD::singleton();
             if ($resultado = $conexion->comprobarUsuario($login)) {
@@ -23,7 +23,7 @@
                 array_push($errores, $error);
                 require_once("../vista/vErrores.php");
             }else {
-                require_once("./controlador/vFiltrado.php");
+                require_once("../controlador/cFiltrado.php");
                 $clave     = filtrado($_GET['clave']);
                 $resultado = $conexion->createP($login, $clave);
                 require_once("../vista/vCreate.php");
