@@ -1,0 +1,72 @@
+body{
+;
+}
+h1 {
+  color: red;
+  text-align: center;
+}
+
+label{
+	text-decoration:bold;
+}
+table {
+  border-collapse: collapse;
+  width: 75%;
+  margin-left: 5%;
+}
+
+th, td {
+  text-align: left;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+    border: 1px solid black;
+
+}
+label {
+  display: block;
+  margin: .1em 0 0 0;
+}
+
+.btn {
+  display: block;
+  margin: 1em 0;
+}
+div {
+  margin: .1em 0;
+}
+div label {
+  width: 25%;
+  float: left;
+}
+
+form fieldset {
+  float: left;
+  width: 85%;
+}
+input:focus {
+  border: 2px solid #000;
+  background: #F3F3F3;
+}
+form{
+	margin-left:20%;
+	width: 55%;
+}
+.correcto{
+	color:green;
+	background-color: red;
+}
+.error{
+	color:red;
+	background-color: green;
+}
+.referesca{
+	 display: block;
+	margin: 1em 0;
+}
