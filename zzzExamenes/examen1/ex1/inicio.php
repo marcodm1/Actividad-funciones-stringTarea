@@ -64,13 +64,34 @@
         ?>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             
-            <label for="txtnombre">Nombre del nuevo restaurante?:</label> <!--donde pongo el required? -->
-                <input type="text"     name="nombre"    id="txtnombre" value="<?php echo comprobar("nombre", "text"); ?>"><br><br> <!-- no me funciona minlength -->
+            <label for="txtnombreJ">Nombre del juego:</label>
+                <input type="text" name="nombreJuego" id="txtnombreJ" value="<?php echo comprobar("nombreJuego", "text"); ?>"><br><br> <!-- no me funciona minlength -->
 
-            <label for="numEdad">Es mayor de 18 años?:</label>
-                <input type="checkbox" name="edadmas"   id="numEdad" <?php echo comprobar("edadmas", "checkbox"); ?>><br><br>
+            <label for="txtnombreJ1">Nombre Jugador1:</label>
+                <input type="text" name="nombreJ1" id="txtnombreJ1" value="<?php echo comprobar("nombreJ1", "text"); ?>"><br><br> <!-- no me funciona minlength -->
 
-            <label for="checkList">Seleccione lo que quiere en la mesa:</label><br> <!--donde pongo el required? -->
+            <label for="txtnombreJ2">Nombre Jugador2:</label>
+                <input type="text" name="nombreJ2" id="txtnombreJ2" value="<?php echo comprobar("nombreJ2", "text"); ?>"><br><br> <!-- no me funciona minlength -->
+
+            <label for="cantCartas">Cantidad de cartas por palo:</label>
+                <select id="cantCartas" name="cantCartas[]" required>
+                    <option value="">Seleccione</option>
+                    <option value="10"<?php echo comprobar("cantCartas", "option", "comidas"); ?>>10</option>
+                    <option value="7" <?php echo comprobar("cantCartas", "option", "cenas");   ?>>7</option>
+                </select><br>
+
+
+
+
+
+
+
+
+
+
+
+
+            <label for="checkList">Seleccione lo que quiere en la mesa:</label><br>
                 <input type="checkbox" name="checkList[]" value="cuchara"    <?php echo comprobar("checkList", "checkbox", "cuchara");    ?>id="checkList">   <label>cuchara     </label><br/>
                 <input type="checkbox" name="checkList[]" value="tenedor"    <?php echo comprobar("checkList", "checkbox", "tenedor");    ?>> <label>tenedor     </label><br/>
                 <input type="checkbox" name="checkList[]" value="cuchillo"   <?php echo comprobar("checkList", "checkbox", "cuchillo");   ?>> <label>cuchillo    </label><br/>
@@ -79,7 +100,7 @@
                 <input type="checkbox" name="checkList[]" value="copa"       <?php echo comprobar("checkList", "checkbox", "copa");       ?>> <label>copa        </label><br/>
                 <input type="checkbox" name="checkList[]" value="servilleta" <?php echo comprobar("checkList", "checkbox", "servilleta"); ?>> <label>servilleta  </label><br/>
           
-            <label for="plato">Seleccione su plato principal:</label><br> <!--donde pongo el required? -->
+            <label for="plato">Seleccione su plato principal:</label><br>
                     <input type="radio" name="plato" value="macarrones" id="macarrones" <?php echo comprobar("plato", "radio", "macarrones") ?>>
                 <label for="macarrones">Macarrones con chorizo</label><br>
                     <input type="radio" name="plato" value="carbonara" id="carbonara" <?php echo comprobar("plato", "radio", "carbonara") ?>>

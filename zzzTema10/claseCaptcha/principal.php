@@ -7,29 +7,24 @@
     <meta name="description" content="captcha">
 </head>
 <body>
-
-    <!-- <img src="rectangulo1.php" alt="img1"><br>
-    <img src="rectangulo2.php" alt="img2"><br>
-     -->
-
-
 <?php
 
-    if (!empty($_POST['color1']) || !empty($_POST['color2']) || !empty($_POST['color3'])) {
-        require_once("./imagen.php");
-        
-        for ($i = 0; $i < 3; $i++) {
-            ?>
-                <img src="imagen.php" alt="img"><br>
-            <?php
-        }
-    }else {
+if (!empty($_GET['color1']) && !empty($_GET['color2']) && !empty($_GET['color3'])) {
+    if ($_GET['color1'][0] == "seleccione" || $_GET['color2'][0] == "seleccione" ||$_GET['color3'][0] == "seleccione") {
         mostrarFormulario();
+    }else {
+        require_once("imagen.php");
+        img($_GET['color1'][0]);
+        img($_GET['color2'][0]);
+        img($_GET['color3'][0]);
     }
+}else {
+    mostrarFormulario();
+}
 
     function mostrarFormulario(){
         ?>
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get">
             De que color quieres los rectángulos ?<br><br>
             <label for="horario">Rectángulo 1:</label>
                 <select id="horario" name="color1[]">
@@ -54,7 +49,7 @@
                     <option value="verde">Verde</option>
                     <option value="azul" >Azul</option>
                 </select><br>
-            <input type="submit" value="enviar"><br><br>
+            <input type="submit" value="enviar"><br><br> 
         
         </form>
         <?php

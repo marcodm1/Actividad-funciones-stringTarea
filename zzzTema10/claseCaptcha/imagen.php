@@ -1,39 +1,22 @@
-<?php  
-
-    elegirColor($_POST['color1']);
-    
-
-    function elegirColor($color) {
+<?php
+    function img($color) {
         switch($color) {
             case "rojo":
-                $imagen = imagecreate(300, 100); 
-                $r      = 255;
-                $g      = 100;
-                $b      = 100;
-                imagecolorallocate($imagen, $r, $g, $b);
-                return $imagen;
+                ?>
+                    <img src="img.php?colorR=255&colorG=0&colorB=0" alt="img"><br>
+                <?php
+                break;
             case "verde":
-                $imagen = imagecreate(300, 100); 
-                $r      = 100;
-                $g      = 255;
-                $b      = 100;
-                imagecolorallocate($imagen, $r, $g, $b); 
-                return $imagen;
+                ?>
+                    <img src="img.php?colorR=0&colorG=255&colorB=0" alt="img"><br>
+                <?php
+                break;
             case "azul":
-                $imagen = imagecreate(300, 100); 
-                $r      = 100;
-                $g      = 100;
-                $b      = 255;
-                imagecolorallocate($imagen, $r, $g, $b); 
-                return $imagen;
+                ?>
+                    <img src="img.php?colorR=0&colorG=0&colorB=255" alt="img"><br>
+                <?php
+                break;
         }
     }
+?>
 
-
-
-
-//------------- estableces que en el body va a haber una imagen png
-    header("Content-type: image/png");
-
-    imagepng($imagen);
- ?>

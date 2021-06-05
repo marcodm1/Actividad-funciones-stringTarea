@@ -7,8 +7,7 @@
         private $colorG;   
         private $colorB;
         public static $cantidadAlergenos = 0; // es un atributo relacionado a la clase, no a los objetos creados   
-
-        // constructor magico
+        
         public function __construct($alergeno, $colorR, $colorG, $colorB) { // colores entre 0 y 255 ok
             $this->alergeno = $alergeno;                                    
             $this->colorR   = $colorR;
@@ -16,39 +15,44 @@
             $this->colorB   = $colorB;
             self::$cantidadAlergenos ++; // accedemos a un atriubuto static con el self::
         }
-        // getter normal
+        
         public function getColor(&$rojo, &$verde, &$azul){ // por referencia
             $rojo  = $this->colorR;
             $verde = $this->colorG;
             $azul  = $this->colorB;
         }
 
-        public function getNombre(){ // por referencia
+        public function getNombre(){
             return $this->alergeno;
-            
         }
 
         // toString magico
-        public function __toString() { // en php no se usan ni los getters ni los setters ni los toString normales 
+        public function __toString() { 
             return "Este objeto tiene: " . $this->alergeno . ", ". $this->colorR . ", ". 
                         $this->colorG . ", ". $this->colorB . ": y la media del color es: " . $this->mediaColor() . ".<br>";
         }
 
         // function normal que llama a una function static
         private function mediaColor() { // metodos private solo se accede a ellos desde otra funcion dentro del objeto
-            return ($this->colorR + $this->colorG + $this->colorB)/3 . self::inicial(); // aqui llamo a function static, pero al reves no podria
+            $media = ($this->colorR + $this->colorG + $this->colorB)/3;
+            return $media . self::inicial(); // aqui llamo a function static, pero al reves no podria
         }
 
         private static function inicial() { // solo se accede a ellos desde otra funcion dentro del objeto
-            return "Aqui esta la static function"; // un function static solo puede llamar a otro metodo static, no como Ej:mediaColor()
+            return ""; // una function static solo puede llamar a otro metodo static, no como Ej:mediaColor()
         }
 
-        public static function ordenar(&$arrayAlergenos) {
+        public static function ordenarAlfabetico(&$arrayAlergenos) {
             usort($arrayAlergenos, function ($a, $b){
                 return strcmp($a->getNombre(), $b->getNombre());
             });
         }
 
+        public static function ordenarAlfabeticoAlReves(&$arrayAlergenos) {
+            usort($arrayAlergenos, function ($a, $b){
+                return strcmp($b->getNombre(), $a->getNombre());
+            });
+        }
 
     }
 
@@ -58,13 +62,13 @@
         const LACTEO       = 3;
         const SINCALIFICAR = 4;
 
-        private $nombre;   //nombre del ingrediente
-        private $calorias; //calorías cada 100 gramos.
-        private $precio;   //precio por 100 gramos.
-        private $tipo;     //tipo animal, vegetal, lácteo o sin calificar. Utilizar las constantes para
-        private $alergeno; //alérgeno que contiene, puede estar vacío si no tienen ninguno
+        private $nombre;   
+        private $calorias;
+        private $precio;   
+        private $tipo;
+        private $alergeno;
     
-        public function __construct($nombre, $calorias, $precio, $tipo, $alergeno = null) { // por defecto tendra el valor null
+        public function __construct($nombre, $calorias, $precio, $tipo, $alergeno = null) { 
             $this->nombre = $nombre;
             if (strlen($nombre) > 10) { // compruebo que el tamaño no sea x
                 throw new Exception ("Error");
@@ -74,9 +78,8 @@
             $this->tipo     = $tipo;
             $this->alergeno = $alergeno;
         }
-        // con el set tambien
-        public function __get($atributo){  // si llaman a una propiedad que no existe o es privada, entra al __getter magioco                                                                   
-                                            // la diff con un get normal es si llaman a una propiedad que no existe
+      
+        public function __get($atributo){                                                                                           
             if ($atributo == "resumen") {  // aqui llamamos al atributo "resumen" que no existe
                 return "Nombre " . $this->nombre . " y precio " . $this->precio . "€/kg";    
             }
@@ -106,16 +109,16 @@
                     $this->nombre = $valor;
                     break;
                 case "calorias":
-                    $this->calorias = $calorias;
+                    $this->calorias = $valor;
                     break;
                 case "precio":
-                    $this->precio = $precio;
+                    $this->precio = $valor;
                     break;
                 case "tipo":
-                    $this->tipo = $tipo;
+                    $this->tipo = $valor;
                     break;
                 case "alergeno":
-                    $this->alergeno = $alergeno;
+                    $this->alergeno = $valor;
                     break;
                 default: echo "Error: " . $atributo . ": esta propiedad no existe";
             }
@@ -192,7 +195,6 @@
         }  
     }
 
-
     class PlatoPreparado extends Plato implements Complementos {
         private $fecha_elaboracion; 
         private $diasComestible;
@@ -234,6 +236,6 @@
         public function cubiertos($cubierto1, $cubierto2){// metodo de la clase interfaz
             return $cubierto1 + $cubierto2;
         }  
-}
+    }
 
 ?>

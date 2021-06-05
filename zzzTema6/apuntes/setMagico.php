@@ -13,8 +13,8 @@
             $this->nombre           = $nombre;
             $this->apellido         = $apellido;
             $this->dni              = $dni;
-            $this->identificador    = ++ self::$contador;
             $this->fechaNacimiento  = $fechaNacimiento;
+            $this->identificador    = ++ self::$contador;
         }
 
         public function getEdad() {
@@ -22,7 +22,7 @@
             return $intervalo->format('%y');
         }
 
-        public function __get($propiedad) {
+        public function __get($propiedad) { // Ej: 
             if (property_exists(__CLASS__, $propiedad)) {
                 return $this->$propiedad;
             }
@@ -47,7 +47,7 @@
     $pepe->apellido = "Dominguez"; // accedo al set magico y le cambio el valor
     echo "<pre>";
     print_r($pepe);
-    echo $pepe->getEdad();
+    echo "Tiene: " . $pepe->getEdad() . " años";
     echo "</pre>";
     
 

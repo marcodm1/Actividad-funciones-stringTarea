@@ -1,0 +1,20 @@
+table {
+    background-color: rgb(134, 139, 134);
+} 
+
+tr {
+    background-color: rgb(139, 197, 112);
+}
+
+.tachado {
+    background-color: rgb(197, 143, 112);
+}
+
+
+.noextraidas {
+    background-color: white;
+}
+
+.extraidas {
+    background-color: red;
+}

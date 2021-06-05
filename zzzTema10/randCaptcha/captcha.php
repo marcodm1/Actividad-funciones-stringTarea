@@ -1,40 +1,36 @@
-<?php // podria crear un monton de rayas para hacerlo mejor 
+<?php 
 //------------- crear img con un tamaño x y color de fondo
-    $ancho      = 150;
-    $alto       = 150;
-    $imagen     = imagecreate($ancho, $alto); // esto creo que es la zona donde va aesta la img
-    $fr         = mt_rand(60, 155);
-    $fg         = mt_rand(60, 155);
-    $fb         = mt_rand(60, 155);
-    imagecolorallocate($imagen, $fr, $fg, $fb); // color de fondo de la img
+    $img = imagecreate(150, 150); 
+    $fr  = mt_rand(60, 155);
+    $fg  = mt_rand(60, 155);
+    $fb  = mt_rand(60, 155);
+    imagecolorallocate($img, $fr, $fg, $fb); // color de fondo de la img
 
 //------------- texto en la img
-    $tamañoRand    = mt_rand(10, 30);   // tamaño texto
-    $posicionxRand = mt_rand(10, 50);   // possX
-    $posicionyRand = mt_rand(40, 100);  // possY
-    $texto = texto();
+    $tamaño = mt_rand(10, 30);  
+    $possX  = mt_rand(10, 50);   
+    $possY  = mt_rand(40, 100);  
+    $texto  = texto();
     
 //------------- color
-    $entreA     = 10;
-    $entreB     = 230;
     $anguloR    = mt_rand(-60, 60);
-    $colorR1    = mt_rand($entreA, $entreB);
-    $colorR2    = mt_rand($entreA, $entreB);
-    $colorR3    = mt_rand($entreA, $entreB);
-    $colorLetra = imagecolorallocate($imagen,$colorR1, $colorR2, $colorR3);
+    $colorR1    = mt_rand(10, 230);
+    $colorR2    = mt_rand(10, 230);
+    $colorR3    = mt_rand(10, 230);
+    $colorLetra = imagecolorallocate($img,$colorR1, $colorR2, $colorR3);
 
 //------------- pintar texto
-    imagettftext($imagen, $tamañoRand, $anguloR, $posicionxRand, $posicionyRand, $colorLetra, "c:/windows/fonts/arial.ttf", $texto);
+    imagettftext($img, $tamaño, $anguloR, $possX, $possY, $colorLetra, "c:/windows/fonts/arial.ttf", $texto);
 
 //------------- guardamos el texto
     session_start();
     $_SESSION['texto'] = $texto;
 
-//------------- estableces que en el body va a haber una imagen png
+//------------- estableces que en el body va a haber una img png
     header("Content-type: image/png");
 
 //-------------  cargar la img
-    imagepng($imagen);
+    imagepng($img);
 
 
     function texto() {
