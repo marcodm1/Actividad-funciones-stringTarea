@@ -48,8 +48,8 @@
             $consulta->bindParam(':idFabricante', $idFabricante);
             $consulta->bindParam(':idProducto'  , $idProducto);
             $consulta->bindParam(':descripcion' , $descripcion);
-            $consulta->bindParam(':precio'      , $precio);
-            $consulta->bindParam(':existencias' , $existencias);
+            $consulta->bindParam(':precio'      , $precio,      PDO::PARAM_INT);
+            $consulta->bindParam(':existencias' , $existencias, PDO::PARAM_INT);
             $consulta->execute();
             // comprobar si se ha hecho bien o si se ha hecho mal
         }

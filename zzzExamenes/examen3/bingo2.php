@@ -19,12 +19,15 @@
             Carton::crearCarton($this->numeros, $this->tachados);
             // self::$cantidadAlergenos ++;
         }
-
         public function __get($propiedad) {
             if (property_exists(__CLASS__, $propiedad)) {
                 return $this->$propiedad;
             }
             return "No existe esa propiedad";
+        }
+        public function getNumeros() {
+            return $this->numeros;
+         
         }
         public function __toString() {
             $cont       = 0;
@@ -86,6 +89,7 @@
             for ($i = 0; $i < $total; $i++) {
                 if ($cont == $total) {
                     // session_start(); // si pongo esto no crea las session
+                    // sort($numeros);  // si los ordeno se me va todo a la mierda
                     $_SESSION['carton']         = $numeros;
                     $_SESSION['cartonTachados'] = $tachados;
                     return "crearCarton() terminado";
@@ -289,24 +293,27 @@
 
 
 
-    $carton  = new Carton();
+    $carton = new Carton();
     echo $carton;
     $numeros = ($carton::COLUMNA) * 10;
     //______________________________________
     $bingo = new Bingo($numeros);
-    if (!$bingo->iniciarJuego()) {
-        echo "Error: el juego no se puede iniciar";
-    }
+    // if (!$bingo->iniciarJuego()) {
+    //     echo "Error: el juego no se puede iniciar";
+    // }
+    $sacado = $bingo->sacarBola();
+    $sacado = $bingo->sacarBola();
+    $sacado = $bingo->sacarBola();
+    $sacado = $bingo->sacarBola();
+    $sacado = $bingo->sacarBola();
+    $sacado = $bingo->sacarBola();
     $bingo->muestraBingo();
-    $cont  = 1;
-    $bingo->iniciaJuego();
-    do {
-        $sacado = $bingo->sacarBola();
-        $cont ++;
-    }while($sacado);
-    echo "Juego terminado";
+    // $bingo->iniciaJuego();
+    // do {
+    //     $sacado = $bingo->sacarBola();
+    // }while($sacado);
+    // echo "Juego terminado";
    
-
     //______________________________________
 
 

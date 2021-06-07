@@ -23,7 +23,7 @@
         public function createP($login, $clave) {
             $newPass  = password_hash($clave, PASSWORD_DEFAULT);
             $consulta = $this->conexion->prepare("INSERT into usuarios (login, clave) values(?, ?)");
-            $consulta->bindParam(1, $login);
+        $consulta->bindParam(1, $login /*,PDO::PARAM_INT si ponemos esto es para indicar el tipo de dato por ejemplo PDO::PARAM_STR*/);
             $consulta->bindParam(2, $newPass);
             try {
                 $consulta->execute();
