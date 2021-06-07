@@ -12,11 +12,12 @@
     class Carton {
         private $numeros  = array(); // total = FILA x COLUMNA
         private $tachados = array();
-        const FILA        = 3;
-        const COLUMNA     = 3;
+        const FILA        = 5;
+        const COLUMNA     = 5;
 
         public function __construct() {
             Carton::crearCarton($this->numeros, $this->tachados);
+            // self::$cantidadAlergenos ++;
         }
 
         public function __get($propiedad) {
@@ -76,7 +77,7 @@
             echo "</table>";
             return "";
         }
-        public static function crearCarton(&$numeros, &$tachados) {
+        public static function crearCarton(&$numeros, &$tachados) { // session
             $total    = self::FILA * self::COLUMNA;
             $numeros  = $numeros;
             $tachados = $tachados;
@@ -84,8 +85,8 @@
         
             for ($i = 0; $i < $total; $i++) {
                 if ($cont == $total) {
-                    session_start();
-                    $_SESSION['carton']         = "a"; // no entra aqui, pero no da error
+                    // session_start(); // si pongo esto no crea las session
+                    $_SESSION['carton']         = $numeros;
                     $_SESSION['cartonTachados'] = $tachados;
                     return "crearCarton() terminado";
                     
@@ -181,35 +182,35 @@
             }
         }
     } 
-    $a = new Carton();
-    // echo $a;
     
     class Bingo {
         private $maxNumeros = array(); // usar las constantes de Carton
         private $extraidas  = array();
         private $total;
         const PRECIO_CARTON = 1;
+        public static $recaudado = 0;
 
         public function __construct($numeros) {
             $this->maxNumeros = Bingo::rellenarMaxNumeros($numeros);
             $this->total      = $numeros;
         }
-        public static function rellenarMaxNumeros($numeros) {
+        public static function rellenarMaxNumeros($numeros) { // session
             $array = array();
             for ($i = 1; $i < $numeros; $i++) {
                 array_push($array, $i);
             }
+            $_SESSION['maxNumeros'] = $array;
             return $array;
         }
-
-        public function __toString() {
+        public function muestraBingo() {
             $cont = 1;
             echo "<br><br>";
             echo "<table>";
                 echo "<tr>";
                 foreach ($this->maxNumeros as $numero) {
                     if ($cont == 10) {
-                        if (array_search($numero, $this->extraidas) >= 0) {
+                        $esta = array_search($numero, $this->extraidas);
+                        if (is_numeric($esta)) {
                             echo '<td class="extraidas">';
                             echo $numero;
                             echo "</td>";
@@ -220,10 +221,11 @@
                             echo $numero;
                             echo "</td>";
                             echo "</tr>";
-                            $cont ++;
+                            $cont = 1;
                         }
                     }else {
-                        if (array_search($numero, $this->extraidas) >= 0) {
+                        $esta = array_search($numero, $this->extraidas);
+                        if (is_numeric($esta)) {
                             echo '<td class="extraidas">';
                             echo $numero;
                             echo "</td>";
@@ -241,49 +243,72 @@
             echo "</table>";
             return "";
         }
-
         public function sacarBola() {
             if (count($this->extraidas) == $this->total) {
-                return "Se ha terminado el juego";
+                return false;
             }
             if (!empty($this->extraidas)) {
                 do {
                     $aleatorio = rand(1, $this->total);
-                    if (array_search($aleatorio, $this->extraidas) >= 0) {
+                    $esta      = array_search($aleatorio, $this->extraidas);
+                    if (is_numeric($esta)) {
                         $repetido = true;
                     }else {
                         array_push($this->extraidas, $aleatorio);
+                        $_SESSION['extraidas'] = $this->extraidas;
                         $repetido = false;
+                        return true;
                     }
                 }while($repetido);
             }else {
                 $aleatorio = rand(1, $this->total);
                 array_push($this->extraidas, $aleatorio);
+                return true;
             } 
-
         }
-        public function muestraBingo() {
-
+        public function iniciaJuego() {
+            $resultado = false;
+            if (self::$recaudado > 0) {
+                $resultado = true;
+            }
+            return $resultado;
+        }
+        public function __get($propiedad) { 
+            if (property_exists(__CLASS__, $propiedad)) {
+                return $this->$propiedad;
+            }
+            return "No existe esa propiedad";
         }
     }
-    // $numeros = ($a::COLUMNA) * 10;
-    // $b = new Bingo($numeros);
-    // echo $b;
-    // $b->sacarBola();
-    // $b->sacarBola();
-    // $b->sacarBola();
-    // $b->sacarBola();
-    // $b->sacarBola();
-    // $b->sacarBola();
-    // echo $b;
-
-
-
 
     class Jugador {
-        
-
     }
+
+
+
+
+
+
+    $carton  = new Carton();
+    echo $carton;
+    $numeros = ($carton::COLUMNA) * 10;
+    //______________________________________
+    $bingo = new Bingo($numeros);
+    if (!$bingo->iniciarJuego()) {
+        echo "Error: el juego no se puede iniciar";
+    }
+    $bingo->muestraBingo();
+    $cont  = 1;
+    $bingo->iniciaJuego();
+    do {
+        $sacado = $bingo->sacarBola();
+        $cont ++;
+    }while($sacado);
+    echo "Juego terminado";
+   
+
+    //______________________________________
+
 
 
 ?>
