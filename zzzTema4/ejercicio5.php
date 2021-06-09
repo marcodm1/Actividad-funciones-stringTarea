@@ -12,6 +12,8 @@
                 mostrarNotaAlta($array);  // - mostrar la nota más alta.
                 mostrarNotaBaja($array);  // - mostrar la nota más baja.
                 mostrarDwes($array);      // - comprobar si tiene la nota de dwes, y mostrarla por pantalla.
+
+                ?><br><br><a href="ejercicio5.php">Atras</a><?php
     }else {
         formulario();
     }

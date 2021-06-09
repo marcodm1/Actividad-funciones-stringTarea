@@ -4,21 +4,14 @@
 	<title>Marco Domínguez</title>
 	<meta charset="UTF-8">
 	<meta name="author" content="Marco Dominguez">
-	<meta name="description" content="Ejercicio Bucles anidados.">
+	<meta name="description" content="Ejercicio x">
 </head>
 <body>
 <?php
-	/*
-		Crea una sola página web, que reciba información por GET.
-		Debe recibir un array de tareas.
-		Muestra el array en formato de tabla con un encabezado que ponga tareas pendientes, y dos columnas con el código de la tarea y la descripción.
-		El código coincidirá con el índice del array que nos pasan, y la descripción con el contenido.
-		Si no nos mandan la información o no tiene el formato adecuado (no es un array), nos deberá indicar el error correspondiente.
-	*/
 	
 	if (!empty($_GET['array'])) {
-		if (is_array($_GET['array'])) { // me dice que no es un array
-			$array = unserialize($_GET['array']);
+		$array = unserialize($_GET['array']);
+		if (is_array($array)) {
 			mostrar($array);
 		}else {
 			echo "No se ha enviado un array";

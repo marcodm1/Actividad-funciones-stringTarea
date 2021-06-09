@@ -5,6 +5,7 @@
         mostrarNumero($_GET['numero']);
         mostrarEnBiOcHe($_GET['numero']);
         mostrarConDecimales($_GET['numero']);
+        ?><br><br><a href="ejercicio4.php">Atras</a><?php
     }else {
         formulario();
     }
@@ -47,11 +48,11 @@
     function mostrarConDecimales($numero) {
         if ($numero >= 0) {
             if (is_numeric($numero)) {
-                $decimal = number_format($numero);
-                echo "Si tiene decimales..:" . $decimal;
+                $decimal = number_format($numero, 3);
+                echo "Si tiene decimales: " . $decimal;
                 echo "<br>";
             }else {
-                echo "<br>No es numerico.";
+                echo "<br>No es un numero.";
             }
         }
     }

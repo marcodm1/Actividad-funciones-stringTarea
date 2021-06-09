@@ -1,3 +1,4 @@
-¿De que color es la madera? | Azul Negro Naranja Marrón
-¿De que color es el agua? | Azul Blanco Amarillo Transparente
-¿De que color es carbón? | Azul Blanco Amarillo Negro
+    ¿De qué color es la: Madera?  |blanco|negro|marrón
+    ¿De qué color es la: Naranja? |blanco|negro|naranja
+    ¿De qué color es el: Metal?   |blanco|negro|gris
+    ¿De qué color es el: Cielo?   |blanco|negro|azúl

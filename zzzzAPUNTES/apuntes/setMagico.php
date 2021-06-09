@@ -10,11 +10,11 @@
         private $fechaNacimiento;
 
         public function __construct($nombre, $apellido, $dni, $fechaNacimiento) {
-            $this->nombre           = $nombre;
-            $this->apellido         = $apellido;
-            $this->dni              = $dni;
-            $this->fechaNacimiento  = $fechaNacimiento;
-            $this->identificador    = ++ self::$contador;
+            $this->nombre          = $nombre;
+            $this->apellido        = $apellido;
+            $this->dni             = $dni;
+            $this->fechaNacimiento = $fechaNacimiento;
+            $this->identificador   = ++ self::$contador;
         }
 
         public function getEdad() {

@@ -4,36 +4,56 @@
 		<title>Marco Domínguez</title>
 		<meta charset="UTF-8">
         <meta name="author" content="Marco Dominguez">
-        <meta name="description" content="ejercicio2 unodos">
+        <meta name="description" content="Ej x">
 	</head>
 	<body>
         <?php
-            /*
-            Dado un archivo de preguntas.txt
-            Comprobar si existe el fichero.
-            En el que cada línea hay una pregunta separada por |. 
-            El primer campo es la pregunta, los tres siguientes son las opciones y el último la respuesta correcta.
-            Leer el fichero y mostrar las preguntas con el formato que consideres oportuno, la solución debe aparecer de un color distinto.
-            No tener en cuenta las líneas en blanco.
-            (Sugerencias, leer por líneas y utilizar la función explode.)
-            */
-            $nombreArchivo = "ejercicio4.txt";
-            
-            if (file_exists($nombreArchivo)) {
-                if (fopen($nombreArchivo, 'r') {
-                    $preguntas = explode("|", $archivo, 100);
-                    print_r($preguntas);
+
+            if (!empty($_POST['archivo'])) {
+                $fichero =  $_POST['archivo'];
+                if (file_exists($fichero)) {
+                    $fopen     = fopen($fichero, 'r');
+                    $lineas    = file($fichero);
+                    $respuesta = array();
+                    
+                    $pregunta = array();
+                    foreach ($lineas as $linea) {
+                        $explode = explode("|", $linea);
+                        echo "<pre>";
+                        print_r($explode);
+                        echo "</pre>"; 
+                        array_push($respuesta, end($explode));
+                    }
+    
+                    foreach ($respuesta as $poss => $valor) {
+                        echo "<br> La respeusta correcta de la pregunta " . $poss . " es: " . $valor;
+                    }
+    
                 }else {
-                    echo "Error al abrir el archivo";
+                    echo "El archivo especificado, no existe";
                 }
 
             }else {
-                echo "El archivo especificado, no existe";
+                formulario();
             }
-        
-    
-            
+
+
+            function formulario() {
+                ?>
+                <form action="ejercicio4.php" method="post">
+                    <label for="archivo1">Seleccione un archivo:</label>
+                        <input type="file"  name="archivo" id="archivo1"><br>
+                    <input type="submit" value="Comprobar" name="submit">
+                </form>
+                <?php
+            }
         ?>
     </body>
 </html>
 
+<!-- 
+    ¿De qué color es la: Madera? blanco|negro|marrón
+    ¿De qué color es la: Naranja? blanco|negro|naranja
+    ¿De qué color es el: Metal? blanco|negro|gris
+    ¿De qué color es el: Cielo? blanco|negro|azúl
+ -->

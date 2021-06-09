@@ -15,17 +15,17 @@
             "Italia"   => ["Roma"  , "Florencia", "Venecia" , "Milán"   ]
         );
 
-        if (!empty($_GET['pais'])) {
+        if (!empty($_GET)) {
             foreach ($mundo as $pais => $ciudades) {
-                if (strcmp($_GET[$pais][0], "seleccione") === 0) {
+                if (strcmp($_GET[$pais][0], "seleccione") !== 0) {
                     echo "<pre>";
                     print_r($pais);
                     echo ": ";
                     print_r($_GET[$pais][0]);
                     echo "</pre>";
-                    $cont ++;
-                }
+                } 
             } 
+            ?><a href="ejercicio1.php">Atras</a><?php
         }else {
             formulario($mundo);
         }
@@ -37,15 +37,15 @@
                 foreach ($mundo as $pais => $array) {
                     ?>
                     <label for="<?php echo $pais ?>"><?php echo $pais . ":"; ?></label>
-                    <select name="<?php echo $pais ?>[]" id="<?php echo $pais ?>">
-                    <option value="seleccione">--Ninguno--</option>
-                    <?php
-                        foreach ($array as $ciudad){
-                            ?><option value="<?php echo $ciudad ?>"><?php echo $ciudad; ?></option>
-                        <?php
-                        }
-                        ?>
-                    </select><br><br>
+                        <select name="<?php echo $pais ?>[]" id="<?php echo $pais ?>">
+                            <option value="seleccione">--Ninguno--</option>
+                            <?php
+                            foreach ($array as $ciudad){
+                                ?><option value="<?php echo $ciudad ?>"><?php echo $ciudad; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select><br><br>
                 <?php
                 } 
                 ?>

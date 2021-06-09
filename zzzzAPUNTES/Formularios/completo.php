@@ -51,6 +51,10 @@
                 }
             }
         }
+        if (empty($_POST['fecha'])) {
+            $error6 = 'No ha rellenado el campo: "Fecha"';
+            array_push($error, $error6);
+        }
         formulario();
         
         if (!empty($error)) {
@@ -95,6 +99,13 @@
                     <option value="comidas" <?php echo comprobar("horario", "option", "comidas"); ?>>Comidas</option>
                     <option value="cenas"   <?php echo comprobar("horario", "option", "cenas");   ?>>Cenas</option>
                 </select><br>
+
+            <label for="fecha">Seleccione una fecha:</label>
+                <input type="date" name="fecha" value="<?php echo comprobar("fecha", "date"); ?>" ><br> <!-- otra opcion buena value="<php echo date('Y-m-d', strtotime(date("y.m.d"))) ?>" -->
+
+            <label for="archivo1">Seleccione un archivo:</label>
+                <input type="file"  name="archivo" id="archivo1"><br>
+
             <input type="submit" value="enviar"><br><br>
         </form>
         <?php
@@ -123,6 +134,10 @@
                     if (in_array($value, $_POST[$name]) ) {
                         return 'selected="selected"';
                     }   
+                    break;
+                case "date": 
+                    $dia = date("Y-m-d", strtotime($_POST['fecha']));
+                    return "$dia";
                     break;
             }
         }

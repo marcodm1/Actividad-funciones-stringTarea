@@ -4,25 +4,10 @@
 		<title>Marco Domínguez</title>
 		<meta charset="UTF-8">
         <meta name="author" content="Marco Dominguez">
-        <meta name="description" content="Ejercicio Bucles anidados.">
+        <meta name="description" content="Ejercicio x">
 	</head>
 	<body>
         <?php
-            /*
-                Se desea crear un formulario para un restaurante. 
-                Se pide: 
-                - Formulario de tipo Post.
-                - Con los campos de tipo: 
-                texto
-                radio
-                checkbox
-                select (simple).
-                - Tratar la información en la propia página.
-                - Todos los datos son obligatorios.
-                - El input de tipo texto debe ser una cadena de al menos 5 caracteres. 
-                - Se deben recordar los datos introducidos por el usuario.
-                - Si los datos son enviados y no tienen errores, mostrar la información por pantalla, en formato de lista ordenada.
-            */
             if (!empty($_POST['nombre']) && !empty($_POST['edad']) && !empty($_POST['plato']) && !empty($_POST['horario'])) {
                 echo "<ol>";
                 foreach ($_POST as $algo) {
@@ -31,7 +16,7 @@
                             echo "<li>" . $valor . "</li>";
                         }
                     }else {
-                        echo "<li>" . $algo . "</li><br>";
+                        echo "<li>" . $algo . "</li>";
                     }
                 }
                 echo "</ol>";

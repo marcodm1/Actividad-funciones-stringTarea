@@ -1,35 +1,20 @@
 <?php
-    // abrir para modificar
-    $archivo  = "texto.txt";
-    $archivo1 = fopen($archivo, 'w') or die("No disponible el archivo seleccionado!"); 
+    $fichero  =  __DIR__ . DIRECTORY_SEPARATOR . "texto.txt";
+    $archivo  = fopen($fichero, 'r');           // fopen devuelve el archivo
+    $linea1   = fgets($archivo);                // fgets devuelve la primera linea
+    $lineas   = file($fichero);                 // file devuelve un array, y cada posicion es una linea
+    // $texto    = file_get_contents($fichero);    // Transmite un fichero completo a una cadena lineal
+    $unido    = implode("------", $lineas);     // convierte array en string
+    $separado = explode(" ", $unido);           // convierte string en array
+    // feof($archivo);                          // Comprueba si el puntero a un archivo está al final del archivo
 
-    if ($archivo1){
-        sobreescribirParte();
-        sobreescribirLinea();
-        sobreescribirTodo();
-    }else {
-        echo "Error al abrir el archivo";
-    }
-     if (fclose($archivo1)){
-        echo "<br><br>El archivo se ha cerrado correctamente <br><br>";
-    }
-
-
-    function sobreescribirParte() {
-        
-    }
-    function sobreescribirLinea() {
-
-    }
-    function sobreescribirTodo() {
-        fwrite($archivo1, "Hijo de puta");
-    }
+    echo "<br>" . $linea1 . "<br>";
+    echo "<pre>"; print_r($lineas); echo "</pre>";
+    echo "<br>" . $texto . "<br>";
+    echo "<br>" . $unido . "<br>";
+    echo "<pre>"; print_r($separado); echo "</pre>";
 
 
 
+    fclose($archivo);
 ?>
-<!-- 
-    Este es el texto del archivo texto.txt en
-    Aqui vamos a escribir la segunda linea
-    y para finalizar, aqui la tercera linea.
- -->

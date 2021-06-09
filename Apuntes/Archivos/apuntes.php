@@ -9,9 +9,9 @@
     /* 
                     metodos abrir/leer:
 
-        fopen("archivo.txt", "r");  Devuelve el contenido del fichero. y puede abrir links... archivos..
-        fgets("archivo.txt", 12);   Devuelve el fichero
-        file("archivo.txt");        Devuelve el fichero como un array 
+        fopen("archivo.txt", "r");  Devuelve el contenido 
+        fgets("archivo.txt", 12);   Obtiene una línea desde el puntero a un fichero
+        file("archivo.txt");        Transfiere un fichero completo a un array
         
                     metodos modificar/sobreescribir:
 

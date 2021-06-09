@@ -8,6 +8,7 @@
             mostrarCadenaSustituyendo($_GET['texto']);
             mostrarCaracterMasRepetido($_GET['texto']);
             contarLetras($_GET['texto']);
+            ?><br><br><a href="ejercicio3.php">Atras</a><?php
         }
     }
     else {
