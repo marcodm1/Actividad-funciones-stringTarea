@@ -13,8 +13,8 @@
         function mostrarFormulario(){
             ?>
             <form action="circulo.php" method="post">
-                <label for="intNombre">Escriba un numero del 1 al 360:</label>
-                    <input type="number" name="numero" id="intNombre" min="1" max="360"><br>
+                <label for="intNombre">Escriba un porcentaje a rellenar del 1 al 100:</label>
+                    <input type="number" name="porcentaje" id="intNombre" min="1" max="100"><br>
                 <input type="submit" value="enviar">
             </form> 
             <?php

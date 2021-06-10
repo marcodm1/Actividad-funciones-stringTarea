@@ -15,10 +15,10 @@
 
     
     //------------- un circulo en la img rellenada automaticamente
-    $colorAutomatico = imagecolorallocate($imagen, 0, 0, 0); 
+    $colorAutomatico = imagecolorallocate($imagen,0, 0, 0); 
     $xc = 150; // la coordenada en x del centro
     $yc = 150; // la coordenada en y del centro
-    $gi = 360; // donde inicia el arco
+    $gi = (360*$_POST['porcentaje'])/100; // donde inicia el arco
     $gf = 360; // donde termina el arco
     imagearc($imagen, $xc, $yc, $ancho, $alto, $gi, $gf, $colorAutomatico); // pinta un arco
     
@@ -27,7 +27,7 @@
     $xc = 150; // la coordenada en x del centro
     $yc = 150; // la coordenada en y del centro
     $gi = 1;   // donde inicia el arco
-    $gf = $_POST['numero']; // donde termina el arco
+    $gf = (360*$_POST['porcentaje'])/100; // donde termina el arco
     imagearc($imagen, $xc, $yc, $ancho, $alto, $gi, $gf, $colorCirculoGet); // pinta un arco
 
     header("Content-type: image/png"); // estableces que en el body va a haber una imagen png

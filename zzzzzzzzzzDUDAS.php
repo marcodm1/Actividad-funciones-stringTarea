@@ -21,12 +21,8 @@ $consulta->store_result...
 $consulta ->bind_result...
 
 
-para usar const de otro objeto
-
 objeto::PROPIEDAD sin ningun problema donde queramos
 
-para usar una function desde otra dentro de un mismo objeto
-con el $this->nombrefunction
 
 guardar img desde el formulario
 ENCTYPE="multipart/form-data"
