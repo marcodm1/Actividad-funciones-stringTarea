@@ -34,9 +34,11 @@
                 
                 if (file_exists("datos.txt")) {
                     $archivo = __DIR__ . DIRECTORY_SEPARATOR . "datos.txt";
-                    $fopen   = fopen($archivo, "w"); // con w siempre apunta al principio
+                    $fopen   = fopen($archivo, "w"); 
+                    // fopen() con w siempre apunta al principio y en modo a lo pone al final
+                    
                     echo ftell($fopen);
-                    fseek($fopen, -1, SEEK_END); // no consigo  que apunte al final
+                    // fseek($fopen, -1, SEEK_END); // fseek solo es para escritura
                     // $fin = '|'.PHP_EOL; //fin de linea para los archivos
                     echo ftell($fopen);
                     fwrite($fopen, $_POST['texto1']);

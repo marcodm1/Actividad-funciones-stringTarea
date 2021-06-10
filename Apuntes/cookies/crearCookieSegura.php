@@ -8,7 +8,7 @@
 	</head>
 	<body>
         <?php 
-            setcookie("cookieSegura", "Marco Segura", time() +60, '/', 'localhost', true);
+            setcookie("cookieSegura", "Marco Segura", time() +60, '/', 'localhost', true); // si pongo ./ deberia de ser esta carpeta sola
             header("Location:menu.php");
         ?>
     </body>

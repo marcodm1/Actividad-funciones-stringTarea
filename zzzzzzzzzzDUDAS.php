@@ -27,3 +27,9 @@ objeto::PROPIEDAD sin ningun problema donde queramos
 
 para usar una function desde otra dentro de un mismo objeto
 con el $this->nombrefunction
+
+guardar img desde el formulario
+ENCTYPE="multipart/form-data"
+comprobar el tamaño en php o n el formulario
+$_FILE guarda la img 
+is_upload_file
