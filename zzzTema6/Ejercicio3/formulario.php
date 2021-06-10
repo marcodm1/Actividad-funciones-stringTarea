@@ -8,19 +8,25 @@
 	</head>
 	<body>
     <?php
-    if (!empty($_POST['enviado'])) {
+    if (!empty($_GET['enviado'])) {
         if (empty($_GET['nombre1']) || empty($_GET['apellido1']) || empty($_GET['nombre2']) || empty($_GET['apellido2']) ) { 
-            // hacer comprobaciones de uno por uno para avsar al usuario cual es el error, asi que tengo que hacer un array con errores
-            echo "Aqui mostrar cada campo que no se ha rellenado";
+            $error = array();
+            if (empty($_GET['nombre'])) {
+                $error1 = 'No ha rellenado el campo: "Nombre"';
+                array_push($error, $error1);
+            }
+            if (empty($_GET['edadmas']) ) {
+                $error2 = 'No ha seleccionado campo: "Es mayor o menor de 18 años":';
+                array_push($error, $error2);
+            }
+            if (!empty($error)) {
+                echo "<pre>";
+                print_r($error);
+                echo "</pre";
+            }
             formulario();
         }else {
-            session_start();
-            $_SESSION['jugador1Nombre']   = $_GET['nombre1'];
-            $_SESSION['jugador1Apellido'] = $_GET['apellido1'];
-            $_SESSION['jugador2Nombre']   = $_GET['nombre2'];
-            $_SESSION['jugador2Apellido'] = $_GET['apellido2'];
-            // session_destroy();
-            Header("Location:juego.php");
+            require_once("juego.php");
         }
     }else {
         formulario();

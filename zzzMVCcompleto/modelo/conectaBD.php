@@ -19,11 +19,10 @@
             }
             return self::$instancia; // devuelve el objeto tipo instancia
         } 
-       
         public function createP($login, $clave) {
             $newPass  = password_hash($clave, PASSWORD_DEFAULT);
             $consulta = $this->conexion->prepare("INSERT into usuarios (login, clave) values(?, ?)");
-        $consulta->bindParam(1, $login /*,PDO::PARAM_INT si ponemos esto es para indicar el tipo de dato por ejemplo PDO::PARAM_STR*/);
+            $consulta->bindParam(1, $login /*,PDO::PARAM_INT si ponemos esto es para indicar el tipo de dato por ejemplo PDO::PARAM_STR*/);
             $consulta->bindParam(2, $newPass);
             try {
                 $consulta->execute();
@@ -42,7 +41,6 @@
                 return "Error: No se ha podido acceder a los datos.";
             }
         }
-        
         public function updateP($login1, $login2, $clave) {
             $newPass  = password_hash($clave, PASSWORD_DEFAULT); 
             $consulta = $this->conexion->prepare("UPDATE usuarios SET login = ? and clave = ? WHERE login = ? ");
@@ -56,7 +54,6 @@
                 return "Error: El usuario no tiene los permisos necesarios para modificar.";
             }
         }
-
         public function deleteP($login, $clave) {
             $consulta = $this->conexion->prepare("SELECT clave from usuarios WHERE login = ?");
             $consulta->bindParam(1, $login);
@@ -83,7 +80,6 @@
                 return "Error: El usuario no tiene los permisos necesarios para eliminar.";
             }
         }
-
         public function comprobarUsuario($login) {
             $consulta = $this->conexion->prepare("SELECT * from usuarios WHERE login = ?");
             $consulta->bindParam(1, $login);

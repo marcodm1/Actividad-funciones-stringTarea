@@ -8,6 +8,10 @@
         private $colorB;
         public static $cantidadAlergenos = 0; // es un atributo relacionado a la clase, no a los objetos creados   
         
+        // public function __construct(Participante $jugadorA, Participante $jugadorB, $premio) {
+            // es un constructor que se le pasa el objeto de otra clase por parametro
+        // }
+
         public function __construct($alergeno, $colorR, $colorG, $colorB) { // colores entre 0 y 255 ok
             $this->alergeno = $alergeno;                                    
             $this->colorR   = $colorR;

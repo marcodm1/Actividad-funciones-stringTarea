@@ -8,75 +8,39 @@
 </head>
 <body>
     <?php 
-        /*
-        Requisitos previos:
-        - Lee el documentos y realiza las prácticas: 05_17_ext_mysqli_2.pdf
-        - Consulta: https://www.php.net/manual/es/class.mysqli.php ,  https://www.php.net/manual/es/class.mysqli-result.php y https://www.php.net/manual/es/class.mysqli-stmt.php
-        - Ejecuta el sql de creación de las tablas y el usuario.
-
-        Práctica: 
-        - Crear Bbdd.php //con una clase para realizar todas las operaciones de conexión, consulta y modificación de la base de datos. 
-        - Mostrar todos los usuarios dados de alta en la base de datos (usar mysqli_result::fetch_all)
-        - Crea un formularioBBD para modificar o insertar usuarios, method post.
-        - Utilizando mysqli.
-        - Utilizar el usuario alumno
-        - Mostrar el error si se produce en la conexión, y en la consulta.
-
-        Bbdd.php:
-        - Clase Bbdd.
-        - Propiedad $con //conexión con la base de datos mysqli
-        - método conecta($host, $usuario, $password, $bbdd) //realiza la conexión con la base de datos y establece el juego de caracteres.
-        - método consultaUsuarios() //devuelve un array con todos los usuarios, utilizar fetch_all.
-        - método muestraTabla($array) //recibe el array del fetch_all y muestra las filas en formato de tabla.
-        - método altaUsuarios($login, $clave) //da de alta el usuario con mysqli::prepare, mysqli_stm::bind_param, mysqli_stm::execute
-        - método modificaUsuarios($login, $clave) //modifica el usuario con mysqli::prepare, mysqli_stm::bind_param, mysqli_stm::execute
-        - método close() //cierra la conexión.
-
-        ejercicio3.php: 
-        - utilizar la clase Bbdd para conectar la base de datos.
-        - Realizar la consulta de usuarios y mostrarlos en formato de tabla //Bbdd::consultaUsuarios y Bbdd::muestraTabla
-        - Mostrar un formularioBBD para insertar o modificar usuarios con dos botones: ALTA, y MODIFICACIÓN.
-        - Comprobar que ha introducido el login y la clave y que la clave tiene al menos 5 caracteres.
-        - Dar de alta o modificar el usuario //Bbdd::altaUsuarios y Bbdd::modificaUsuarios
-        */
-        if (!empty($_GET['formBBDD'])) {
-            $error = array();
-            if (empty($_GET['host'])) {
-                $host = "No ha rellenado el campo host";
-                array_push($error, $host);
-            }
-            if (empty($_GET['usuario'])) {
-                $host = "No ha rellenado el campo usuario";
-                array_push($error, $host);
-            }
-            if (empty($_GET['nombre'])) {
-                $host = "No ha rellenado el campo nombre";
-                array_push($error, $host);
-            }
-            if (!empty($error)) {
-                echo "<pre>";
-                print_r($error);
-                echo "</pre>";
-                formularioBBDD();
-                echo "jjjj";
-                $_SESSION['error'] = true;
-            }else {
-                if (!empty($_SESSION['error'])) {
-                    unset($_SESSION['error']);
-                }
-                session_start();
-                $_SESSION['host']    = $_GET['host'];
-                $_SESSION['usuario'] = $_GET['usuario'];
-                $_SESSION['passB']   = $_GET['passB'];
-                $_SESSION['nombre']  = $_GET['nombre'];
-            }
-        }else {
-            if (empty($_GET['formMod'])) {
-                formularioBBDD();
-                echo "ffff";
-            }
+        require_once("opciones.php");
+        
+        $error = array();
+        if (empty($_GET['host'])) {
+            $host = "No ha rellenado el campo host";
+            array_push($error, $host);
         }
-        if (!empty($_GET['formBBDD']) && empty($_SESSION['error'])) {
+        if (empty($_GET['usuario'])) {
+            $host = "No ha rellenado el campo usuario";
+            array_push($error, $host);
+        }
+        if (empty($_GET['nombre'])) {
+            $host = "No ha rellenado el campo nombre";
+            array_push($error, $host);
+        }
+        if (!empty($error)) {
+            echo "<pre>";
+            print_r($error);
+            echo "</pre>";
+            echo "jjjj";
+            $_SESSION['error'] = true;
+        }else {
+            if (!empty($_SESSION['error'])) {
+                unset($_SESSION['error']);
+            }
+            session_start();
+            $_SESSION['host']    = $_GET['host'];
+            $_SESSION['usuario'] = $_GET['usuario'];
+            $_SESSION['passB']   = $_GET['passB'];
+            $_SESSION['nombre']  = $_GET['nombre'];
+        }
+        
+        if (empty($_SESSION['error'])) {
             $formu = 1;
             mostrarUsuarios();
             formularioModificacion();
@@ -139,16 +103,15 @@
             }
         }
 
-
         function mostrarUsuarios() {
             require_once("bbdd.php");
             $host     = $_SESSION['host'];
             $usuario  = $_SESSION['usuario'];
             $passB    = $_SESSION['passB'];
             $nombre   = $_SESSION['nombre'];
-            $bbdd     = new Bbdd();
+            $bbdd     = new ConectaBD();
             $conexion = $bbdd->conecta($host, $usuario, $passB, $nombre);
-            $usuarios = $bbdd->consultaUsuarios();
+            $usuarios = $bbdd->readP();
             ?>
             <table style="border: 2px solid black; background-color: #9BBF9D;">
                 <tr><td>Resultado de la busqueda.</td></tr>
@@ -167,27 +130,6 @@
             ?>
             </table>
             <?php
-        }
-
-        function formularioBBDD() {
-            ?>
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-            <br><br><strong>Conexión a la base de datos: </strong><br><br>
-                <label for="host1">Escriba el nombre del host:</label>
-                    <input type="text" name="host" id="host1" ><br><br>
-
-                <label for="usuario1">Escriba el nombre del usuario:</label>
-                    <input type="text" name="usuario" id="usuario1" ><br><br>
-
-                <label for="pass1">Escriba la contraseña:</label>
-                    <input type="password" name="passB" id="pass1" ><br><br>
-
-                <label for="bbdd1">Escriba el nombre de la base de datos:</label>
-                    <input type="text" name="nombre" id="bbdd1" ><br><br>
-
-                <input type="submit" name="formBBDD" value="enviar">
-            </form>
-            <?php   
         }
 
         function formularioModificacion() {

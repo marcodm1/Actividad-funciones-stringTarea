@@ -36,11 +36,9 @@
 
         public function getGanador(){
             if ($this->jugadorA->puntos > $this->jugadorB->puntos) {
-                // return "El jugador ganador ha sido: " . $this->jugadorA . " con un total de: " . $this->jugadorA->puntos;
-            
+                return "El jugador ganador ha sido: " . $this->jugadorA . " con un total de: " . $this->jugadorA->puntos;
             }else {
-                // return "El jugador ganador ha sido: " . $this->jugadorB . " con un total de: " . $this->jugadorB->puntos;
-            
+                return "El jugador ganador ha sido: " . $this->jugadorB . " con un total de: " . $this->jugadorB->puntos;
             }
 
             if ($this->jugadorA == $this->jugadorB) {
@@ -54,7 +52,7 @@
 
     }
     class JuegoDados extends Juego {
-      
+        
         public function __construct(Participante $jugadorA, Participante $jugadorB, $premio) {
             parent::__construct($jugadorA, $jugadorB, $premio); 
         }
@@ -71,7 +69,7 @@
             }
             if ($tiradaA > $tiradaB) {
                 echo "Gana " . $nombre1 . "<br>";
-                $this->jugadorA->puntos += 3;
+                $this->jugadorA->puntos += 3; // valdra sin el + ??
                 mostrarTirada($nombre1, $nombre2, $tiradaA, $tiradaB);
             }
             if ($tiradaA < $tiradaB){
@@ -81,36 +79,29 @@
             }
         }
     }
-
+    session_start();
+    session_destroy();
+    session_start();
     if (empty($_GET['jugar']) && empty($_GET['ver'])) {
-        echo "Solo se mostrara una vez:<br><br>";
-        print_r($_POST);
-        echo "<br><br>";
-        session_start();
-        $jugador1   = new Participante($_SESSION['jugador1Nombre'], $_SESSION['jugador1Apellido']);
-        $jugador2   = new Participante($_SESSION['jugador2Nombre'], $_SESSION['jugador2Apellido']);
-        $juegoDados = new JuegoDados($jugador1, $jugador2, 100);
-        guardarPartida($jugador1);
-        guardarPartida($jugador2);
-        $_SESSION['juego'] = $juegoDados;
-        mostrarActual($jugador1, $jugador2);
+        $participante1 = new Participante($_GET['nombre1'], $_GET['apellido1']);
+        $participante2 = new Participante($_GET['nombre2'], $_GET['apellido2']);
+        $juegoDados    = new JuegoDados($participante1, $participante2, 100);
+        guardarPartida($juegoDados);
+        mostrarJugadores($juegoDados);
+        formJuego();
     }
     if (!empty($_GET['jugar']) ) {
-        echo "Paso:3<br><br>";
-        $_SESSION['juego']->jugada();
-        guardarPartida($jugador1);
-        guardarPartida($jugador2);
-        mostrarActual($jugador1, $jugador2);
+        $juegoDados = cargarPartida();
+        $juegoDados->jugada();
+        guardarPartida($juegoDados);
+        mostrarJugadores($juegoDados);
+        formJuego();
     }else {
         if (!empty($_GET['ver'])) {
-            echo "Paso:5<br><br>";
-            $_SESSION['juego']->jugada();
-            echo "Participante 1: <br>" . $jugador1->nombre . ": ha terminado con: " . $jugador1->puntos . "<br>";
-            echo "<br>Participante 1: <br>" . $jugador2->nombre . ": ha terminado con: " . $jugador2->puntos;
-            echo "<br><br>";
-            $_SESSION['juego']->getPremio();
-            $_SESSION['juego']->getGanador();
-            formJuego();
+            $juegoDados = cargarPartida();
+            mostrarJugadores($juegoDados);
+            $juegoDados->getPremio();
+            $juegoDados->getGanador();
         }
 
     }
@@ -119,25 +110,51 @@
         echo $nombre1 . " ha sacado un " . $tiradaA . "<br>";
         echo $nombre2 . " ha sacado un " . $tiradaB . "<br><br>";
     }
+    function mostrarJugadores($juegoDados) {
+        $nombreA    = $juegoDados->::jugadorA->nombre; // revisar com oentrar a las protecteds
+        $apellidosA = $juegoDados->jugadorA->apellidos;
+        $puntosA    = $juegoDados->jugadorA->puntos;
 
-    function mostrarActual($jugador1, $jugador2) {
-        echo $jugador1->nombre . " " . $jugador1->apellidos . ": " . $jugador1->puntos . " puntos" . "<br>";
-        echo $jugador2->nombre . " " . $jugador2->apellidos . ": " . $jugador2->puntos . " puntos" . "<br>";
+        $nombreB    = $juegoDados->jugadorB->nombre;
+        $apellidosB = $juegoDados->jugadorB->apellidos;
+        $puntosB    = $juegoDados->jugadorB->puntos;
+
+        echo $nombreA . " " . $apellidosA . ": " . $puntosA . " puntos" . "<br>";
+        echo $nombreB . " " . $apellidosB . ": " . $puntosB . " puntos" . "<br>";
         echo "<br>";
-        formJuego();
     }
 
-    function guardarPartida($jugador) {
-        $nombre = $jugador->nombre;
-        $_SESSION["$nombre"] = $jugador;
+    function guardarPartida($juegoDados) {
+        $_SESSION["juegoDados"] = $juegoDados;
     }
-    
+    function cargarPartida() {
+        return $_SESSION["juegoDados"];
+    }
     function formJuego() {
         ?>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-                <input type="submit" value="Jugar"          name="jugar" /> 
+                Qué quiere hacer?
+                <input type="submit" value="Jugar"          name="jugar" /> o
                 <input type="submit" value="Ver resultados" name="ver" />
             </form>
         <?php   
     }
     ?>
+
+
+
+<?php 
+    class Coche {
+        protected $potencia;
+        // constructor ...
+    }
+    class Motor extends Coche{
+        private $kv;
+
+        // constructor....{
+            //  parent::__constructor...
+        // }
+    }
+
+
+?>

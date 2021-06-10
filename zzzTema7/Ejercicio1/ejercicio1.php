@@ -8,35 +8,9 @@
 </head>
 <body>
     <?php 
-    /*
-    Lee el documentos y realiza las prácticas: 05_16_ext_mysqli_1.pdf
-    - Consulta: https://www.php.net/manual/es/class.mysqli.php y https://www.php.net/manual/es/class.mysqli-result.php
-    - Ejecuta el sql de creación de las tablas y el usuario.
-
-    Práctica: 
-    - Utilizando mysqli realiza la consulta de la tabla productos.
-    - Mostrar los datos de los productos en formato tabla.
-    - Mostrar la cantidad de productos consultados.
-    - Utilizar el usuario alumno para la conexión con la base de datos.
-    - Mostrar el error si se produce en la conexión, y en la consulta.
-
-    Pasos: 
-    - Conectar con la base de datos //mysqli::connect
-    - Establecer el juego de caracteres //mysqli::set_charset
-    - Realizar la consulta //mysqli::query
-    - Obtener el número de filas consultadas //mysqli_result::num_rows
-    - Obtener los datos //mysqli_result::fetch_assoc
-    - Mostrar los datos en el formato establecido.
-    - Liberar espacio //mysqli_result::free o mysqli_result::free_result
-    - Cerrar la conexión //mysqli::close
-
-    Entregar: 
-    - Los programas php
-    - El script sql con la creación del usuario de acceso a la base de datos y la asignación de los permisos.
-    */
-
-        // conectarse a esta BBDD
-        $conexion = new mysqli("localhost", "alumno", "1234","dwes2"); 
+    
+        // conectarse a esta BBDD con mysqli
+        $conexion = new mysqli("localhost", "alumno", "1234","dwes2"); // usamos el usuario alumno
         if ($conexion->connect_errno /*!= 0*/) { // Sí el código de error es distinto de 0
             echo "Fallo al conectar a MySQL: " . $conexion->connect_error ;
         }else {
@@ -45,16 +19,15 @@
                 printf("Error cargando el conjunto de caracteres utf8: %s\n", $conexion->error);
             }
             // realiza la consulta a la BBDD
-            $consulta = "SELECT * from usuarios"; 
+            $consulta = "SELECT * from productos"; 
             if (mysqli_query($conexion , $consulta)) {
-                $resultadoCon = mysqli_query($conexion , $consulta); 
-            }else {
+                $resultadoCon = mysqli_query($conexion , $consulta); // esto se podria poner asi? --- if ($resultadoCon = mysqli_query($conexion , $consulta)) {
+                $totalResultados = mysqli_num_rows($resultadoCon); // devuelve el numero de resultados de la consulta
+                mostrarResultados($resultadoCon);
+                echo "<br>Total de productos encontrados : " . $totalResultados;
+                }else {
                 echo "Error al intentar conectarse con la base de datos:";
             }
-            
-            $totalResultados = mysqli_num_rows($resultadoCon); // devuelve el numero de resultados de la consulta
-            mostrarResultados($resultadoCon);
-            echo "<br>Total de productos encontrados : " . $totalResultados;
             $conexion->close();
         }
         
