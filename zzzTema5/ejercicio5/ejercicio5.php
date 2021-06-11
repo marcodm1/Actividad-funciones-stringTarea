@@ -37,10 +37,10 @@
                     $fopen   = fopen($archivo, "w"); 
                     // fopen() con w siempre apunta al principio y en modo a lo pone al final
                     
-                    echo ftell($fopen);
+                    // echo ftell($fopen);
                     // fseek($fopen, -1, SEEK_END); // fseek solo es para escritura
                     // $fin = '|'.PHP_EOL; //fin de linea para los archivos
-                    echo ftell($fopen);
+                    // echo ftell($fopen);
                     fwrite($fopen, $_POST['texto1']);
                     fwrite($fopen, $_POST['texto2']);
                     fwrite($fopen, $_POST['texto3']);
