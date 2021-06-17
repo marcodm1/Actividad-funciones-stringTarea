@@ -20,11 +20,12 @@
                     echo $error;
                 }
                 formulario();
+            }else {
+                $_SESSION['idioma'] = $_POST['idioma'];
+                echo "<pre>";
+                print_r($_SESSION);
+                echo "</pre>";
             }
-            $_SESSION['idioma'] = $_POST['idioma'];
-            echo "<pre>";
-            print_r($_SESSION);
-            echo "</pre>";
         }else {
             formulario();
         }
@@ -50,10 +51,3 @@
     ?>
 </body>
 </html>
-<!-- 
-    Crea un formulario con una select para seleccionar un idioma (usar select múltiple.)
-    Procesar el formulario, y cargar el array en la sesión.
-    procesa_sesiones.php
-    Comprueba que existe idioma en la sesión.
-    Muestra los idiomas separados por comas (sugerencia utilizar implode). 
--->

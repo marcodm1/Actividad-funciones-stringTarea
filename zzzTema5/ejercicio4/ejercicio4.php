@@ -20,13 +20,13 @@
                     foreach ($lineas as $linea) {
                         $explode = explode("|", $linea);
                         echo "<pre>";
-                        print_r($explode);
+                        print_r($explode); // quitr el print_R
                         echo "</pre>"; 
-                        array_push($respuesta, end($explode));
+                        array_push($respuesta, end($explode)); // cambiar el color de las respuestas
                     }
     
                     foreach ($respuesta as $poss => $valor) {
-                        echo "<br> La respeusta correcta de la pregunta " . $poss . " es: " . $valor;
+                        echo "<br> <strong>La respeusta correcta de la pregunta " . $poss . " es: " . $valor . "<strong>";
                     }
     
                 }else {

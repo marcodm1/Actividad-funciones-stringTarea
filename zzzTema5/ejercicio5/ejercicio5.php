@@ -30,30 +30,14 @@
                         echo $error;
                     }
                     formulario();
-                }
-                
-                if (file_exists("datos.txt")) {
-                    $archivo = __DIR__ . DIRECTORY_SEPARATOR . "datos.txt";
-                    $fopen   = fopen($archivo, "w"); 
-                    // fopen() con w siempre apunta al principio y en modo a lo pone al final
-                    
-                    // echo ftell($fopen);
-                    // fseek($fopen, -1, SEEK_END); // fseek solo es para escritura
-                    // $fin = '|'.PHP_EOL; //fin de linea para los archivos
-                    // echo ftell($fopen);
-                    fwrite($fopen, $_POST['texto1']);
-                    fwrite($fopen, $_POST['texto2']);
-                    fwrite($fopen, $_POST['texto3']);
-                    echo "Añadido correctamente.";
                 }else {
-                    $archivo = __DIR__ . DIRECTORY_SEPARATOR . "datos.txt";
-                    $fopen   = fopen($archivo, "w");
-                    fwrite($fopen, $_POST['texto1']);
-                    fwrite($fopen, $_POST['texto2']);
-                    fwrite($fopen, $_POST['texto3']);
-                    echo "Creado y rellenado correctamente.";
+                        $archivo = __DIR__ . DIRECTORY_SEPARATOR . "datos.txt";
+                        $fopen   = fopen($archivo, "a"); // al abrirlo con 'a' hace automatico el crearlo o no
+                        fwrite($fopen, $_POST['texto1'] . "\n");
+                        fwrite($fopen, $_POST['texto2'] . "\n");
+                        fwrite($fopen, $_POST['texto3'] . "\n");
+                        echo "Añadido correctamente.";
                 }
-                
 
             }else {
                 formulario();

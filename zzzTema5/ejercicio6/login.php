@@ -24,13 +24,17 @@
                     echo $error;
                 }
                 formulario();
-            }
-            setcookie("codigo", $_POST['codigo'], time() +60, '/', 'localhost', true);
-            setcookie("nombre", $_POST['nombre'], time() +60, '/', 'localhost', true); // con solo /, la cookie estará disponible en la totalidad del domain
-            // setcookie("cookieSegura", "Marco Segura", time() +60, '../ejercicio6', 'localhost', true);
-            // setcookie("cookieSegura", "Marco Segura", time() +60, __DIR__ . DIRECTORY_SEPARATOR, 'localhost', true);
+            }else {
+                $codigo = $_POST['codigo'];
+                $nombre = $_POST['nombre'];
+                setcookie("codigo", $codigo, time() +60, './', 'localhost'); // ./ ó ../ejercicio6
+                setcookie("nombre", $nombre, time() +60, './', 'localhost'); // con solo /, la cookie estará disponible en la totalidad del domain
+                // setcookie("cookieSegura", "Marco Segura", time() +60, '../ejercicio6', 'localhost', true);
+                // setcookie("cookieSegura", "Marco Segura", time() +60, __DIR__ . DIRECTORY_SEPARATOR, 'localhost', true);
+    
+                header("Location: procesa.php");
 
-            require_once("procesa.php");
+            }
 
         }else {
             formulario();
@@ -53,16 +57,3 @@
     ?>
 </body>
 </html>
-<!-- 
-
-Una vez validados los datos utilizar cookies para enviar la información.
-
--	solo válida en el directorio en curso.
-
--	usando el servidor localhost
-
--	válida durante 1 minuto
-
-Crear la página procesa.php
-
-Mostrar la información recibida en las cookies, de código, nombre. -->

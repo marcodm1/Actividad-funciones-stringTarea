@@ -9,6 +9,7 @@
 	<body>
         <?php 
             setcookie("cookieSegura", "Marco Segura", time() +60, '/', 'localhost', true); // si pongo ./ deberia de ser esta carpeta sola
+            // el true final es para que solo la cree si stoy en modo seguro, es decir https:
             header("Location:menu.php");
         ?>
     </body>
