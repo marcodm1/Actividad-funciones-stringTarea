@@ -7,19 +7,18 @@
         <meta name="description" content="MVC1">
 	</head>
 	<body>
-	<?php	
-        require_once("./controlador/controlador.php");
-
-        echo "<pre>";
-        print_r($resultado);
-        echo "</pre>";
-
-        // $resultado = $conexion->createP();
-        // $resultado = $conexion->deleteP();
-        // $resultado = $conexion->readP("todos");
-        // echo "<pre>";
-        // print_r($resultado);
-        // echo "</pre>";
-    ?>
-</body>
+        <table>
+            <?php
+            foreach($resultado as $valor) {
+                ?><tr>
+                <?php
+                foreach($valor as $x) {
+                    echo'<td>'.$x.'</td>';
+                }
+                ?></tr>
+                <?php
+            }
+            ?>
+        </table>
+    </body>
 </html>

@@ -20,8 +20,7 @@
             }
             // realiza la consulta a la BBDD
             $consulta = "SELECT * from productos"; 
-            if (mysqli_query($conexion , $consulta)) {
-                $resultadoCon = mysqli_query($conexion , $consulta); // esto se podria poner asi? --- if ($resultadoCon = mysqli_query($conexion , $consulta)) {
+            if ($resultadoCon = mysqli_query($conexion , $consulta)) {
                 $totalResultados = mysqli_num_rows($resultadoCon); // devuelve el numero de resultados de la consulta
                 mostrarResultados($resultadoCon);
                 echo "<br>Total de productos encontrados : " . $totalResultados;
@@ -36,14 +35,17 @@
         function mostrarResultados($resultadoCon) {
             ?>
             <table style="border: 2px solid black; background-color: #9BBF9D;">
-                <tr><td>Resultado de la busqueda</td></tr>
+                <tr><th colspan="10">Resultado de la busqueda</th></tr>
                 <?php
                 foreach ($resultadoCon as $fila => $contenido) {
                     ?>
-                    <tr  style="border: 1px solid black; background-color: #5EAC63;"><td>
-                    <?php echo $fila . ": "; print_r($contenido);
+                    <tr style="border: 1px solid black; background-color: #5EAC63;">
+                    <?php
+                    foreach ($contenido as $valor) {
+                        echo "<td>" . $valor . " </td>";
+                    }
                     ?>
-                    </td></tr>
+                    </tr>
                     <?php
                 }
             ?>

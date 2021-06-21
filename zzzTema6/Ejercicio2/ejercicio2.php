@@ -15,8 +15,9 @@
         public function __construct() {
             $args     = func_get_args();
             $num_args = func_num_args();
-            if (method_exists($this, $nombre_funcion = 'constructor' . $num_args)) {
-                call_user_func_array(array($this, $nombre_funcion), $args);
+            $nombreFuncion = "construct";
+            if (method_exists($this, $nombreFuncion . $num_args)) {
+                call_user_func_array(array($this, $nombreFuncion . $num_args), $args);
             }
         }
 
@@ -27,6 +28,7 @@
 
         public function construct1($nombre) {
             $this->nombre = $nombre;
+            $this->sueldo = 0;
         }
 
         public function construct2($nombre, $sueldo) {
@@ -39,14 +41,12 @@
             echo "Sueldo: " . $this->sueldo;
         }
 
-        public function __get($propiedad){
+        public function __get($propiedad) {
             if (property_exists(__CLASS__, $propiedad)){
                 return $this->$propiedad;
             }
-            //return $propiedad. ' no existe';
             return null;
         }
-
     }
 
     $pepe = new Empleado();

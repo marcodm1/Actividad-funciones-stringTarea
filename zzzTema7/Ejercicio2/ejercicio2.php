@@ -7,39 +7,32 @@
     <meta name="description" content="">
 </head>
 <body>
-    <?php 
-        $conexion = new mysqli("localhost", "alumno", "1234","dwes2"); 
-        if ($conexion->connect_errno) { 
-            echo "Fallo al conectar a MySQL: " . $conexion->connect_error ;
-        }else {
-            if (!$conexion->set_charset("utf8")) { 
-                printf("Error cargando el conjunto de caracteres utf8: %s\n", $conexion->error);
-            }
-    
-            $consulta = "Select * from usuarios"; 
-            if (mysqli_query($conexion , $consulta)) {
-                $resultadoConsulta = mysqli_query($conexion , $consulta); 
-            }else {
-                echo "Error al intentar conectarse con la base de datos:";
-            }
-    
-            $totalResultados = mysqli_num_rows($resultadoConsulta); 
-    
-            // Ajustar el puntero de resultado a una fila concreta
-            $resultadoConsulta->data_seek($totalResultados -1);
-    
-            // obtenemos la fila
-            $fila = $resultadoConsulta->fetch_row();
-    
-            // mostramos la fila
-            echo "<pre>";
-            print_r($fila);
-            echo "</pre>";
-            $conexion->close();
-        }
+<?php
+    if (!$conexion = mysqli_connect("localhost", "alumno", "1234", "dwes2")) {
+        echo "Error: conexión fallida " . mysqli_connect_error() . "<br>";       
+        die();
+    }else {
+        echo "Conexión correcta" . "<br>";
+    }
 
+    if (!$conexion->set_charset("utf8")) {
+        echo "Error: no es posible cambiar el juego de caracteres " . $conexion->error . "<br>";
+    }
 
-
-    ?>
+    $sentencia = "SELECT * FROM usuarios";
+    if ($consulta = $conexion->real_query($sentencia)) {
+        $resultado = $conexion->store_result();
+        $numFilas  = $resultado->num_rows;
+        echo "Numero de filas: " . $numFilas . "<br>";
+        $resultado->data_seek(mysqli_num_rows($resultado) -1);
+        $resultados = $resultado->fetch_assoc();
+        echo "Login: " . $resultados['login'] . "<br>";
+        echo "Clave: " . $resultados['clave'] . "<br>";
+        $resultado->free();
+    }else{
+        echo "Error: Consulta fallida";
+    }
+    $conexion->close();
+?>
 </body>
 </html>

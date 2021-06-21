@@ -4,7 +4,7 @@
     <title>Marco Domínguez</title>
 	<meta charset="UTF-8">
     <meta name="author"      content="Marco Dominguez">
-    <meta name="description" content="Tema4. Ej1.">
+    <meta name="description" content="ej4">
 </head>
 <body>
 <?php

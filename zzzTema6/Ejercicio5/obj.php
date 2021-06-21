@@ -1,5 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Marco Domínguez</title>
+	<meta charset="UTF-8">
+    <meta name="author"      content="Marco Dominguez">
+    <meta name="description" content="ej4">
+</head>
+<body>
 <?php
-require_once("interfaz.php");
+    interface Tiempo {
+        public function avanza();
+        public function retrocede();
+    }
     class Coche implements Tiempo {
         private $kmActual;
 
@@ -22,7 +34,6 @@ require_once("interfaz.php");
             $this->kmActual -= 100;
         }
     }
-
     class Pelicula implements Tiempo {
         private $minActual;
 
@@ -61,6 +72,6 @@ require_once("interfaz.php");
     $peli->retrocede();
     $peli->retrocede();
     echo "<br>Actualmente estamos en el minuto " . $peli->minActual;
-    
-
 ?>
+</body>
+</html>

@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Marco Domínguez</title>
+	<meta charset="UTF-8">
+    <meta name="author"      content="Marco Dominguez">
+    <meta name="description" content="ej 3">
+</head>
+<body>
 <?php
     class Participante {
         private static $contador = 0;
@@ -12,12 +21,23 @@
             $this->apellidos     = $apellidos;
             $this->puntos        = 0;
         }
-
-        public function __get($atributo) {
-            return $this->$atributo;
+        public function getNombre() {
+            return  $this->nombre;
         }
-        public function __set($atributo, $valor) {
-            $this->$atributo = $valor;
+        public function getApellidos() {
+            return  $this->apellidos;
+        }
+        public function getPuntos() {
+            return  $this->puntos;
+        }
+        public function setNombre($nombre, $valor) {
+            $this->$nombre = $valor;
+        }
+        public function setApellidos($apellidos, $valor) {
+            $this->$apellidos = $valor;
+        }
+        public function setPuntos($valor) {
+            $this->puntos += $valor;
         }
 
     }
@@ -32,20 +52,18 @@
             $this->premio   = $premio;
         }
 
-        public abstract function jugada(); // esto es una funcion no impementada
+        public abstract function jugada();
 
         public function getGanador(){
-            if ($this->jugadorA->puntos > $this->jugadorB->puntos) {
-                return "El jugador ganador ha sido: " . $this->jugadorA . " con un total de: " . $this->jugadorA->puntos;
+            if ($this->jugadorA->getPuntos() > $this->jugadorB->getPuntos()) {
+                return "El jugador ganador ha sido: " . $this->jugadorA->getNombre() . " con un total de: " . $this->jugadorA->getPuntos();
             }else {
-                return "El jugador ganador ha sido: " . $this->jugadorB . " con un total de: " . $this->jugadorB->puntos;
+                return "El jugador ganador ha sido: " . $this->jugadorB->getNombre() . " con un total de: " . $this->jugadorB->getPuntos();
             }
-
-            if ($this->jugadorA == $this->jugadorB) {
+            if ($this->jugadorA->getPuntos() == $this->jugadorB->getPuntos()) {
                 return "Ha sido un empate.";
             }
         } 
-
         public function getJugador($letra) {
             switch ($letra) {
                 case "A":
@@ -60,7 +78,6 @@
         public function getPremio() {
             return "El premio es de: " . $this->premio;
         }
-
     }
     class JuegoDados extends Juego {
         
@@ -71,8 +88,8 @@
         public function jugada() { 
             $tiradaA = rand(0,6);
             $tiradaB = rand(0,6);
-            $nombre1 = $this->jugadorA->nombre;
-            $nombre2 = $this->jugadorB->nombre;
+            $nombre1 = $this->jugadorA->getNombre();
+            $nombre2 = $this->jugadorB->getNombre();
  
             if ($tiradaA == $tiradaB) {
                 echo "Empate: <br>";
@@ -80,12 +97,12 @@
             }
             if ($tiradaA > $tiradaB) {
                 echo "Gana " . $nombre1 . "<br>";
-                $this->jugadorA->puntos += 3; // valdra sin el + ??
+                $this->jugadorA->setPuntos(3);
                 mostrarTirada($nombre1, $nombre2, $tiradaA, $tiradaB);
             }
             if ($tiradaA < $tiradaB){
                 echo "Gana " . $nombre2 . "<br>";
-                $this->jugadorB->puntos += 3;
+                $this->jugadorB->setPuntos(3);
                 mostrarTirada($nombre1, $nombre2, $tiradaA, $tiradaB);
             }
         }
@@ -119,13 +136,13 @@
         echo $nombre2 . " ha sacado un " . $tiradaB . "<br><br>";
     }
     function mostrarJugadores($juegoDados) {
-        $nombreA    = $juegoDados->getJugador("A")->nombre;
-        $apellidosA = $juegoDados->getJugador("A")->apellidos;
-        $puntosA    = $juegoDados->getJugador("A")->puntos;
+        $nombreA    = $juegoDados->getJugador("A")->getNombre();
+        $apellidosA = $juegoDados->getJugador("A")->getApellidos();
+        $puntosA    = $juegoDados->getJugador("A")->getPuntos();
 
-        $nombreB    = $juegoDados->getJugador("B")->nombre;
-        $apellidosB = $juegoDados->getJugador("B")->apellidos;
-        $puntosB    = $juegoDados->getJugador("B")->puntos;
+        $nombreB    = $juegoDados->getJugador("B")->getNombre();
+        $apellidosB = $juegoDados->getJugador("B")->getApellidos();
+        $puntosB    = $juegoDados->getJugador("B")->getPuntos();
 
         echo $nombreA . " " . $apellidosA . ": " . $puntosA . " puntos" . "<br>";
         echo $nombreB . " " . $apellidosB . ": " . $puntosB . " puntos" . "<br>";
@@ -148,5 +165,5 @@
         <?php   
     }
     ?>
-
-
+</body>
+</html>

@@ -1,3 +1,3 @@
 <?php	
-    require_once("vista/vistaProductos.php");
+    require_once("controlador/controlador.php");
 ?>

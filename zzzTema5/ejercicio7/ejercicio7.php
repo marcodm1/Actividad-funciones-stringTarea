@@ -23,7 +23,6 @@
             }else {
                 session_start();
                 $_SESSION['idioma']  = $_POST['idioma'];
-
                 $_SESSION['idiomas'] = implode(",", $_SESSION['idioma']);
                 header("Location:procesa_sesiones.php");
             }
