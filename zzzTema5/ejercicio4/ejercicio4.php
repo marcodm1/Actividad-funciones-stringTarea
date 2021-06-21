@@ -8,31 +8,29 @@
 	</head>
 	<body>
         <?php
-
-            if (!empty($_POST['archivo'])) {
-                $fichero =  $_POST['archivo'];
-                if (file_exists($fichero)) {
-                    $fopen     = fopen($fichero, 'r');
-                    $lineas    = file($fichero);
-                    $respuesta = array();
-                    
-                    $pregunta = array();
-                    foreach ($lineas as $linea) {
-                        $explode = explode("|", $linea);
-                        echo "<pre>";
-                        print_r($explode); // quitr el print_R
-                        echo "</pre>"; 
-                        array_push($respuesta, end($explode)); // cambiar el color de las respuestas
+            if (!empty($_POST['formulario'])) {
+                if (!empty($_POST['archivo'])) {
+                    $fichero =  $_POST['archivo'];
+                    if (file_exists($fichero)) {
+                        $fopen     = fopen($fichero, 'r');
+                        $lineas    = file($fichero);
+                        $respuesta = array();
+                        $pregunta  = array();
+                        echo "____________________________<br>";
+                        foreach ($lineas as $linea) {
+                            $explode = explode("|", $linea);
+                            foreach ($explode as $line) {
+                                echo $line . "<br>";
+                            }
+                            echo "<p style='color:blue'>La respuesta correcta es: " . end($explode) . "</p><br><br>";
+                            echo "____________________________<br>";
+                        }
+                    }else {
+                        echo "No exise el fichero seleccionado";
                     }
-    
-                    foreach ($respuesta as $poss => $valor) {
-                        echo "<br> <strong>La respeusta correcta de la pregunta " . $poss . " es: " . $valor . "<strong>";
-                    }
-    
                 }else {
-                    echo "El archivo especificado, no existe";
+                    echo "No ha seleccionado ningún archivo válido";
                 }
-
             }else {
                 formulario();
             }
@@ -43,17 +41,10 @@
                 <form action="ejercicio4.php" method="post">
                     <label for="archivo1">Seleccione un archivo:</label>
                         <input type="file"  name="archivo" id="archivo1"><br>
-                    <input type="submit" value="Comprobar" name="submit">
+                    <input type="submit" value="Comprobar" name="formulario">
                 </form>
                 <?php
             }
         ?>
     </body>
 </html>
-
-<!-- 
-    ¿De qué color es la: Madera? blanco|negro|marrón
-    ¿De qué color es la: Naranja? blanco|negro|naranja
-    ¿De qué color es el: Metal? blanco|negro|gris
-    ¿De qué color es el: Cielo? blanco|negro|azúl
- -->

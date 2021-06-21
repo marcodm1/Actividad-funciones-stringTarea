@@ -1,0 +1,23 @@
+Seed       - Nada
+Seedling   - Nada
+Sapling    - Esquejes
+Crossbreed - Poner el de enmedio
+Mature     - Puede recolectarse
+Fruiting   - Puede Recolectarse
+Ripe       - Cosecha
+
+
+Y = Más cantidad de producción
+G = Crece más rápido
+H = Mejor aguante a las termperaturas
+W = Consume más agua
+
+
+Planta - A tiene: Y  -  Y  -  Y  -  Y  -  Y  -  X
+Planta - B tiene: Y  -  Y  -  Y  -  G  -  G  -  G
+Planta - C tiene: Y  -  G  -  X  -  X  -  G  -  G
+Planta - D tiene: Y  -  G  -  X  -  W  -  G  -  Y
+
+El resultado es : Y  - 50% - 50% - 25% -  G  -  G
+
+

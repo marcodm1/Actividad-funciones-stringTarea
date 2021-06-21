@@ -46,6 +46,17 @@
             }
         } 
 
+        public function getJugador($letra) {
+            switch ($letra) {
+                case "A":
+                    return $this->jugadorA;
+                    break;
+                case "B":
+                    return $this->jugadorB;
+                    break;
+            }
+            
+        }
         public function getPremio() {
             return "El premio es de: " . $this->premio;
         }
@@ -80,8 +91,6 @@
         }
     }
     session_start();
-    session_destroy();
-    session_start();
     if (empty($_GET['jugar']) && empty($_GET['ver'])) {
         $participante1 = new Participante($_GET['nombre1'], $_GET['apellido1']);
         $participante2 = new Participante($_GET['nombre2'], $_GET['apellido2']);
@@ -89,35 +98,34 @@
         guardarPartida($juegoDados);
         mostrarJugadores($juegoDados);
         formJuego();
-    }
-    if (!empty($_GET['jugar']) ) {
-        $juegoDados = cargarPartida();
-        $juegoDados->jugada();
-        guardarPartida($juegoDados);
-        mostrarJugadores($juegoDados);
-        formJuego();
     }else {
-        if (!empty($_GET['ver'])) {
+        if (!empty($_GET['jugar']) ) {
             $juegoDados = cargarPartida();
+            $juegoDados->jugada();
+            guardarPartida($juegoDados);
             mostrarJugadores($juegoDados);
-            $juegoDados->getPremio();
-            $juegoDados->getGanador();
+            formJuego();
+        }else {
+            if (!empty($_GET['ver'])) {
+                $juegoDados = cargarPartida();
+                mostrarJugadores($juegoDados);
+                $juegoDados->getPremio();
+                $juegoDados->getGanador();
+            }
         }
-
     }
-    
     function mostrarTirada($nombre1, $nombre2, $tiradaA, $tiradaB) {
         echo $nombre1 . " ha sacado un " . $tiradaA . "<br>";
         echo $nombre2 . " ha sacado un " . $tiradaB . "<br><br>";
     }
     function mostrarJugadores($juegoDados) {
-        $nombreA    = $juegoDados->::jugadorA->nombre; // revisar com oentrar a las protecteds
-        $apellidosA = $juegoDados->jugadorA->apellidos;
-        $puntosA    = $juegoDados->jugadorA->puntos;
+        $nombreA    = $juegoDados->getJugador("A")->nombre;
+        $apellidosA = $juegoDados->getJugador("A")->apellidos;
+        $puntosA    = $juegoDados->getJugador("A")->puntos;
 
-        $nombreB    = $juegoDados->jugadorB->nombre;
-        $apellidosB = $juegoDados->jugadorB->apellidos;
-        $puntosB    = $juegoDados->jugadorB->puntos;
+        $nombreB    = $juegoDados->getJugador("B")->nombre;
+        $apellidosB = $juegoDados->getJugador("B")->apellidos;
+        $puntosB    = $juegoDados->getJugador("B")->puntos;
 
         echo $nombreA . " " . $apellidosA . ": " . $puntosA . " puntos" . "<br>";
         echo $nombreB . " " . $apellidosB . ": " . $puntosB . " puntos" . "<br>";
@@ -132,7 +140,7 @@
     }
     function formJuego() {
         ?>
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+            <form action="juego.php" method="get">
                 Qué quiere hacer?
                 <input type="submit" value="Jugar"          name="jugar" /> o
                 <input type="submit" value="Ver resultados" name="ver" />
@@ -142,19 +150,3 @@
     ?>
 
 
-
-<?php 
-    class Coche {
-        protected $potencia;
-        // constructor ...
-    }
-    class Motor extends Coche{
-        private $kv;
-
-        // constructor....{
-            //  parent::__constructor...
-        // }
-    }
-
-
-?>

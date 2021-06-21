@@ -8,29 +8,35 @@
 	</head>
 	<body>
     <?php
-    if (!empty($_GET['enviado'])) {
-        if (empty($_GET['nombre1']) || empty($_GET['apellido1']) || empty($_GET['nombre2']) || empty($_GET['apellido2']) ) { 
-            $error = array();
-            if (empty($_GET['nombre'])) {
-                $error1 = 'No ha rellenado el campo: "Nombre"';
-                array_push($error, $error1);
+        $errores = array();
+        if (!empty($_GET['enviado'])) {
+            if (empty($_GET['nombre1'])){
+                $error = "<br>Error: No ha rellenado el nombre1.<br>";
+                array_push($errores, $error);
             }
-            if (empty($_GET['edadmas']) ) {
-                $error2 = 'No ha seleccionado campo: "Es mayor o menor de 18 años":';
-                array_push($error, $error2);
+            if (empty($_GET['apellido1'])){
+                $error = "<br>Error: No ha rellenado el apellido1.<br>";
+                array_push($errores, $error);
             }
-            if (!empty($error)) {
+            if (empty($_GET['nombre2'])){
+                $error = "<br>Error: No ha rellenado el nombre2.<br>";
+                array_push($errores, $error);
+            }
+            if (empty($_GET['apellido2'])){
+                $error = "<br>Error: No ha rellenado el apellido2.<br>";
+                array_push($errores, $error);
+            } 
+            if (!empty($errores)) {
+                formulario();
                 echo "<pre>";
-                print_r($error);
+                print_r($errores);
                 echo "</pre";
+            }else {
+                require_once("juego.php");
             }
-            formulario();
         }else {
-            require_once("juego.php");
+            formulario();
         }
-    }else {
-        formulario();
-    }
         
        
         function formulario() {
