@@ -1,11 +1,15 @@
+Estado de las plantas:
+
 Seed       - Nada
 Seedling   - Nada
 Sapling    - Esquejes
 Crossbreed - Poner el de enmedio
-Mature     - Puede recolectarse
-Fruiting   - Puede Recolectarse
+Mature     - Puede recolectarse pero da menos
+Fruiting   - Puede Recolectarse pero da menos
 Ripe       - Cosecha
 
+
+Significados de las letras:
 
 Y = Más cantidad de producción
 G = Crece más rápido
@@ -19,5 +23,7 @@ Planta - C tiene: Y  -  G  -  X  -  X  -  G  -  G
 Planta - D tiene: Y  -  G  -  X  -  W  -  G  -  Y
 
 El resultado es : Y  - 50% - 50% - 25% -  G  -  G
+
+
 
 
